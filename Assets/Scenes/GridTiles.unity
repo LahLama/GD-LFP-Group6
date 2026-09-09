@@ -870,7 +870,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff22b3fe8faf8434d932525a069b241b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerProperties
-  playerCords: {x: 0, y: 0}
+  playerCords: {x: 1, y: 1}
   playerPos: {x: 0, y: 0, z: 0}
 --- !u!1001 &7049441570340212085
 PrefabInstance:

@@ -44,11 +44,12 @@ void Update()
             Vector2Int playerCords = playerProperties.playerCords;
               Debug.Log("Player Cords: " + playerCords + "\n Tile Cords: " + newCords);
             bool canMove = tile.CheckAdjacencyOnPlayer(playerCords, newCords);
+            Debug.Log(canMove);
             if (canMove)
             {
                 Debug.Log("Player moves");
             Debug.Log("Player Cords: " + playerCords + "\n New Cords: " + newCords);
-                playerProperties.SetPlayerCords(newCords, hit.collider.gameObject.transform.position);
+                playerProperties.SetPlayerCords(newCords, tile.transform.position);
             }
         }
     }
