@@ -73,9 +73,10 @@ public class TileProperties : MonoBehaviour
 		ray = Camera.main.ScreenPointToRay(inputActions.UI.Point.ReadValue<Vector2>());
 		if(Physics.Raycast(ray, out hit))
 		{
-			if(inputActions.UI.Click.triggered)
+			if(inputActions.Player.Attack.WasCompletedThisDynamicUpdate()){
 				newCords = hit.collider.gameObject.GetComponent<TileProperties>().cords;
                 Debug.Log(CheckAdjacencyOnPlayer(playerCords, newCords));
+                }
 		}
 	}
 }
