@@ -49,8 +49,9 @@ void Update()
             Vector2Int newCords = tile.cords;
             Vector2Int playerCords = playerProperties.playerCords;
             //   Debug.Log("Player Cords: " + playerCords + "\n Tile Cords: " + newCords);
-            bool canMove = tile.CheckAdjacencyOnPlayer(playerCords, newCords);
-            tile.ExecuteType();
+                       
+            bool canMove = tile.ExecuteType() && tile.CheckAdjacencyOnPlayer(playerCords, newCords) ;
+            
             Debug.Log(canMove);
             if (canMove)
             {

@@ -1,5 +1,8 @@
+using Unity.Android.Gradle;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Tilemaps;
 public class TileProperties : MonoBehaviour
 {
     private int row = 0;
@@ -8,7 +11,12 @@ public class TileProperties : MonoBehaviour
     public Vector2Int playerCords = new Vector2Int(0,0);
     public Vector2Int newCords = new Vector2Int(0,0);
     public State tileState = State.Tile;
+    private bool MadeAMove = false;
     private PlayerProperties playerProperties;
+
+    private int tileMoveCost = -1;
+    private int obstacleMoveCost = -2;
+    private int moveAddCost = +2;
 
     void Start()
     {
@@ -18,27 +26,33 @@ public class TileProperties : MonoBehaviour
         col = cords.y;
     }
 
-    public void ExecuteType()
-    {
-        switch (tileState)
-        {
-            case State.Tile:
-                Debug.Log("This is a tile");
-                playerProperties.ModifyMoves(-1);
-                break;
-            case State.Obstacle:
-                Debug.Log("This is an obstacle");
-                playerProperties.ModifyMoves(-2);
-                break;
-            case State.MoveAdd:
-                Debug.Log("This is a move add");
-                playerProperties.ModifyMoves(+3);    
-                break;
-            default:
-                Debug.Log("This is a tile");
-                break;
-        }
-        Debug.Log("Current Moves: " + playerProperties.currentMoves );
+    public bool ExecuteType()
+    {   
+        MadeAMove = false; 
+                // Debug.Log("This is a tile");
+            if (playerProperties.CanModifyMove(tileMoveCost) && tileState == State.Tile )
+            {
+                playerProperties.ModifyMoves(tileMoveCost);
+                MadeAMove = true;
+            }
+            else if (playerProperties.CanModifyMove(obstacleMoveCost) && tileState == State.Obstacle )
+            {
+                playerProperties.ModifyMoves(obstacleMoveCost);
+                MadeAMove = true;
+                }
+            else if (playerProperties.CanModifyMove(moveAddCost) && tileState == State.MoveAdd )
+            {
+                playerProperties.ModifyMoves(moveAddCost);
+                MadeAMove = true;
+                }
+            else 
+            {
+                MadeAMove = false;
+            }
+       
+    return MadeAMove;
+        // Debug.Log("Current Moves: " + playerProperties.currentMoves );
+        
     }
 
     public bool CheckAdjacencyOnPlayer(Vector2Int playerCords, Vector2Int newCords)
