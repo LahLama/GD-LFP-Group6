@@ -2,15 +2,18 @@ using UnityEngine;
 
 public class PlayerProperties : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+public Vector2Int playerCords = new Vector2Int(1,1);
+public Vector3 playerPos;
+
+public void SetPlayerCords(Vector2Int newCords, Vector3 newPos)
     {
-        
+        playerCords = newCords;
+        playerPos = newPos;
+        gameObject.transform.position = newPos;
     }
 
-    // Update is called once per frame
-    void Update()
+public Vector2 GetPlayerCords()
     {
-        
+        return playerCords;
     }
 }

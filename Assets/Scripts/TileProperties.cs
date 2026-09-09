@@ -4,47 +4,25 @@ public class TileProperties : MonoBehaviour
 {
     private int row = 0;
     private int col = 0;
-    public Vector2 cords = new Vector2(0,0);
-    public Vector2 playerCords = new Vector2(0,0);
-    public Vector2 newCords = new Vector2(0,0);
+    public Vector2Int cords = new Vector2Int(0,0);
+    public Vector2Int playerCords = new Vector2Int(0,0);
+    public Vector2Int newCords = new Vector2Int(0,0);
     public string type = "tile";
-    
-	Ray ray;
-	RaycastHit hit;
 
 
     void Start()
     {
         // Divide the cordinate vector
-        row = (int)cords.x;
-        col = (int)cords.y;
-
-
+        row = cords.x;
+        col = cords.y;
     }
 
-// Create a region
-#region InputSystem
-    
-    InputSystem_Actions inputActions;
-    void Awake()
-    {
-        inputActions = new InputSystem_Actions();
-    }
-    void OnEnable()
-    {
-        inputActions.Enable();
-    }
-    void OnDisable()
-    {
-        inputActions.Disable();
-    }
-#endregion
-    
 
-    bool CheckAdjacencyOnPlayer(Vector2 playerCords, Vector2 newCords)
+
+    public bool CheckAdjacencyOnPlayer(Vector2Int playerCords, Vector2Int newCords)
     {   
-        int playerX = (int)playerCords.x;
-        int playerY = (int)playerCords.y;
+        int playerX = playerCords.x;
+        int playerY = playerCords.y;
         // Check if the player can move to an adjacent tile
 
         if (newCords.x == playerX && newCords.y == playerY + 1)  // Move - Up 
@@ -68,15 +46,4 @@ public class TileProperties : MonoBehaviour
     }
 
 
-    void Update()
-	{
-		ray = Camera.main.ScreenPointToRay(inputActions.UI.Point.ReadValue<Vector2>());
-		if(Physics.Raycast(ray, out hit))
-		{
-			if(inputActions.Player.Attack.WasCompletedThisDynamicUpdate()){
-				newCords = hit.collider.gameObject.GetComponent<TileProperties>().cords;
-                Debug.Log(CheckAdjacencyOnPlayer(playerCords, newCords));
-                }
-		}
-	}
 }
