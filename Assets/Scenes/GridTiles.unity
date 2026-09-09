@@ -143,10 +143,22 @@ PrefabInstance:
       propertyPath: cords.x
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 4530319641886536622, guid: 0ae6be10acda40443ad2c1baa17fb4a3, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: f3262b2c04419364daa789ca45cf3727, type: 2}
     - target: {fileID: 5344939991967154738, guid: 0ae6be10acda40443ad2c1baa17fb4a3, type: 3}
       propertyPath: cords.x
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 5344939991967154738, guid: 0ae6be10acda40443ad2c1baa17fb4a3, type: 3}
+      propertyPath: tileState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5470350401625015905, guid: 0ae6be10acda40443ad2c1baa17fb4a3, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: cb84f7c33977e1343a5315f81c7604a0, type: 2}
     - target: {fileID: 6652978418499904965, guid: 0ae6be10acda40443ad2c1baa17fb4a3, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -227,6 +239,10 @@ PrefabInstance:
       propertyPath: cords.x
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 9047855727796999237, guid: 0ae6be10acda40443ad2c1baa17fb4a3, type: 3}
+      propertyPath: tileState
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 184759340391464383, guid: 0ae6be10acda40443ad2c1baa17fb4a3, type: 3}
     m_RemovedGameObjects: []
@@ -301,7 +317,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 4.96
+  orthographic size: 2.53
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -325,13 +341,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.4999999, y: -0.50000006, z: 0.4999986, w: 0.50000155}
-  m_LocalPosition: {x: 10.4, y: 23.1, z: 3}
+  m_LocalRotation: {x: 0.26313835, y: -0.40693668, z: 0.12365686, w: 0.8659501}
+  m_LocalPosition: {x: 16.8, y: 0.66, z: -10.52}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 90}
+  m_LocalEulerAnglesHint: {x: 33.805, y: -50.341, z: 0}
 --- !u!114 &330585547
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -872,6 +888,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerProperties
   playerCords: {x: 1, y: 1}
   playerPos: {x: 0, y: 0, z: 0}
+  currentMoves: 6
 --- !u!1001 &7049441570340212085
 PrefabInstance:
   m_ObjectHideFlags: 0

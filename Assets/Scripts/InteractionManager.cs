@@ -1,11 +1,17 @@
 using UnityEngine;
+using UnityEngine.Tilemaps;
+
+
+public enum State { Tile,Obstacle, MoveAdd }
+
 
 public class InteractionManager : MonoBehaviour
 {
     Ray ray;
 	RaycastHit hit;
     PlayerProperties playerProperties;
-    
+   
+    // Create a global struct with the tile types that i can use in other scripts
 
 
   // Create a region
@@ -42,13 +48,14 @@ void Update()
           
             Vector2Int newCords = tile.cords;
             Vector2Int playerCords = playerProperties.playerCords;
-              Debug.Log("Player Cords: " + playerCords + "\n Tile Cords: " + newCords);
+            //   Debug.Log("Player Cords: " + playerCords + "\n Tile Cords: " + newCords);
             bool canMove = tile.CheckAdjacencyOnPlayer(playerCords, newCords);
+            tile.ExecuteType();
             Debug.Log(canMove);
             if (canMove)
             {
-                Debug.Log("Player moves");
-            Debug.Log("Player Cords: " + playerCords + "\n New Cords: " + newCords);
+                // Debug.Log("Player moves");
+            // Debug.Log("Player Cords: " + playerCords + "\n New Cords: " + newCords);
                 playerProperties.SetPlayerCords(newCords, tile.transform.position);
             }
         }
