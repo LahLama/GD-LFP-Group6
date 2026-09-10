@@ -1,8 +1,11 @@
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Tilemaps;
 
 
-public enum State { Tile,Obstacle, MoveAdd }
+public enum TileState { Tile,Obstacle, MoveAdd, Element}
+
+public enum ElementState { Fire,Earth,Nature,Air, Tipid }
+
 
 
 public class InteractionManager : MonoBehaviour
@@ -10,7 +13,7 @@ public class InteractionManager : MonoBehaviour
     Ray ray;
 	RaycastHit hit;
     PlayerProperties playerProperties;
-   
+   public List<Material> elementMaterials = new List<Material>();
     // Create a global struct with the tile types that i can use in other scripts
 
 

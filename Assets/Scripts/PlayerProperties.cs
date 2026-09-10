@@ -11,6 +11,8 @@ int movesCheck =0;
 int maxMoves = 6;
 public TextMeshProUGUI movesText;
 
+public ElementState playerElement = ElementState.Tipid;
+
     void Start()
     {
          movesText.text = currentMoves.ToString();

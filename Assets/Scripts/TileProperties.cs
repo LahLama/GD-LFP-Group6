@@ -1,3 +1,4 @@
+using TMPro;
 using Unity.Android.Gradle;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -10,13 +11,16 @@ public class TileProperties : MonoBehaviour
     public Vector2Int cords = new Vector2Int(0,0);
     public Vector2Int playerCords = new Vector2Int(0,0);
     public Vector2Int newCords = new Vector2Int(0,0);
-    public State tileState = State.Tile;
+
+   
+    public TileState tileState = TileState.Tile;
+    public ElementState tileElement = ElementState.Tipid;
     private bool MadeAMove = false;
     private PlayerProperties playerProperties;
-
     private int tileMoveCost = -1;
     private int obstacleMoveCost = -2;
     private int moveAddCost = +2;
+
 
     void Start()
     {
@@ -29,26 +33,45 @@ public class TileProperties : MonoBehaviour
     public bool ExecuteType()
     {   
         MadeAMove = false; 
-                // Debug.Log("This is a tile");
-            if (playerProperties.CanModifyMove(tileMoveCost) && tileState == State.Tile )
-            {
-                playerProperties.ModifyMoves(tileMoveCost);
-                MadeAMove = true;
-            }
-            else if (playerProperties.CanModifyMove(obstacleMoveCost) && tileState == State.Obstacle )
-            {
-                playerProperties.ModifyMoves(obstacleMoveCost);
-                MadeAMove = true;
-                }
-            else if (playerProperties.CanModifyMove(moveAddCost) && tileState == State.MoveAdd )
-            {
-                playerProperties.ModifyMoves(moveAddCost);
-                MadeAMove = true;
-                }
-            else 
-            {
-                MadeAMove = false;
-            }
+// Check if the player has enough moves to conquer the obstacle and if the player has the same element as the obstacle
+        bool canConquerObstacle = playerProperties.CanModifyMove(obstacleMoveCost) 
+                        && tileState == TileState.Obstacle
+                        && playerProperties.playerElement == tileElement;
+        
+
+// Check if the player has enough moves to move to the tile
+        if (playerProperties.CanModifyMove(tileMoveCost) && tileState == TileState.Tile )
+        {
+            playerProperties.ModifyMoves(tileMoveCost);
+            MadeAMove = true;
+        }
+    
+// Check if the player has enough moves to conquer the obstacle and if the player has the same element as the obstacle
+        else if (canConquerObstacle)
+        {
+        playerProperties.ModifyMoves(obstacleMoveCost);
+        MadeAMove = true;
+        }
+
+// Check if the player has enough moves to move to the tile and if the tile is a MoveAdd tile
+        else if (playerProperties.CanModifyMove(moveAddCost) && tileState == TileState.MoveAdd )
+        {
+        playerProperties.ModifyMoves(moveAddCost);
+        MadeAMove = true;
+        }
+
+// Check if the player has enough moves to move to the tile and if the tile is an Element tile
+        else if (playerProperties.CanModifyMove(tileMoveCost) && tileState == TileState.Element)
+        {
+            playerProperties.ModifyMoves(tileMoveCost);
+            playerProperties.playerElement = tileElement;
+            MadeAMove = true;
+        }
+// If the player does not have enough moves to move to the tile, do not allow the player to move
+        else 
+        {
+            MadeAMove = false;
+        }
        
     return MadeAMove;
         // Debug.Log("Current Moves: " + playerProperties.currentMoves );
