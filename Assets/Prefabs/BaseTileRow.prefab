@@ -31,9 +31,9 @@ RectTransform:
   - {fileID: 6617007006654200102}
   - {fileID: 7712311212589009999}
   - {fileID: 7147116883718579227}
-  - {fileID: 5214842834833383415}
-  - {fileID: 4773136431902897070}
   - {fileID: 4687313910364835469}
+  - {fileID: 4773136431902897070}
+  - {fileID: 5214842834833383415}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -245,15 +245,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2633827486789168956, guid: ac3e82bbb8915c1449bef988af53dfae, type: 3}
       propertyPath: cords.y
-      value: 4
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6861604084023989436, guid: ac3e82bbb8915c1449bef988af53dfae, type: 3}
       propertyPath: m_Name
-      value: 4
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7625183583846131270, guid: ac3e82bbb8915c1449bef988af53dfae, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.3
+      value: 5.5
       objectReference: {fileID: 0}
     - target: {fileID: 7625183583846131270, guid: ac3e82bbb8915c1449bef988af53dfae, type: 3}
       propertyPath: m_LocalPosition.y
@@ -311,15 +311,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2633827486789168956, guid: ec03d551cd394b841bc744b52fc45a55, type: 3}
       propertyPath: cords.y
-      value: 6
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6861604084023989436, guid: ec03d551cd394b841bc744b52fc45a55, type: 3}
       propertyPath: m_Name
-      value: 6
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7625183583846131270, guid: ec03d551cd394b841bc744b52fc45a55, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.5
+      value: 3.3
       objectReference: {fileID: 0}
     - target: {fileID: 7625183583846131270, guid: ec03d551cd394b841bc744b52fc45a55, type: 3}
       propertyPath: m_LocalPosition.y
