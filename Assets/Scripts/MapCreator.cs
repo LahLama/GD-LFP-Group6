@@ -70,6 +70,7 @@ public class MapCreator : MonoBehaviour
                 continue;
             }
             _prefabLookup[entry.type] = entry.prefab;
+
         }
     }
 
@@ -90,6 +91,12 @@ public class MapCreator : MonoBehaviour
                 }
 
                 Vector3 pos = new Vector3(x * cellSize, 0f, -y * cellSize);
+            prefab.TryGetComponent<TileProperties>(out var tileProperties);
+                if (tileProperties != null)
+                {
+                    // this arrangement will make it be row, col according to TileProperties script
+                    tileProperties.cords = new Vector2Int(y+1,x+1);
+                }
                 Instantiate(prefab, pos, Quaternion.identity, gridParent);
             }
         }
