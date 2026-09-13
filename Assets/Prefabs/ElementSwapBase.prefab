@@ -66,7 +66,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: d33fe726361e22f4f8dca5e9aea53f03, type: 2}
     - target: {fileID: 8994451080318423122, guid: f582545e406b3b2468e54ec95ca7648a, type: 3}
       propertyPath: m_Name
-      value: Change Element Tile 1
+      value: Element Swap Tile
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
