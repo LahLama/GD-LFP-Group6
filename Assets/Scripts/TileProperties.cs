@@ -11,6 +11,7 @@ public class TileProperties : MonoBehaviour
     public Vector2Int cords = new Vector2Int(0,0);
     public Vector2Int playerCords = new Vector2Int(0,0);
     public Vector2Int newCords = new Vector2Int(0,0);
+    public Material tileMaterial;
 
    
     public TileState tileState = TileState.Tile;
@@ -21,10 +22,16 @@ public class TileProperties : MonoBehaviour
     private int obstacleMoveCost = -2;
     private int moveAddCost = +2;
 
+    int playerX ;
+    int playerY ;
+
 
     void Start()
     {
+        playerX = playerCords.x;
+         playerY = playerCords.y;
         playerProperties = FindAnyObjectByType<PlayerProperties>();
+        this.GetComponent<Renderer>().material = tileMaterial;
         // Divide the cordinate vector
         row = cords.x;
         col = cords.y;
@@ -72,7 +79,7 @@ public class TileProperties : MonoBehaviour
         {
             MadeAMove = false;
         }
-       
+    Debug.Log("Can move? " + MadeAMove);
     return MadeAMove;
         // Debug.Log("Current Moves: " + playerProperties.currentMoves );
         
@@ -80,8 +87,7 @@ public class TileProperties : MonoBehaviour
 
     public bool CheckAdjacencyOnPlayer(Vector2Int playerCords, Vector2Int newCords)
     {   
-        int playerX = playerCords.x;
-        int playerY = playerCords.y;
+        
         // Check if the player can move to an adjacent tile
 
         if (newCords.x == playerX && newCords.y == playerY + 1)  // Move - Up 

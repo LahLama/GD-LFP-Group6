@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: tileState
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 533352407080823762, guid: f582545e406b3b2468e54ec95ca7648a, type: 3}
+      propertyPath: tileMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: d33fe726361e22f4f8dca5e9aea53f03, type: 2}
     - target: {fileID: 5348584230258827944, guid: f582545e406b3b2468e54ec95ca7648a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -53,12 +57,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8328631378275113550, guid: f582545e406b3b2468e54ec95ca7648a, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8328631378275113550, guid: f582545e406b3b2468e54ec95ca7648a, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: d33fe726361e22f4f8dca5e9aea53f03, type: 2}
     - target: {fileID: 8994451080318423122, guid: f582545e406b3b2468e54ec95ca7648a, type: 3}
       propertyPath: m_Name
-      value: Move Addition Tile 1
+      value: Change Element Tile 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

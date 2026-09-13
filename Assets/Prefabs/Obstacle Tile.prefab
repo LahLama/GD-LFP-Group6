@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: tileState
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 533352407080823762, guid: f582545e406b3b2468e54ec95ca7648a, type: 3}
+      propertyPath: tileMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 3a499d43cd1d08d42bfdcb920c105eb5, type: 2}
     - target: {fileID: 5348584230258827944, guid: f582545e406b3b2468e54ec95ca7648a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -58,7 +62,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 3a499d43cd1d08d42bfdcb920c105eb5, type: 2}
     - target: {fileID: 8994451080318423122, guid: f582545e406b3b2468e54ec95ca7648a, type: 3}
       propertyPath: m_Name
-      value: Change Element Tile
+      value: Obstacle Tile
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
