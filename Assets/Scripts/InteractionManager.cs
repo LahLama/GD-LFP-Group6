@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum TileState { Tile,Obstacle, MoveAdd, Element}
 
-public enum ElementState { Fire,Earth,Nature,Air, Tipid }
+public enum ElementState { Fire,Earth,Nature,Water, Tipid }
 
 
 

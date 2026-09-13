@@ -11,7 +11,7 @@ public class TileProperties : MonoBehaviour
     public Vector2Int cords = new Vector2Int(0,0);
     public Vector2Int playerCords = new Vector2Int(0,0);
     public Vector2Int newCords = new Vector2Int(0,0);
-    public Material tileMaterial;
+    // public Material tileMaterial;
 
    
     public TileState tileState = TileState.Tile;
@@ -28,13 +28,74 @@ public class TileProperties : MonoBehaviour
 
     void Start()
     {
+        SetTileMaterial();
         playerX = playerCords.x;
          playerY = playerCords.y;
         playerProperties = FindAnyObjectByType<PlayerProperties>();
-        this.GetComponent<Renderer>().material = tileMaterial;
+
         // Divide the cordinate vector
         row = cords.x;
         col = cords.y;
+    }
+
+    private void SetTileMaterial()
+    {
+        Material tileMaterial = GetComponent<Renderer>().material;
+        if (tileState == TileState.Element)
+        {
+            switch (tileElement)
+            {
+                case ElementState.Tipid:
+                // Load the material from the assets/materials folder
+                    tileMaterial = Resources.Load<Material>("Materials/Achetypes/swapEarth");
+                    break;
+                case ElementState.Water:
+                    tileMaterial = Resources.Load<Material>("Materials/Achetypes/swapWater");
+                   break;
+                case ElementState.Earth:
+                    tileMaterial = Resources.Load<Material>("Materials/Achetypes/swapEarth");
+                    break;
+                case ElementState.Fire:
+                    tileMaterial = Resources.Load<Material>("Materials/Achetypes/swapFire");
+                    break;
+                case ElementState.Nature:
+                    tileMaterial = Resources.Load<Material>("Materials/Achetypes/swapNature");
+                    break;
+                default:
+                    tileMaterial = Resources.Load<Material>("Materials/Achetypes/swapTipid");
+                    break;
+            }
+        }
+
+        if (tileState == TileState.Obstacle)
+        {
+            switch (tileElement)
+            {
+                case ElementState.Tipid:
+                    tileMaterial = Resources.Load<Material>("Materials/Achetypes/obstacleTipid");
+                    break;
+                case ElementState.Water:
+                    tileMaterial = Resources.Load<Material>("Materials/Achetypes/obstacleWater");
+                    break;
+                case ElementState.Earth:
+                    tileMaterial = Resources.Load<Material>("Materials/Achetypes/obstacleEarth");
+                    break;
+                case ElementState.Fire:
+                    tileMaterial = Resources.Load<Material>("Materials/Achetypes/obstacleFire");
+                    break;
+                case ElementState.Nature:
+                    tileMaterial = Resources.Load<Material>("Materials/Achetypes/obstacleNature");
+                    break;
+                default:
+                    tileMaterial = Resources.Load<Material>("Materials/Achetypes/obstacleTipid");
+                    break;
+            }
+        }
+        if (tileState == TileState.MoveAdd)
+        {
+            tileMaterial = Resources.Load<Material>("Materials/Achetypes/moveAdd");
+        }
+        this.GetComponent<Renderer>().material = tileMaterial;
     }
 
     public bool ExecuteType()
