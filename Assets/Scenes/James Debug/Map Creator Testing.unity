@@ -254,6 +254,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 768932537340427493, guid: 0ae6be10acda40443ad2c1baa17fb4a3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 888206512654682103, guid: 0ae6be10acda40443ad2c1baa17fb4a3, type: 3}
       propertyPath: cords.x
       value: 4
@@ -428,6 +432,10 @@ PrefabInstance:
     - target: {fileID: 768932537340427493, guid: 0ae6be10acda40443ad2c1baa17fb4a3, type: 3}
       propertyPath: m_Name
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 768932537340427493, guid: 0ae6be10acda40443ad2c1baa17fb4a3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 888206512654682103, guid: 0ae6be10acda40443ad2c1baa17fb4a3, type: 3}
       propertyPath: cords.x
@@ -631,7 +639,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: -0.5
+  near clip plane: -10
   far clip plane: 1000
   field of view: 60
   orthographic: 1
@@ -757,6 +765,10 @@ PrefabInstance:
     - target: {fileID: 768932537340427493, guid: 0ae6be10acda40443ad2c1baa17fb4a3, type: 3}
       propertyPath: m_Name
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 768932537340427493, guid: 0ae6be10acda40443ad2c1baa17fb4a3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 888206512654682103, guid: 0ae6be10acda40443ad2c1baa17fb4a3, type: 3}
       propertyPath: cords.x
@@ -1175,7 +1187,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 455100130}
-  m_LocalRotation: {x: -0, y: -0.707091, z: -0, w: 0.7071226}
+  m_LocalRotation: {x: 0.7071227, y: 0.00005849451, z: -0.707091, w: -0.000058747828}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1186,7 +1198,7 @@ RectTransform:
   - {fileID: 165506808}
   - {fileID: 1902349187}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: -89.997, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90.003, z: -180.009}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
@@ -1494,6 +1506,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 768932537340427493, guid: 0ae6be10acda40443ad2c1baa17fb4a3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 888206512654682103, guid: 0ae6be10acda40443ad2c1baa17fb4a3, type: 3}
       propertyPath: cords.x
       value: 5
@@ -1654,7 +1670,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &2011047488
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1668,6 +1684,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MapCreator
   tilePrefabs:
+  - type: 9
+    prefab: {fileID: 8994451080318423122, guid: f582545e406b3b2468e54ec95ca7648a, type: 3}
   - type: 0
     prefab: {fileID: 2803687835734767554, guid: 1cd74007db9ee3042bcdeb00842dd45d, type: 3}
   - type: 1
@@ -1686,8 +1704,8 @@ MonoBehaviour:
     prefab: {fileID: 6260357811884321959, guid: 79e9bf69b4235ba4aba424489143e505, type: 3}
   - type: 8
     prefab: {fileID: 825326845203239223, guid: 9ba76d3cb7f27d840820b62f6e3c6266, type: 3}
-  - type: 8
-    prefab: {fileID: 7847923408014062169, guid: b2387fa4d8c784b41ba506614e2979f8, type: 3}
+  - type: 6
+    prefab: {fileID: 7914357244904216498, guid: eb51cced88e8e194ba99ab99a399b660, type: 3}
   - type: 10
     prefab: {fileID: 8994451080318423122, guid: bfe5270e1ae3441478e7b0bf2a077530, type: 3}
   cellSize: 1.1
@@ -1859,6 +1877,10 @@ PrefabInstance:
     - target: {fileID: 768932537340427493, guid: 0ae6be10acda40443ad2c1baa17fb4a3, type: 3}
       propertyPath: m_Name
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 768932537340427493, guid: 0ae6be10acda40443ad2c1baa17fb4a3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 888206512654682103, guid: 0ae6be10acda40443ad2c1baa17fb4a3, type: 3}
       propertyPath: tileElement

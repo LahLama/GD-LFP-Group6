@@ -4,28 +4,100 @@ using UnityEngine;
 
 
 
-public enum CellType
+public enum TileType
 {
-    Empty,   // e
-    Mine,    // m
-    Trap,    // t
-    End      // END
+    ElementWater, // EW
+    ElementFire, // EF
+    ElementEarth, // EE
+    ElementNature, // EN
+    MoveAdd, // MA
+    ObstacleWater, // OW
+    ObstacleFire, // OF
+    ObstacleEarth, // OE
+    ObstacleNature, // ON
+    NormalTile, // .
+    EndTile // X
+}
+
+[System.Serializable]
+public class TilePrefabEntry
+{
+    public TileType type;
+    public GameObject prefab;
 }
 
 [System.Serializable]
 public class RowData
 {
-    public List<CellType> cells = new List<CellType>();
+    public List<TileType> tiles = new List<TileType>();
 }
 
 public class MapCreator : MonoBehaviour
 {
-    static readonly Dictionary<char, CellType> CharMap = new Dictionary<char, CellType>
+    static readonly Dictionary<string, TileType> CharMap = new Dictionary<string, TileType>
     {
-        { 'e', CellType.Empty },
-        { 'm', CellType.Mine },
-        { 't', CellType.Trap },
+        {"w", TileType.ElementWater},
+        {"f", TileType.ElementFire},
+        {"e", TileType.ElementEarth},
+        {"n", TileType.ElementNature},
+        {"m", TileType.MoveAdd},
+        {"W", TileType.ObstacleWater},
+        {"F", TileType.ObstacleFire},
+        {"E", TileType.ObstacleEarth},
+        {"N", TileType.ObstacleNature},
+        {".", TileType.NormalTile},
+        {"END", TileType.EndTile}
     };
+
+
+    [Header("Tile Prefabs")]
+    public List<TilePrefabEntry> tilePrefabs = new List<TilePrefabEntry>();
+
+    Dictionary<TileType, GameObject> _prefabLookup;
+
+    [Header("Grid Settings")]
+    public float cellSize = 1f;
+    public Transform gridParent;
+
+    void BuildPrefabLookup()
+    {
+        _prefabLookup = new Dictionary<TileType, GameObject>();
+        foreach (var entry in tilePrefabs)
+        {
+            if (entry.prefab == null)
+            {
+                Debug.LogWarning($"No prefab assigned for {entry.type}");
+                continue;
+            }
+            _prefabLookup[entry.type] = entry.prefab;
+        }
+    }
+
+
+     void SpawnGrid()
+    {
+        for (int y = 0; y < rows.Count; y++)
+        {
+            var row = rows[y];
+            for (int x = 0; x < row.tiles.Count; x++)
+            {
+                var type = row.tiles[x];
+
+                if (!_prefabLookup.TryGetValue(type, out var prefab))
+                {
+                    Debug.LogError($"No prefab mapped for {type}");
+                    continue;
+                }
+
+                Vector3 pos = new Vector3(x * cellSize, 0f, -y * cellSize);
+                Instantiate(prefab, pos, Quaternion.identity, gridParent);
+            }
+        }
+    }
+
+
+
+
 
     public List<RowData> rows = new List<RowData>();
 
@@ -35,11 +107,10 @@ public class MapCreator : MonoBehaviour
         foreach (var line in rowStrings)
         {
             var row = new RowData();
-            // handle "END" as a special multi-char token
             var tokens = line.Split(',');
             foreach (var token in tokens)
             {
-                row.cells.Add(token == "END" ? CellType.End : CharMap[token[0]]);
+                row.tiles.Add(CharMap[token]);
             }
             result.Add(row);
         }
@@ -49,11 +120,24 @@ public class MapCreator : MonoBehaviour
     void Awake()
     {
         string[] level =
-        {
-            ""
-        };
+         {
+        ".,.,.,.,.,.,.,.,.,.",
+        ".,.,.,.,.,.,.,.,.,.",
+        ".,.,.,.,.,.,.,.,.,END",
 
-        CreateLevel(level);
+    };
+
+        rows = CreateLevel(level);
+        BuildPrefabLookup();
+        SpawnGrid();
+
+        foreach (var row in rows)
+        {
+            foreach (var tile in row.tiles)
+            {
+                Debug.Log(tile);
+            }
+        }
     }
 }
 
