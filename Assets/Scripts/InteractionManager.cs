@@ -13,7 +13,6 @@ public class InteractionManager : MonoBehaviour
     Ray ray;
 	RaycastHit hit;
     PlayerProperties playerProperties;
-   public List<Material> elementMaterials = new List<Material>();
     // Create a global struct with the tile types that i can use in other scripts
 
 
