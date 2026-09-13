@@ -29,8 +29,7 @@ public class TileProperties : MonoBehaviour
     void Start()
     {
         SetTileMaterial();
-        playerX = playerCords.x;
-         playerY = playerCords.y;
+
         playerProperties = FindAnyObjectByType<PlayerProperties>();
 
         // Divide the cordinate vector
@@ -147,7 +146,9 @@ public class TileProperties : MonoBehaviour
     }
 
     public bool CheckAdjacencyOnPlayer(Vector2Int playerCords, Vector2Int newCords)
-    {   
+    {     
+        playerX = playerCords.x;
+        playerY = playerCords.y;
         
         // Check if the player can move to an adjacent tile
 
