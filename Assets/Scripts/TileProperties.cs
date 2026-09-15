@@ -91,6 +91,10 @@ public class TileProperties : MonoBehaviour
         {
             tileMaterial = Resources.Load<Material>("Materials/Achetypes/moveAdd");
         }
+        if (tileState == TileState.Wall)
+        {
+            tileMaterial = Resources.Load<Material>("Materials/Achetypes/wall");
+        }
         this.GetComponent<Renderer>().material = tileMaterial;
     }
 
@@ -131,12 +135,17 @@ public class TileProperties : MonoBehaviour
             playerProperties.playerElement = tileElement;
             MadeAMove = true;
         }
+// Check if the player tries to move to a wall, dont move
+        else if ( tileState == TileState.Wall)
+        {
+               MadeAMove = true;
+        }
 // If the player does not have enough moves to move to the tile, do not allow the player to move
         else 
         {
             MadeAMove = false;
         }
-    Debug.Log("Can move? " + MadeAMove);
+    // Debug.Log("Can move? " + MadeAMove);
     return MadeAMove;
         // Debug.Log("Current Moves: " + playerProperties.currentMoves );
         

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public enum TileState { Tile,Obstacle, MoveAdd, Element}
+public enum TileState { Tile,Obstacle, MoveAdd, Element, Wall}
 
 public enum ElementState { Fire,Earth,Nature,Water, Tipid }
 
@@ -42,11 +42,13 @@ void Update()
     if (Physics.Raycast(ray, out hit))
     {
         TileProperties tile = hit.collider.gameObject.GetComponent<TileProperties>();
-        // if (tile == null) return;
+        if (tile == null) return;
         // Debug.Log(hit.collider.gameObject.name + " is being hovered over.");
 
         if (inputActions.UI.Click.WasReleasedThisFrame())
         {
+          if (tile.tileState == TileState.Wall)
+          return;
           
             Vector2Int newCords = tile.cords;
             Vector2Int playerCords = playerProperties.playerCords;
@@ -54,7 +56,7 @@ void Update()
                        
             bool canMove = tile.ExecuteType() && tile.CheckAdjacencyOnPlayer(playerCords, newCords) ;
             
-            Debug.Log(canMove);
+            // Debug.Log(canMove);
             if (canMove)
             {
                 // Debug.Log("Player moves");

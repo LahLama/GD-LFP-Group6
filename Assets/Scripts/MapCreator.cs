@@ -16,7 +16,8 @@ public enum TileType
     ObstacleEarth, // OE
     ObstacleNature, // ON
     NormalTile, // .
-    EndTile // X
+    EndTile, // X
+    WallTile // W
 }
 
 [System.Serializable]
@@ -40,11 +41,12 @@ public class MapCreator : MonoBehaviour
         {"f", TileType.ElementFire},
         {"e", TileType.ElementEarth},
         {"n", TileType.ElementNature},
-        {"m", TileType.MoveAdd},
         {"W", TileType.ObstacleWater},
         {"F", TileType.ObstacleFire},
         {"E", TileType.ObstacleEarth},
         {"N", TileType.ObstacleNature},
+        {"#", TileType.WallTile},
+        {"m", TileType.MoveAdd},
         {".", TileType.NormalTile},
         {"END", TileType.EndTile}
     };
@@ -130,7 +132,8 @@ public class MapCreator : MonoBehaviour
          {
         
         ".,e,m,E,.,.,.,.,.,.",
-        ".,m,.,.,.,.,.,.,.,.",
+        ".,#,#,#,.,.,.,.,.,.",
+        ".,#,#,#,.,.,.,.,.,.",
         ".,w,.,.,W,.,.,.,.,END",
 
 
