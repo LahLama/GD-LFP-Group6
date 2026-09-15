@@ -49,20 +49,24 @@ void Update()
         {
           if (tile.tileState == TileState.Wall)
           return;
-          
+
             Vector2Int newCords = tile.cords;
-            Vector2Int playerCords = playerProperties.playerCords;
-            //   Debug.Log("Player Cords: " + playerCords + "\n Tile Cords: " + newCords);
+            Vector2Int playerCords = playerProperties.GetPlayerCords();
+              Debug.Log("Player Cords: " + playerCords + "\n Tile Cords: " + newCords);
                        
-            bool canMove = tile.ExecuteType() && tile.CheckAdjacencyOnPlayer(playerCords, newCords) ;
-            
-            // Debug.Log(canMove);
-            if (canMove)
-            {
-                // Debug.Log("Player moves");
-            // Debug.Log("Player Cords: " + playerCords + "\n New Cords: " + newCords);
-                playerProperties.SetPlayerCords(newCords, tile.transform.position);
+
+            // Check if the tile is adjacent to the player
+            if (playerProperties.CheckAdjacencyOnPlayer(playerCords, newCords) )
+                {
+                // Check if the player has enough moves to move to the tile
+                if( tile.ExecuteType())
+                {
+                    // Update the player's position and coordinates
+                    playerProperties.SetPlayerCords(newCords, tile.transform.position);
+                }
             }
+        
+      
         }
     }
 }
