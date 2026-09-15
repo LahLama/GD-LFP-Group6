@@ -1,9 +1,6 @@
 using TMPro;
-using Unity.Android.Gradle;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Tilemaps;
 public class TileProperties : MonoBehaviour
 {
     private int row = 0;
