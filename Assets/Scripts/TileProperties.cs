@@ -11,7 +11,7 @@ public class TileProperties : MonoBehaviour
 
    
     public TileState tileState = TileState.Tile;
-    public ElementState tileElement = ElementState.Tipid;
+    public ElementState tileElement = ElementState.Base;
     private bool MadeAMove = false;
     private PlayerProperties playerProperties;
     private int tileMoveCost = -1;
@@ -38,7 +38,7 @@ public class TileProperties : MonoBehaviour
         {
             switch (tileElement)
             {
-                case ElementState.Tipid:
+                case ElementState.Base:
                 // Load the material from the assets/materials folder
                     tileMaterial = Resources.Load<Material>("Materials/Achetypes/swapEarth");
                     break;
@@ -55,17 +55,17 @@ public class TileProperties : MonoBehaviour
                     tileMaterial = Resources.Load<Material>("Materials/Achetypes/swapNature");
                     break;
                 default:
-                    tileMaterial = Resources.Load<Material>("Materials/Achetypes/swapTipid");
+                    tileMaterial = Resources.Load<Material>("Materials/Achetypes/swapBase");
                     break;
             }
         }
 
-        if (tileState == TileState.Obstacle)
+        else if (tileState == TileState.Obstacle)
         {
             switch (tileElement)
             {
-                case ElementState.Tipid:
-                    tileMaterial = Resources.Load<Material>("Materials/Achetypes/obstacleTipid");
+                case ElementState.Base:
+                    tileMaterial = Resources.Load<Material>("Materials/Achetypes/obstacleBase");
                     break;
                 case ElementState.Water:
                     tileMaterial = Resources.Load<Material>("Materials/Achetypes/obstacleWater");
@@ -80,17 +80,25 @@ public class TileProperties : MonoBehaviour
                     tileMaterial = Resources.Load<Material>("Materials/Achetypes/obstacleNature");
                     break;
                 default:
-                    tileMaterial = Resources.Load<Material>("Materials/Achetypes/obstacleTipid");
+                    tileMaterial = Resources.Load<Material>("Materials/Achetypes/obstacleBase");
                     break;
             }
         }
-        if (tileState == TileState.MoveAdd)
+        else if (tileState == TileState.MoveAdd)
         {
             tileMaterial = Resources.Load<Material>("Materials/Achetypes/moveAdd");
         }
-        if (tileState == TileState.Wall)
+        else if (tileState == TileState.Wall)
         {
             tileMaterial = Resources.Load<Material>("Materials/Achetypes/wall");
+        }
+        else if (tileState == TileState.EndPoint)
+        {
+        tileMaterial = Resources.Load<Material>("Materials/Achetypes/endPoint");    
+        }
+        else
+        {
+            tileMaterial = Resources.Load<Material>("Materials/Achetypes/baseTile");
         }
         this.GetComponent<Renderer>().material = tileMaterial;
     }
@@ -116,6 +124,9 @@ public class TileProperties : MonoBehaviour
         {
         playerProperties.ModifyMoves(obstacleMoveCost);
         MadeAMove = true;
+        //if its a obstacle tile and its broken, remove the type and set it to a normal tile
+        tileState = TileState.Tile;
+        SetTileMaterial();
         }
 
 // Check if the player has enough moves to move to the tile and if the tile is a MoveAdd tile
@@ -123,6 +134,9 @@ public class TileProperties : MonoBehaviour
         {
         playerProperties.ModifyMoves(moveAddCost);
         MadeAMove = true;
+        //if its a moveAdd tile, remove the type and set it to a normal tile
+        tileState = TileState.Tile;
+        SetTileMaterial();
         }
 
 // Check if the player has enough moves to move to the tile and if the tile is an Element tile
@@ -137,6 +151,15 @@ public class TileProperties : MonoBehaviour
         {
                MadeAMove = true;
         }
+// Check if the player tries to move to a wall, dont move
+        else if ( playerProperties.CanModifyMove(tileMoveCost) && tileState == TileState.EndPoint)
+        {
+        playerProperties.ModifyMoves(tileMoveCost);
+        MadeAMove = true;
+        Debug.Log("YOU WIN****************************************");
+        }
+        
+
 // If the player does not have enough moves to move to the tile, do not allow the player to move
         else 
         {

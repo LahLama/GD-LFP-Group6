@@ -2,9 +2,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public enum TileState { Tile,Obstacle, MoveAdd, Element, Wall}
+public enum TileState { Tile,Obstacle, MoveAdd, Element, Wall, EndPoint}
 
-public enum ElementState { Fire,Earth,Nature,Water, Tipid }
+public enum ElementState { Fire,Earth,Nature,Water, Base }
 
 
 

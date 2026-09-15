@@ -12,7 +12,7 @@ int maxMoves = 6;
 public TextMeshProUGUI movesText;
     int playerX ;
     int playerY ;
-public ElementState playerElement = ElementState.Tipid;
+public ElementState playerElement = ElementState.Base;
 
     void Start()
     {
