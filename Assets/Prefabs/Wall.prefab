@@ -58,10 +58,11 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 1a15570b10cc54046b21005b174658a2, type: 2}
     - target: {fileID: 8994451080318423122, guid: f582545e406b3b2468e54ec95ca7648a, type: 3}
       propertyPath: m_Name
-      value: Wall Variant
+      value: Wall
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 5346496821838299167, guid: f582545e406b3b2468e54ec95ca7648a, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f582545e406b3b2468e54ec95ca7648a, type: 3}

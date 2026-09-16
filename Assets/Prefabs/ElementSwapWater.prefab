@@ -54,8 +54,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7378023007207632946, guid: a21c406c8845f8f4d99da9cbdc78c73c, type: 3}
       propertyPath: m_Name
-      value: 4 Variant
+      value: ElementSwapWater
       objectReference: {fileID: 0}
+    - target: {fileID: 8694174732399225039, guid: a21c406c8845f8f4d99da9cbdc78c73c, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

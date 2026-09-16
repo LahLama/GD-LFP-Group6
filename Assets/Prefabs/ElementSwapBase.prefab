@@ -9,6 +9,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 533352407080823762, guid: f582545e406b3b2468e54ec95ca7648a, type: 3}
+      propertyPath: cords.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 533352407080823762, guid: f582545e406b3b2468e54ec95ca7648a, type: 3}
+      propertyPath: cords.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 533352407080823762, guid: f582545e406b3b2468e54ec95ca7648a, type: 3}
       propertyPath: tileState
       value: 3
       objectReference: {fileID: 0}
@@ -66,7 +74,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: d33fe726361e22f4f8dca5e9aea53f03, type: 2}
     - target: {fileID: 8994451080318423122, guid: f582545e406b3b2468e54ec95ca7648a, type: 3}
       propertyPath: m_Name
-      value: Element Swap Tile
+      value: ElementSwapBase
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -16,6 +16,7 @@ public class TileProperties : MonoBehaviour
     private PlayerProperties playerProperties;
     private int tileMoveCost = -1;
     private int obstacleMoveCost = -2;
+    public int waterObstacleMoveCost = -4;
     private int moveAddCost = +2;
 
 
@@ -122,6 +123,7 @@ public class TileProperties : MonoBehaviour
 // Check if the player has enough moves to conquer the obstacle and if the player has the same element as the obstacle
         else if (canConquerObstacle)
         {
+        
         playerProperties.ModifyMoves(obstacleMoveCost);
         MadeAMove = true;
         //if its a obstacle tile and its broken, remove the type and set it to a normal tile
@@ -151,7 +153,7 @@ public class TileProperties : MonoBehaviour
         {
                MadeAMove = true;
         }
-// Check if the player tries to move to a wall, dont move
+// Check if the player tries to move to a Endpoint, dont move
         else if ( playerProperties.CanModifyMove(tileMoveCost) && tileState == TileState.EndPoint)
         {
         playerProperties.ModifyMoves(tileMoveCost);

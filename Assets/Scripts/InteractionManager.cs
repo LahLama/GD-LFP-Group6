@@ -45,6 +45,7 @@ void Update()
         if (tile == null) return;
         // Debug.Log(hit.collider.gameObject.name + " is being hovered over.");
 
+        // Check if WASD - then move accordiling.
         if (inputActions.UI.Click.WasReleasedThisFrame())
         {
           if (tile.tileState == TileState.Wall)

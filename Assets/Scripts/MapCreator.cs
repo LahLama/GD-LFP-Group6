@@ -41,10 +41,12 @@ public class MapCreator : MonoBehaviour
         {"f", TileType.ElementFire},
         {"e", TileType.ElementEarth},
         {"n", TileType.ElementNature},
+
         {"W", TileType.ObstacleWater},
         {"F", TileType.ObstacleFire},
         {"E", TileType.ObstacleEarth},
         {"N", TileType.ObstacleNature},
+
         {"#", TileType.WallTile},
         {"m", TileType.MoveAdd},
         {".", TileType.NormalTile},
@@ -131,10 +133,9 @@ public class MapCreator : MonoBehaviour
         string[] level =
          {
         
-        ".,e,E,.,.,.,.,.,.",
-        "m,E,#,#,.,.,.,.,.,.",
-        ".,#,#,#,.,.,.,.,.,.",
-        ".,w,.,.,W,.,.,.,.,END",
+        ".,m,e,E,.,.,.,.,.",
+        "#,m,e,END,.,.,.,.,.",
+        "#,m,e,.,W,.,.,.,.",
 
 
     };

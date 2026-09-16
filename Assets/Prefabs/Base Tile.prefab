@@ -125,8 +125,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98fd6c91bf9c51841bb7e3062ae08aa3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TileProperties
-  cords: {x: 1, y: 1}
-  playerCords: {x: 0, y: 0}
+  cords: {x: 3, y: 9}
   newCords: {x: 0, y: 0}
   tileState: 0
   tileElement: 4
+  waterObstacleMoveCost: -4
