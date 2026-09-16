@@ -99,7 +99,7 @@ public class MapCreator : MonoBehaviour
                 if (tileProperties != null)
                 {
                     // this arrangement will make it be row, col according to TileProperties script
-                    tileProperties.cords = new Vector2Int(y+1,x+1);
+                    tileProperties.cords = new Vector2Int(x+1,y+1);
                 }
                 Instantiate(prefab, pos, Quaternion.identity, gridParent);
             }
@@ -133,9 +133,9 @@ public class MapCreator : MonoBehaviour
         string[] level =
          {
         
-        ".,m,e,E,.,.,.,.,.",
-        "#,m,e,END,.,.,.,.,.",
-        "#,m,e,.,W,.,.,.,.",
+        ".,m,m,m,m,m,m,.,.",
+        ".,m,m,m,m,m,m,.,.",
+        ".,m,m,m,m,m,m,.,.",
 
 
     };
@@ -148,7 +148,7 @@ public class MapCreator : MonoBehaviour
         {
             foreach (var tile in row.tiles)
             {
-                Debug.Log(tile);
+                // Debug.Log(tile);
             }
         }
     }

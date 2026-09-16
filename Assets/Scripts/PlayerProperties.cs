@@ -53,33 +53,52 @@ public Vector2Int GetPlayerCords()
         return playerCords;
     }
 
-
-    
-    public bool CheckAdjacencyOnPlayer(Vector2Int CurrentPlayerCords, Vector2Int newCords)
-    {    
+    public bool CheckLeftOfPlayer(Vector2Int CurrentPlayerCords, Vector2Int newCords)
+    {
         playerCords = CurrentPlayerCords;
         playerX = CurrentPlayerCords.x;
         playerY = CurrentPlayerCords.y;
-        
-        // Check if the player can move to an adjacent tile
 
-        if (newCords.x == playerX && newCords.y == playerY + 1)  // Move - Up 
+        if (newCords.x == playerX - 1 && newCords.y == playerY) // Move - Left
             return true;
-        else if (newCords.x == playerX && newCords.y == playerY - 1) // Move - Down
+        else
+            return false;
+    }
+
+    public bool CheckRightOfPlayer(Vector2Int CurrentPlayerCords, Vector2Int newCords)
+    {
+        playerCords = CurrentPlayerCords;
+        playerX = CurrentPlayerCords.x;
+        playerY = CurrentPlayerCords.y;
+
+        if (newCords.x == playerX + 1 && newCords.y == playerY) // Move - Right
             return true;
-        else if (newCords.x == playerX + 1 && newCords.y == playerY) // Move - Right
+        else
+            return false;
+    }
+
+    public bool CheckAbovePlayer(Vector2Int CurrentPlayerCords, Vector2Int newCords)
+    {
+        playerCords = CurrentPlayerCords;
+        playerX = CurrentPlayerCords.x;
+        playerY = CurrentPlayerCords.y;
+
+        if (newCords.x == playerX && newCords.y == playerY - 1) // Move - Up
             return true;
-        else if (newCords.x == playerX - 1 && newCords.y == playerY) // Move - Left
+        else
+            return false;
+    }
+
+    public bool CheckBelowPlayer(Vector2Int CurrentPlayerCords, Vector2Int newCords)
+    {
+        playerCords = CurrentPlayerCords;
+        playerX = CurrentPlayerCords.x;
+        playerY = CurrentPlayerCords.y;
+
+        
+        if (newCords.x == playerX && newCords.y == playerY + 1) // Move - Down
             return true;
-        else if (newCords.x == playerX + 1 && newCords.y == playerY + 1) // Move - Up Right
-            return true;
-        else if (newCords.x == playerX - 1 && newCords.y == playerY - 1) // Move - Down Left
-            return true;
-        else if (newCords.x == playerX + 1 && newCords.y == playerY - 1) // Move - Down Right
-            return true;
-        else if (newCords.x == playerX - 1 && newCords.y == playerY + 1) // Move - Up Left
-            return true;
-        else     // Not Adjacent
+        else
             return false;
     }
 

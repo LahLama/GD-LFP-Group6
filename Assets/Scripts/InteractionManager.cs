@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using Unity.VisualScripting.InputSystem;
+using UnityEditor;
 using UnityEngine;
 
 
@@ -33,42 +35,93 @@ public class InteractionManager : MonoBehaviour
     {
         inputActions.Disable();
     }
-#endregion
-      
+    #endregion
 
-void Update()
-{
-    ray = Camera.main.ScreenPointToRay(inputActions.UI.Point.ReadValue<Vector2>());
-    if (Physics.Raycast(ray, out hit))
+    void OnDrawGizmos()
     {
-        TileProperties tile = hit.collider.gameObject.GetComponent<TileProperties>();
-        if (tile == null) return;
-        // Debug.Log(hit.collider.gameObject.name + " is being hovered over.");
+        
+    Gizmos.color = Color.red;
+    Gizmos.DrawRay(ray);
+    }
 
-        // Check if WASD - then move accordiling.
-        if (inputActions.UI.Click.WasReleasedThisFrame())
-        {
-          if (tile.tileState == TileState.Wall)
-          return;
+    //Trigger this function when the player presses the WASD keys based on the input system reading
 
-            Vector2Int newCords = tile.cords;
-            Vector2Int playerCords = playerProperties.GetPlayerCords();
-              Debug.Log("Player Cords: " + playerCords + "\n Tile Cords: " + newCords);
-                       
 
-            // Check if the tile is adjacent to the player
-            if (playerProperties.CheckAdjacencyOnPlayer(playerCords, newCords) )
-                {
+    void Update()
+{
+        
+    Vector2 playerSuggestedMove  = inputActions.Player.Move.ReadValue<Vector2>();
+    Vector3 translatedMove = new Vector3( playerSuggestedMove.x,0,playerSuggestedMove.y);
+    ray = new Ray(playerProperties.transform.position, translatedMove);
+    Physics.Raycast(ray, out hit);
+    
+    if (hit.collider == null) return;
+    if (!hit.collider.gameObject.TryGetComponent<TileProperties>(out var tile)) return;
+
+    Vector2Int newCords = tile.cords;
+    Vector2Int playerCords = playerProperties.GetPlayerCords();
+// Debug.Log("input : " +inputActions.Player.Move.ReadValue<Vector2>());
+    if (!inputActions.Player.Move.WasPressedThisFrame()) return;
+    
+    
+    switch (inputActions.Player.Move.ReadValue<Vector2>())
+    {
+        
+    // Check if WASD - then move accordiling.
+        case Vector2 v when v == Vector2.up:
+            if (playerProperties.CheckAbovePlayer(playerCords,newCords))
                 // Check if the player has enough moves to move to the tile
                 if( tile.ExecuteType())
                 {
                     // Update the player's position and coordinates
                     playerProperties.SetPlayerCords(newCords, tile.transform.position);
                 }
-            }
+         
+            break;
         
-      
-        }
+        case Vector2 v when v == Vector2.down:
+            if (playerProperties.CheckBelowPlayer(playerCords,newCords))          
+                // Check if the player has enough moves to move to the tile
+                if( tile.ExecuteType())
+                {
+                    // Update the player's position and coordinates
+                    playerProperties.SetPlayerCords(newCords, tile.transform.position);
+                }
+        
+        break;
+
+        case Vector2 v when v == Vector2.left:
+            if (playerProperties.CheckLeftOfPlayer(playerCords,newCords))
+                // Check if the player has enough moves to move to the tile
+                if( tile.ExecuteType())
+                {
+                    // Update the player's position and coordinates
+                    playerProperties.SetPlayerCords(newCords, tile.transform.position);
+                }
+        
+            break;
+        case Vector2 v when v == Vector2.right:
+        if (playerProperties.CheckRightOfPlayer(playerCords,newCords))
+                // Check if the player has enough moves to move to the tile
+                if( tile.ExecuteType())
+                {
+                    // Update the player's position and coordinates
+                    playerProperties.SetPlayerCords(newCords, tile.transform.position);
+                }
+        
+        
+            break;
     }
+
+
+
+
+
+
+
+        
+
+       
+    
 }
 }
