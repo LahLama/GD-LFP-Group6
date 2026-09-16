@@ -15,6 +15,8 @@ public class InteractionManager : MonoBehaviour
     Ray ray;
 	RaycastHit hit;
     PlayerProperties playerProperties;
+    
+ MovementChecker movementChecker;
     // Create a global struct with the tile types that i can use in other scripts
 
 
@@ -26,6 +28,7 @@ public class InteractionManager : MonoBehaviour
     {
         inputActions = new InputSystem_Actions();
         playerProperties = FindAnyObjectByType<PlayerProperties>();
+         movementChecker = FindAnyObjectByType<MovementChecker>();
     }
     void OnEnable()
     {
@@ -69,7 +72,7 @@ public class InteractionManager : MonoBehaviour
         
     // Check if WASD - then move accordiling.
         case Vector2 v when v == Vector2.up:
-            if (playerProperties.CheckAbovePlayer(playerCords,newCords))
+            if (movementChecker.CheckAbovePlayer(playerCords,newCords))
                 // Check if the player has enough moves to move to the tile
                 if( tile.ExecuteType())
                 {
@@ -80,7 +83,7 @@ public class InteractionManager : MonoBehaviour
             break;
         
         case Vector2 v when v == Vector2.down:
-            if (playerProperties.CheckBelowPlayer(playerCords,newCords))          
+            if (movementChecker.CheckBelowPlayer(playerCords,newCords))          
                 // Check if the player has enough moves to move to the tile
                 if( tile.ExecuteType())
                 {
@@ -91,7 +94,7 @@ public class InteractionManager : MonoBehaviour
         break;
 
         case Vector2 v when v == Vector2.left:
-            if (playerProperties.CheckLeftOfPlayer(playerCords,newCords))
+            if (movementChecker.CheckLeftOfPlayer(playerCords,newCords))
                 // Check if the player has enough moves to move to the tile
                 if( tile.ExecuteType())
                 {
@@ -101,7 +104,7 @@ public class InteractionManager : MonoBehaviour
         
             break;
         case Vector2 v when v == Vector2.right:
-        if (playerProperties.CheckRightOfPlayer(playerCords,newCords))
+        if (movementChecker.CheckRightOfPlayer(playerCords,newCords))
                 // Check if the player has enough moves to move to the tile
                 if( tile.ExecuteType())
                 {
