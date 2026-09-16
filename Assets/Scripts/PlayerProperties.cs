@@ -1,6 +1,7 @@
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class PlayerProperties : MonoBehaviour
 {
@@ -11,16 +12,27 @@ int maxMoves = 6;
 public TextMeshProUGUI movesText;
 public Vector3 playerPos;
 
+[SerializeField] Vector2Int respawnPoint;
+[SerializeField] int respawnMoves;
+[SerializeField] Vector3 respawnTransform;
+bool hasRespawned = false;
+
 public ElementState playerElement = ElementState.Base;
 
     void Start()
     {
+        
+        respawnPoint = playerCords;
+        respawnMoves = maxMoves;
+        respawnTransform = gameObject.transform.position;
          movesText.text = currentMoves.ToString();
+        respawnPoint = playerCords;
     }
 
     public bool CanModifyMove(int val)
     {
-       movesCheck = currentMoves;
+   
+        movesCheck = currentMoves;
         if ((movesCheck+=val) < 0)
         return false;
         else
@@ -34,7 +46,11 @@ public ElementState playerElement = ElementState.Base;
         if (currentMoves > maxMoves)
         {
             currentMoves = maxMoves;
-        };
+        }
+        else if( currentMoves <= 0)
+        {
+            RespawnPlayer();
+        }
          movesText.text = currentMoves.ToString();
     }
 
@@ -42,6 +58,12 @@ public ElementState playerElement = ElementState.Base;
 
 public void SetPlayerCords(Vector2Int newCords, Vector3 newPos)
     {
+        if (hasRespawned)
+        {
+            // A respawn already placed the player this turn.
+            hasRespawned = false;
+            return;
+        }
         playerCords = newCords;
         playerPos = newPos;
         gameObject.transform.position = newPos;
@@ -51,6 +73,22 @@ public Vector2Int GetPlayerCords()
     {
         return playerCords;
     }
+public void UpdateRespawnPoint(Vector2Int NewRespawnPoint, int NewRespawnMoves, Vector3 NewRespawnTransform)
+    {
+        respawnPoint = NewRespawnPoint;
+        respawnMoves = NewRespawnMoves;
+        respawnTransform = NewRespawnTransform;
+    }
+    
+public void RespawnPlayer()
+    {
+        currentMoves = respawnMoves;
+       
+        playerCords = respawnPoint;
+        this.transform.position = respawnTransform;
+        hasRespawned = true;
+        // Update the text counter
+         movesText.text = currentMoves.ToString();
 
-
+    }
 }

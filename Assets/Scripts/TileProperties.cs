@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Tilemaps;
 public class TileProperties : MonoBehaviour
 {
     private int row = 0;
@@ -123,7 +124,7 @@ public class TileProperties : MonoBehaviour
 // Check if the player has enough moves to conquer the obstacle and if the player has the same element as the obstacle
         else if (canConquerObstacle)
         {
-        
+        playerProperties.UpdateRespawnPoint(cords,playerProperties.currentMoves,transform.position);
         playerProperties.ModifyMoves(obstacleMoveCost);
         MadeAMove = true;
         //if its a obstacle tile and its broken, remove the type and set it to a normal tile

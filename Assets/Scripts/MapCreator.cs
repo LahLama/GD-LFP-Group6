@@ -133,8 +133,8 @@ public class MapCreator : MonoBehaviour
         string[] level =
          {
         
-        ".,m,m,m,m,m,m,.,.",
-        ".,m,m,m,m,m,m,.,.",
+        ".,m,n,N,m,m,m,.,.",
+        ".,m,m,w,W,m,m,.,.",
         ".,m,m,m,m,m,m,.,.",
 
 
