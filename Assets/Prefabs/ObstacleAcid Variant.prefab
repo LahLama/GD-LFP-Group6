@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &1693446968865423450
+--- !u!1001 &6220658270567046687
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -8,45 +8,25 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2633827486789168956, guid: ac3e82bbb8915c1449bef988af53dfae, type: 3}
-      propertyPath: cords.x
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2633827486789168956, guid: ac3e82bbb8915c1449bef988af53dfae, type: 3}
-      propertyPath: cords.y
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 2633827486789168956, guid: ac3e82bbb8915c1449bef988af53dfae, type: 3}
-      propertyPath: tileElement
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 2633827486789168956, guid: ac3e82bbb8915c1449bef988af53dfae, type: 3}
-      propertyPath: tileMaterial
-      value: 
-      objectReference: {fileID: 2100000, guid: 3a499d43cd1d08d42bfdcb920c105eb5, type: 2}
-    - target: {fileID: 5800314204868976288, guid: ac3e82bbb8915c1449bef988af53dfae, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
-      value: 
-      objectReference: {fileID: 2100000, guid: 3a499d43cd1d08d42bfdcb920c105eb5, type: 2}
     - target: {fileID: 6861604084023989436, guid: ac3e82bbb8915c1449bef988af53dfae, type: 3}
       propertyPath: m_Name
-      value: 6 (3) Variant
+      value: ObstacleAcid Variant
       objectReference: {fileID: 0}
     - target: {fileID: 7625183583846131270, guid: ac3e82bbb8915c1449bef988af53dfae, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.940246
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7625183583846131270, guid: ac3e82bbb8915c1449bef988af53dfae, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -7.700001
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7625183583846131270, guid: ac3e82bbb8915c1449bef988af53dfae, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 5.4998236
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7625183583846131270, guid: ac3e82bbb8915c1449bef988af53dfae, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.7071226
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7625183583846131270, guid: ac3e82bbb8915c1449bef988af53dfae, type: 3}
       propertyPath: m_LocalRotation.x
@@ -54,7 +34,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7625183583846131270, guid: ac3e82bbb8915c1449bef988af53dfae, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.707091
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 7625183583846131270, guid: ac3e82bbb8915c1449bef988af53dfae, type: 3}
       propertyPath: m_LocalRotation.z

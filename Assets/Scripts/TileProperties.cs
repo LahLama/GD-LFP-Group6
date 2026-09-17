@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
 public class TileProperties : MonoBehaviour
 {
@@ -17,7 +18,6 @@ public class TileProperties : MonoBehaviour
     private PlayerProperties playerProperties;
     private int tileMoveCost = -1;
     private int obstacleMoveCost = -2;
-    public int waterObstacleMoveCost = -4;
     private int moveAddCost = +2;
 
 
@@ -42,19 +42,19 @@ public class TileProperties : MonoBehaviour
             {
                 case ElementState.Base:
                 // Load the material from the assets/materials folder
-                    tileMaterial = Resources.Load<Material>("Materials/Achetypes/swapEarth");
+                    tileMaterial = Resources.Load<Material>("Materials/Achetypes/swapElectro");
                     break;
-                case ElementState.Water:
-                    tileMaterial = Resources.Load<Material>("Materials/Achetypes/swapWater");
+                case ElementState.Ice:
+                    tileMaterial = Resources.Load<Material>("Materials/Achetypes/swapIce");
                    break;
-                case ElementState.Earth:
-                    tileMaterial = Resources.Load<Material>("Materials/Achetypes/swapEarth");
+                case ElementState.Electro:
+                    tileMaterial = Resources.Load<Material>("Materials/Achetypes/swapElectro");
                     break;
                 case ElementState.Fire:
                     tileMaterial = Resources.Load<Material>("Materials/Achetypes/swapFire");
                     break;
-                case ElementState.Nature:
-                    tileMaterial = Resources.Load<Material>("Materials/Achetypes/swapNature");
+                case ElementState.Acid:
+                    tileMaterial = Resources.Load<Material>("Materials/Achetypes/swapAcid");
                     break;
                 default:
                     tileMaterial = Resources.Load<Material>("Materials/Achetypes/swapBase");
@@ -69,17 +69,17 @@ public class TileProperties : MonoBehaviour
                 case ElementState.Base:
                     tileMaterial = Resources.Load<Material>("Materials/Achetypes/obstacleBase");
                     break;
-                case ElementState.Water:
-                    tileMaterial = Resources.Load<Material>("Materials/Achetypes/obstacleWater");
+                case ElementState.Ice:
+                    tileMaterial = Resources.Load<Material>("Materials/Achetypes/obstacleIce");
                     break;
-                case ElementState.Earth:
-                    tileMaterial = Resources.Load<Material>("Materials/Achetypes/obstacleEarth");
+                case ElementState.Electro:
+                    tileMaterial = Resources.Load<Material>("Materials/Achetypes/obstacleElectro");
                     break;
                 case ElementState.Fire:
                     tileMaterial = Resources.Load<Material>("Materials/Achetypes/obstacleFire");
                     break;
-                case ElementState.Nature:
-                    tileMaterial = Resources.Load<Material>("Materials/Achetypes/obstacleNature");
+                case ElementState.Acid:
+                    tileMaterial = Resources.Load<Material>("Materials/Achetypes/obstacleAcid");
                     break;
                 default:
                     tileMaterial = Resources.Load<Material>("Materials/Achetypes/obstacleBase");
@@ -159,6 +159,7 @@ public class TileProperties : MonoBehaviour
         {
         playerProperties.ModifyMoves(tileMoveCost);
         MadeAMove = true;
+        SceneManager.LoadScene("winScene");
         Debug.Log("YOU WIN****************************************");
         }
         

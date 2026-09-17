@@ -6,7 +6,7 @@ using UnityEngine;
 
 public enum TileState { Tile,Obstacle, MoveAdd, Element, Wall, EndPoint}
 
-public enum ElementState { Fire,Earth,Nature,Water, Base }
+public enum ElementState { Acid,Electro,Fire,Ice, Base }
 
 
 

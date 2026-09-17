@@ -6,15 +6,15 @@ using UnityEngine;
 
 public enum TileType
 {
-    ElementWater, // EW
+    ElementIce, // EW
     ElementFire, // EF
-    ElementEarth, // EE
-    ElementNature, // EN
+    ElementElectro, // EE
+    ElementAcid, // EN
     MoveAdd, // MA
-    ObstacleWater, // OW
+    ObstacleIce, // OW
     ObstacleFire, // OF
-    ObstacleEarth, // OE
-    ObstacleNature, // ON
+    ObstacleElectro, // OE
+    ObstacleAcid, // ON
     NormalTile, // .
     EndTile, // X
     WallTile // W
@@ -37,15 +37,15 @@ public class MapCreator : MonoBehaviour
 {
     static readonly Dictionary<string, TileType> CharMap = new Dictionary<string, TileType>
     {
-        {"w", TileType.ElementWater},
+        {"w", TileType.ElementIce},
         {"f", TileType.ElementFire},
-        {"e", TileType.ElementEarth},
-        {"n", TileType.ElementNature},
+        {"e", TileType.ElementElectro},
+        {"n", TileType.ElementAcid},
 
-        {"W", TileType.ObstacleWater},
+        {"W", TileType.ObstacleIce},
         {"F", TileType.ObstacleFire},
-        {"E", TileType.ObstacleEarth},
-        {"N", TileType.ObstacleNature},
+        {"E", TileType.ObstacleElectro},
+        {"N", TileType.ObstacleAcid},
 
         {"#", TileType.WallTile},
         {"m", TileType.MoveAdd},
@@ -135,7 +135,7 @@ public class MapCreator : MonoBehaviour
         
         ".,m,n,N,m,m,m,.,.",
         ".,m,m,w,W,m,m,.,.",
-        ".,m,m,m,m,m,m,.,.",
+        "END,m,m,m,m,m,m,.,.",
 
 
     };
