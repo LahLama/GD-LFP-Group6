@@ -20,18 +20,26 @@ public class TileProperties : MonoBehaviour
     private int obstacleMoveCost = -2;
     private int moveAddCost = +2;
     public int CustomMoveCost = 0;
+    TextMeshPro moveText;
 
 
 
 
-    void Start()
+    void OnEnable()
     {
         SetTileMaterial();
 
         playerProperties = FindAnyObjectByType<PlayerProperties>();
+        
         // Divide the cordinate vector
         row = cords.x;
         col = cords.y;
+
+        if (tileState == TileState.Obstacle || tileState == TileState.Element)
+            CustomMoveCost *= -1;
+
+        if (tileState == TileState.MoveAdd)
+            CustomMoveCost *= 1;
     }
 
     private void SetTileMaterial()
@@ -111,7 +119,7 @@ public class TileProperties : MonoBehaviour
         MadeAMove = false; 
         
 // Check if the player has enough moves to conquer the obstacle and if the player has the same element as the obstacle
-        bool canConquerObstacle = playerProperties.CanModifyMove(CustomMoveCost*-1) 
+        bool canConquerObstacle = playerProperties.CanModifyMove(CustomMoveCost) 
                         && tileState == TileState.Obstacle
                         && playerProperties.playerElement == tileElement;
         
@@ -152,7 +160,7 @@ public class TileProperties : MonoBehaviour
         else if (canConquerObstacle)
         {
         
-        playerProperties.ModifyMoves(CustomMoveCost*-1);
+        playerProperties.ModifyMoves(CustomMoveCost);
         MadeAMove = true;
         //if its a obstacle tile and its broken, remove the type and set it to a normal tile
         tileState = TileState.Tile;

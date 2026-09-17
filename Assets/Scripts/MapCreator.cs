@@ -129,10 +129,10 @@ public class MapCreator : MonoBehaviour
                 Instantiate(prefab, pos, Quaternion.identity, gridParent);
             }
         }
-        for (int i = 0; i < customMovementNumbers.Count; i++)
-        {
-            Debug.Log(customMovementNumbers[i] + " @ "+ i);
-        }
+        // for (int i = 0; i < customMovementNumbers.Count; i++)
+        // {
+        //     Debug.Log(customMovementNumbers[i] + " @ "+ i);
+        // }
     }
 
 
@@ -187,6 +187,8 @@ public class MapCreator : MonoBehaviour
         rows = CreateLevel(level);
         BuildPrefabLookup();
         SpawnGrid();
+
+        
 
         foreach (var row in rows)
         {

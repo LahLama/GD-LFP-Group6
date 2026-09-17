@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 780037072114970828, guid: ac3e82bbb8915c1449bef988af53dfae, type: 3}
+      propertyPath: m_Name
+      value: 'CustomMoveText '
+      objectReference: {fileID: 0}
     - target: {fileID: 2633827486789168956, guid: ac3e82bbb8915c1449bef988af53dfae, type: 3}
       propertyPath: tileElement
       value: 2
