@@ -68,7 +68,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b2f3ce5aab64820409b6ca6ea4df435a, type: 2}
+  - {fileID: 2100000, guid: 0d7ae98dcdda45946b2306286ffd398d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -125,8 +125,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98fd6c91bf9c51841bb7e3062ae08aa3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TileProperties
-  cords: {x: 1, y: 1}
-  playerCords: {x: 0, y: 0}
+  cords: {x: 1, y: 3}
   newCords: {x: 0, y: 0}
-  tileState: 0
+  tileState: 5
   tileElement: 4

@@ -50,7 +50,7 @@ public class MapCreator : MonoBehaviour
         {"#", TileType.WallTile},
         {"m", TileType.MoveAdd},
         {".", TileType.NormalTile},
-        {"END", TileType.EndTile}
+        {"X", TileType.EndTile}
     };
 
 
@@ -135,7 +135,7 @@ public class MapCreator : MonoBehaviour
         
         ".,m,n,N,m,m,m,.,.",
         ".,m,m,w,W,m,m,.,.",
-        "END,m,m,m,m,m,m,.,.",
+        "X,m,m,m,m,m,m,.,.",
 
 
     };
