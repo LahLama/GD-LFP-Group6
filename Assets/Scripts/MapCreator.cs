@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -35,6 +36,7 @@ public class RowData
 
 public class MapCreator : MonoBehaviour
 {
+    List<int> customMovementNumbers = new List<int>();
     static readonly Dictionary<string, TileType> CharMap = new Dictionary<string, TileType>
     {
         {"w", TileType.ElementIce},
@@ -100,9 +102,36 @@ public class MapCreator : MonoBehaviour
                 {
                     // this arrangement will make it be row, col according to TileProperties script
                     tileProperties.cords = new Vector2Int(x+1,y+1);
+                   
+                    int index = x + ( y * row.tiles.Count );
+                    if (index < customMovementNumbers.Count )
+                       {
+                    // this sets the value of the correct index,
+                    //Examples
+                    
+                    // 0 1 2  
+                    // 3 4 5
+                    // 6 7 8
+
+                    // if row 0, tile 0 = x = 0
+                    // if row 0, tile 1 = x = 1
+                    
+                    // if row 1, tile 0 = x = (maxCount ) + 0
+                    // if row 1, tile 1 = x = (maxCount ) + 1
+
+                    // if row 2, tile 0 = x = (2*maxCount) + 0
+                    // if row 2, tile 1 = x = (2*maxCount) + 1
+
+                    tileProperties.CustomMoveCost = customMovementNumbers[index];
+                      
+                    }
                 }
                 Instantiate(prefab, pos, Quaternion.identity, gridParent);
             }
+        }
+        for (int i = 0; i < customMovementNumbers.Count; i++)
+        {
+            Debug.Log(customMovementNumbers[i] + " @ "+ i);
         }
     }
 
@@ -119,12 +148,27 @@ public class MapCreator : MonoBehaviour
         {
             var row = new RowData();
             var tokens = line.Split(',');
-            foreach (var token in tokens)
+            foreach (string token in tokens)
             {
-                row.tiles.Add(CharMap[token]);
+                string charToken = token[0].ToShortString();
+                int numberToken = 0;
+
+                if (token.Length > 1){
+                    numberToken = (int)Char.GetNumericValue(token[1]);
+                    // Set the customMoveCost to be this numberToken
+                    customMovementNumbers.Add(numberToken);
+                    }
+                    else
+                {
+                    customMovementNumbers.Add(0);
+                }
+                // Debug.Log("Value: " + token + "\n Char: " + charToken + "\t Number: " + numberToken);
+                row.tiles.Add(CharMap[charToken]);
             }
             result.Add(row);
+            
         }
+    
         return result;
     }
 
@@ -133,9 +177,9 @@ public class MapCreator : MonoBehaviour
         string[] level =
          {
         
-        ".,m,n,N,m,m,m,.,.",
-        ".,m,m,w,W,m,m,.,.",
-        "X,m,m,m,m,m,m,.,.",
+        ".,m3,n,N2",
+        ".,m6,w,W3",
+        ".,m5,#",
 
 
     };

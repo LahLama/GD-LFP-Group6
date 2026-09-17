@@ -19,6 +19,7 @@ public class TileProperties : MonoBehaviour
     private int tileMoveCost = -1;
     private int obstacleMoveCost = -2;
     private int moveAddCost = +2;
+    public int CustomMoveCost = 0;
 
 
 
@@ -108,8 +109,9 @@ public class TileProperties : MonoBehaviour
     public bool ExecuteType()
     {   
         MadeAMove = false; 
+        
 // Check if the player has enough moves to conquer the obstacle and if the player has the same element as the obstacle
-        bool canConquerObstacle = playerProperties.CanModifyMove(obstacleMoveCost) 
+        bool canConquerObstacle = playerProperties.CanModifyMove(CustomMoveCost*-1) 
                         && tileState == TileState.Obstacle
                         && playerProperties.playerElement == tileElement;
         
@@ -121,38 +123,12 @@ public class TileProperties : MonoBehaviour
             MadeAMove = true;
         }
     
-// Check if the player has enough moves to conquer the obstacle and if the player has the same element as the obstacle
-        else if (canConquerObstacle)
-        {
-        playerProperties.UpdateRespawnPoint(cords,playerProperties.currentMoves,transform.position);
-        playerProperties.ModifyMoves(obstacleMoveCost);
-        MadeAMove = true;
-        //if its a obstacle tile and its broken, remove the type and set it to a normal tile
-        tileState = TileState.Tile;
-        SetTileMaterial();
-        }
-
-// Check if the player has enough moves to move to the tile and if the tile is a MoveAdd tile
-        else if (playerProperties.CanModifyMove(moveAddCost) && tileState == TileState.MoveAdd )
-        {
-        playerProperties.ModifyMoves(moveAddCost);
-        MadeAMove = true;
-        //if its a moveAdd tile, remove the type and set it to a normal tile
-        tileState = TileState.Tile;
-        SetTileMaterial();
-        }
-
 // Check if the player has enough moves to move to the tile and if the tile is an Element tile
         else if (playerProperties.CanModifyMove(tileMoveCost) && tileState == TileState.Element)
         {
             playerProperties.ModifyMoves(tileMoveCost);
             playerProperties.playerElement = tileElement;
             MadeAMove = true;
-        }
-// Check if the player tries to move to a wall, dont move
-        else if ( tileState == TileState.Wall)
-        {
-               MadeAMove = true;
         }
 // Check if the player tries to move to a Endpoint, dont move
         else if ( playerProperties.CanModifyMove(tileMoveCost) && tileState == TileState.EndPoint)
@@ -162,6 +138,33 @@ public class TileProperties : MonoBehaviour
         SceneManager.LoadScene("winScene");
         Debug.Log("YOU WIN****************************************");
         }
+
+// Check if the player has enough moves to move to the tile and if the tile is a MoveAdd tile
+        else if (playerProperties.CanModifyMove(CustomMoveCost) && tileState == TileState.MoveAdd )
+        {
+        playerProperties.ModifyMoves(CustomMoveCost);
+        MadeAMove = true;
+        //if its a moveAdd tile, remove the type and set it to a normal tile
+        tileState = TileState.Tile;
+        SetTileMaterial();
+        }
+// Check if the player has enough moves to conquer the obstacle and if the player has the same element as the obstacle
+        else if (canConquerObstacle)
+        {
+        
+        playerProperties.ModifyMoves(CustomMoveCost*-1);
+        MadeAMove = true;
+        //if its a obstacle tile and its broken, remove the type and set it to a normal tile
+        tileState = TileState.Tile;
+        SetTileMaterial();
+        playerProperties.UpdateRespawnPoint(cords,playerProperties.currentMoves,transform.position);
+        }
+// Check if the player tries to move to a wall, dont move
+        else if ( tileState == TileState.Wall)
+        {
+               MadeAMove = true;
+        }
+
         
 
 // If the player does not have enough moves to move to the tile, do not allow the player to move

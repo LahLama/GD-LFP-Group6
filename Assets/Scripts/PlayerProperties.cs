@@ -47,6 +47,7 @@ public ElementState playerElement = ElementState.Base;
         {
             currentMoves = maxMoves;
         }
+        //Current problem if the moves used to get an obstcle is at the same time they get to respawn.
         else if( currentMoves <= 0)
         {
             RespawnPlayer();
