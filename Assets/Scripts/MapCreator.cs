@@ -18,7 +18,8 @@ public enum TileType
     ObstacleAcid, // ON
     NormalTile, // .
     EndTile, // X
-    WallTile // W
+    WallTile, // W
+    StartTile // W
 }
 
 [System.Serializable]
@@ -37,21 +38,23 @@ public class RowData
 public class MapCreator : MonoBehaviour
 {
     List<int> customMovementNumbers = new List<int>();
+    public string[] level;
     static readonly Dictionary<string, TileType> CharMap = new Dictionary<string, TileType>
     {
-        {"w", TileType.ElementIce},
+        {"i", TileType.ElementIce},
         {"f", TileType.ElementFire},
         {"e", TileType.ElementElectro},
-        {"n", TileType.ElementAcid},
+        {"a", TileType.ElementAcid},
 
-        {"W", TileType.ObstacleIce},
+        {"I", TileType.ObstacleIce},
         {"F", TileType.ObstacleFire},
         {"E", TileType.ObstacleElectro},
-        {"N", TileType.ObstacleAcid},
+        {"A", TileType.ObstacleAcid},
 
         {"#", TileType.WallTile},
         {"m", TileType.MoveAdd},
         {".", TileType.NormalTile},
+        {"O", TileType.StartTile},
         {"X", TileType.EndTile}
     };
 
@@ -174,15 +177,15 @@ public class MapCreator : MonoBehaviour
 
     void Awake()
     {
-        string[] level =
-         {
+    //     string[] level =
+    //      {
         
-        ".,m3,n,N2",
-        ".,m6,w,W3",
-        ".,m5,#",
+    //     ".,m3,n,N2",
+    //     ".,m6,w,W3",
+    //     ".,m5,#",
 
 
-    };
+    // };
 
         rows = CreateLevel(level);
         BuildPrefabLookup();

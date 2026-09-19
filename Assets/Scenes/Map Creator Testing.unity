@@ -285,8 +285,8 @@ Camera:
   near clip plane: 0.01
   far clip plane: 1000
   field of view: 85
-  orthographic: 0
-  orthographic size: 6.42
+  orthographic: 1
+  orthographic size: 3.73
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -315,7 +315,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 2084505430}
   m_LocalEulerAnglesHint: {x: 33.805, y: -53.872, z: 0}
 --- !u!114 &330585547
 MonoBehaviour:
@@ -986,6 +986,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fee480e53f1cc14e808c79eb4198075, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MapCreator
+  level:
+  - .,.,.,i,.,.,.,.,.,.,.,X
+  - .,m4,.,m2,.,.,.,E,.,.,.,.
+  - .,.,.,.,I,.,.,.,F,.,.,.
+  - O,.,m4,.,.,.,.,.,.,.,.,.
   tilePrefabs:
   - type: 9
     prefab: {fileID: 8994451080318423122, guid: f582545e406b3b2468e54ec95ca7648a, type: 3}
@@ -1013,6 +1018,8 @@ MonoBehaviour:
     prefab: {fileID: 8994451080318423122, guid: bfe5270e1ae3441478e7b0bf2a077530, type: 3}
   - type: 11
     prefab: {fileID: 7485456468001117179, guid: fbcfa04f9e6073c4db653fc079eb26cb, type: 3}
+  - type: 12
+    prefab: {fileID: 8994451080318423122, guid: 1b1628bfbf07ed5499db723dbac98629, type: 3}
   cellSize: 1.1
   gridParent: {fileID: 455100132}
   rows: []
@@ -1144,7 +1151,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 330585546}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2084505431
@@ -1161,6 +1169,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerProperties
   playerCords: {x: 1, y: 1}
   currentMoves: 6
+  maxMoves: 6
   movesText: {fileID: 446878355}
   playerPos: {x: 0, y: 0, z: 0}
   respawnPoint: {x: 0, y: 0}
@@ -1183,7 +1192,6 @@ MonoBehaviour:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 330585546}
   - {fileID: 410087041}
   - {fileID: 832575519}
   - {fileID: 455100132}

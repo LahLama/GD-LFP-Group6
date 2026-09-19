@@ -8,7 +8,7 @@ public class PlayerProperties : MonoBehaviour
 public Vector2Int playerCords = new Vector2Int(1,1);
 public int currentMoves = 6;
 int movesCheck =0;
-int maxMoves = 6;
+public int maxMoves = 6;
 public TextMeshProUGUI movesText;
 public Vector3 playerPos;
 

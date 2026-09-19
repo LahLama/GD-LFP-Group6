@@ -1,4 +1,5 @@
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -40,6 +41,12 @@ public class TileProperties : MonoBehaviour
 
         if (tileState == TileState.MoveAdd)
             CustomMoveCost *= 1;
+
+        if(tileState == TileState.StartTile)
+        {
+            playerProperties.UpdateRespawnPoint(this.cords,playerProperties.maxMoves,this.transform.position);
+            playerProperties.RespawnPlayer();
+        }
     }
 
     private void SetTileMaterial()
@@ -106,6 +113,10 @@ public class TileProperties : MonoBehaviour
         else if (tileState == TileState.EndPoint)
         {
         tileMaterial = Resources.Load<Material>("Materials/Achetypes/endPoint");    
+        }
+        else if (tileState == TileState.StartTile)
+        {
+        tileMaterial = Resources.Load<Material>("Materials/Achetypes/startPoint");    
         }
         else
         {
