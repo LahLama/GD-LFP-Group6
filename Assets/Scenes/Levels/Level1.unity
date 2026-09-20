@@ -987,9 +987,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MapCreator
   level:
-  - '.,.,.,i,#,. '
-  - .,m4,.,.,I,X
-  - .,.,.,.,.,#
+  - ',.,.,i,#,. '
+  - F1,m4,.,.,I1,X
+  - f,.,.,.,.,#
   - O,#,.,m5,.,.
   tilePrefabs:
   - type: 9

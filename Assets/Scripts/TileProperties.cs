@@ -47,28 +47,20 @@ public class TileProperties : MonoBehaviour
 
         if(tileState == TileState.StartTile)
         {
-            playerProperties.UpdateRespawnPoint(this.cords,playerProperties.maxMoves,this.transform.position);
             playerProperties.SetPlayerCords(cords,this.transform.position);
         }
     }
-    
-    private void Update() {
-        //Each time the player gets a checkpoint, update the tiles to save thier state for respawn
-        if (playerProperties.GetRespawnPointStatus() == true)
-        {
-            preRespawnState = tileState;
-            Debug.Log("UPDATE ALL THE TILES STATUS");
-           
-        }
-
-        if (playerProperties.GetRespawnedStatus() == true)
-        {
-            tileState = preRespawnState;
-            Debug.Log("REVERSE TIME");
-             SetTileMaterial();
-        }
-
+ 
+ public void CacheTilesState()
+    {
+        preRespawnState = tileState;
     }
+
+ public void RefreshTilesOnRespawn()
+    {
+        tileState = preRespawnState;
+        SetTileMaterial();
+    }   
 
     private void SetTileMaterial()
     {

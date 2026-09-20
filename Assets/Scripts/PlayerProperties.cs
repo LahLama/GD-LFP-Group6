@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -81,8 +82,16 @@ public void UpdateRespawnPoint(Vector2Int NewRespawnPoint, int NewRespawnMoves, 
         respawnMoves = NewRespawnMoves;
         respawnTransform = NewRespawnTransform;
         gotRespawnPoint = true;
+
+        TileProperties[] tiles = FindObjectsByType<TileProperties>();
+        foreach (var tile in tiles)
+        {
+            tile.CacheTilesState();
+            
+        }
         
     }
+    
     
 public void RespawnPlayer()
     {
@@ -94,14 +103,14 @@ public void RespawnPlayer()
         gotRespawnPoint =false;
         // Update the text counter
         movesText.text = currentMoves.ToString();
+
+        TileProperties[] tiles = FindObjectsByType<TileProperties>();
+        foreach (var tile in tiles)
+        {
+            tile.RefreshTilesOnRespawn();
+            
+        }
     }
 
-public bool GetRespawnPointStatus()
-    {
-        return gotRespawnPoint;
-    }
-public bool GetRespawnedStatus()
-    {
-        return hasRespawned;
-    }
+
 }
