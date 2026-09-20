@@ -22,6 +22,8 @@ public class TileProperties : MonoBehaviour
     private int moveAddCost = +2;
     public int CustomMoveCost = 0;
     TextMeshPro moveText;
+    [SerializeField]
+    TileState preRespawnState = TileState.Tile;
 
 
 
@@ -31,6 +33,7 @@ public class TileProperties : MonoBehaviour
         SetTileMaterial();
 
         playerProperties = FindAnyObjectByType<PlayerProperties>();
+        preRespawnState = tileState;
         
         // Divide the cordinate vector
         row = cords.x;
@@ -45,8 +48,26 @@ public class TileProperties : MonoBehaviour
         if(tileState == TileState.StartTile)
         {
             playerProperties.UpdateRespawnPoint(this.cords,playerProperties.maxMoves,this.transform.position);
-            playerProperties.RespawnPlayer();
+            playerProperties.SetPlayerCords(cords,this.transform.position);
         }
+    }
+    
+    private void Update() {
+        //Each time the player gets a checkpoint, update the tiles to save thier state for respawn
+        if (playerProperties.GetRespawnPointStatus() == true)
+        {
+            preRespawnState = tileState;
+            Debug.Log("UPDATE ALL THE TILES STATUS");
+           
+        }
+
+        if (playerProperties.GetRespawnedStatus() == true)
+        {
+            tileState = preRespawnState;
+            Debug.Log("REVERSE TIME");
+             SetTileMaterial();
+        }
+
     }
 
     private void SetTileMaterial()

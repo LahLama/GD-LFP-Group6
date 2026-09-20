@@ -16,6 +16,7 @@ public Vector3 playerPos;
 [SerializeField] int respawnMoves;
 [SerializeField] Vector3 respawnTransform;
 bool hasRespawned = false;
+bool gotRespawnPoint = false;
 
 public ElementState playerElement = ElementState.Base;
 
@@ -79,6 +80,8 @@ public void UpdateRespawnPoint(Vector2Int NewRespawnPoint, int NewRespawnMoves, 
         respawnPoint = NewRespawnPoint;
         respawnMoves = NewRespawnMoves;
         respawnTransform = NewRespawnTransform;
+        gotRespawnPoint = true;
+        
     }
     
 public void RespawnPlayer()
@@ -88,8 +91,17 @@ public void RespawnPlayer()
         playerCords = respawnPoint;
         this.transform.position = respawnTransform;
         hasRespawned = true;
+        gotRespawnPoint =false;
         // Update the text counter
-         movesText.text = currentMoves.ToString();
+        movesText.text = currentMoves.ToString();
+    }
 
+public bool GetRespawnPointStatus()
+    {
+        return gotRespawnPoint;
+    }
+public bool GetRespawnedStatus()
+    {
+        return hasRespawned;
     }
 }
