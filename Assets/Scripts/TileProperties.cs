@@ -14,10 +14,12 @@ public class TileProperties : MonoBehaviour
     public ElementState tileElement = ElementState.Base;
     private bool MadeAMove = false;
     private PlayerProperties playerProperties;
+    private LevelManager levelManager;
     private int tileMoveCost = -1;
     private int obstacleMoveCost = -2;
     private int moveAddCost = +2;
     public int CustomMoveCost = 0;
+    
     TextMeshPro moveText;
     [SerializeField]
     TileState preRespawnState = TileState.Tile;
@@ -30,6 +32,7 @@ public class TileProperties : MonoBehaviour
         SetTileMaterial();
 
         playerProperties = FindAnyObjectByType<PlayerProperties>();
+        levelManager = FindAnyObjectByType<LevelManager>();
         preRespawnState = tileState;
         
         // Divide the cordinate vector
@@ -44,7 +47,9 @@ public class TileProperties : MonoBehaviour
 
         if(tileState == TileState.StartTile)
         {
+            playerProperties.UpdateRespawnPoint(cords,playerProperties.maxMoves,transform.position);
             playerProperties.SetPlayerCords(cords,this.transform.position);
+            playerProperties.RespawnPlayer();
         }
     }
  
@@ -167,8 +172,8 @@ public class TileProperties : MonoBehaviour
         {
         playerProperties.ModifyMoves(tileMoveCost);
         MadeAMove = true;
-        //Load the next scene in the build
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        //Load the next map in the list
+        levelManager.NextLevel();
         Debug.Log("YOU WIN****************************************");
         }
 

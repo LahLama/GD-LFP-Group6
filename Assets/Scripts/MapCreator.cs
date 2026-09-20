@@ -39,6 +39,7 @@ public class MapCreator : MonoBehaviour
 {
     List<int> customMovementNumbers = new List<int>();
     public string[] level;
+
     static readonly Dictionary<string, TileType> CharMap = new Dictionary<string, TileType>
     {
         {"i", TileType.ElementIce},

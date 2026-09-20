@@ -147,8 +147,7 @@ public void RespawnPlayer()
             
         }
 
-        
-            FindAnyObjectByType<InteractionManager>().enabled = true;
+       FindAnyObjectByType<InteractionManager>().enabled = true;
     }
 
 
