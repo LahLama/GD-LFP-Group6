@@ -168,13 +168,12 @@ public class TileProperties : MonoBehaviour
         }
 //-------- End Point Tile --------        
 // Check if the player tries to move to a Endpoint, dont move
-        else if ( playerProperties.CanModifyMove(tileMoveCost) && tileState == TileState.EndPoint)
+        else if (playerProperties.CanModifyMove(tileMoveCost) && tileState == TileState.EndPoint)
         {
-        playerProperties.ModifyMoves(tileMoveCost);
-        MadeAMove = true;
-        //Load the next map in the list
-        levelManager.NextLevel();
-        Debug.Log("YOU WIN****************************************");
+            playerProperties.ModifyMoves(tileMoveCost);
+            levelManager.NextLevel();   // new level's StartTile places the player
+            Debug.Log("YOU WIN");
+            MadeAMove = false;          // don't let InteractionManager move the player onto this old tile
         }
 
 //-------- Move Adder Tile --------

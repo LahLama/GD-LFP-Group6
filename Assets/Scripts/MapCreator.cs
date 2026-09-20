@@ -87,6 +87,7 @@ public class MapCreator : MonoBehaviour
 
      void SpawnGrid()
     {
+        // Debug.Log($"SpawnGrid called on {name}", this);
         for (int y = 0; y < rows.Count; y++)
         {
             var row = rows[y];
@@ -176,7 +177,7 @@ public class MapCreator : MonoBehaviour
         return result;
     }
 
-    void Start()
+    void OnEnable()
     {
     //     string[] level =
     //      {

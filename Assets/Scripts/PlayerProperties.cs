@@ -17,8 +17,7 @@ public Vector3 playerPos;
 [SerializeField] Vector2Int respawnPoint;
 [SerializeField] int respawnMoves;
 [SerializeField] Vector3 respawnTransform;
-bool hasRespawned = false;
-bool gotRespawnPoint = false;
+
 [SerializeField] ElementState respawnElementState;
 public ElementState playerElement = ElementState.Base;
 
@@ -54,7 +53,7 @@ public ElementState playerElement = ElementState.Base;
         else if( currentMoves <= 0)
         {
             FindAnyObjectByType<InteractionManager>().enabled = false;
-            Invoke("RespawnPlayer",1);
+            Invoke("RespawnPlayer",0.25f);
             
         }
          movesText.text = currentMoves.ToString();
@@ -64,12 +63,6 @@ public ElementState playerElement = ElementState.Base;
 
 public void SetPlayerCords(Vector2Int newCords, Vector3 newPos)
     {
-        if (hasRespawned)
-        {
-            // A respawn already placed the player this turn.
-            hasRespawned = false;
-            return;
-        }
         playerCords = newCords;
         playerPos = newPos;
         gameObject.transform.position = newPos;
@@ -84,7 +77,7 @@ public void UpdateRespawnPoint(Vector2Int NewRespawnPoint, int NewRespawnMoves, 
         respawnPoint = NewRespawnPoint;
         respawnMoves = NewRespawnMoves;
         respawnTransform = NewRespawnTransform;
-        gotRespawnPoint = true;
+
         respawnElementState = playerElement;
     
 
@@ -134,8 +127,6 @@ public void RespawnPlayer()
         this.transform.position = respawnTransform;
         playerElement = respawnElementState;
         UpdatePlayerColor();
-        hasRespawned = true;
-        gotRespawnPoint =false;
         // Update the text counter
         movesText.text = currentMoves.ToString();
 
