@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using NUnit.Framework;
 using Unity.VisualScripting.InputSystem;
 using UnityEditor;
 using UnityEngine;
@@ -60,12 +61,12 @@ public class InteractionManager : MonoBehaviour
     
     if (hit.collider == null) return;
     if (!hit.collider.gameObject.TryGetComponent<TileProperties>(out var tile)) return;
-
+    if (!inputActions.Player.Move.WasPressedThisFrame()) return;
+    if (tile.tileState == TileState.Wall) return;
+    
     Vector2Int newCords = tile.cords;
     Vector2Int playerCords = playerProperties.GetPlayerCords();
 // Debug.Log("input : " +inputActions.Player.Move.ReadValue<Vector2>());
-    if (!inputActions.Player.Move.WasPressedThisFrame()) return;
-    
     
     switch (inputActions.Player.Move.ReadValue<Vector2>())
     {

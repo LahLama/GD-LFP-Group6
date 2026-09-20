@@ -154,7 +154,8 @@ public class TileProperties : MonoBehaviour
         {
         playerProperties.ModifyMoves(tileMoveCost);
         MadeAMove = true;
-        SceneManager.LoadScene("winScene");
+        //Load the next scene in the build
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         Debug.Log("YOU WIN****************************************");
         }
 
