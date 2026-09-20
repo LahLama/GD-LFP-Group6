@@ -175,7 +175,7 @@ public class MapCreator : MonoBehaviour
         return result;
     }
 
-    void Awake()
+    void Start()
     {
     //     string[] level =
     //      {

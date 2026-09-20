@@ -1,9 +1,6 @@
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
-using UnityEngine.Tilemaps;
 public class TileProperties : MonoBehaviour
 {
     private int row = 0;
@@ -147,21 +144,24 @@ public class TileProperties : MonoBehaviour
                         && tileState == TileState.Obstacle
                         && playerProperties.playerElement == tileElement;
         
-
+// -------- Normal Tile ---------
 // Check if the player has enough moves to move to the tile
         if (playerProperties.CanModifyMove(tileMoveCost) && tileState == TileState.Tile )
         {
             playerProperties.ModifyMoves(tileMoveCost);
             MadeAMove = true;
         }
-    
+// -------- Element Tile --------    
 // Check if the player has enough moves to move to the tile and if the tile is an Element tile
         else if (playerProperties.CanModifyMove(tileMoveCost) && tileState == TileState.Element)
         {
             playerProperties.ModifyMoves(tileMoveCost);
             playerProperties.playerElement = tileElement;
+            playerProperties.UpdatePlayerColor();
+            
             MadeAMove = true;
         }
+//-------- End Point Tile --------        
 // Check if the player tries to move to a Endpoint, dont move
         else if ( playerProperties.CanModifyMove(tileMoveCost) && tileState == TileState.EndPoint)
         {
@@ -172,6 +172,7 @@ public class TileProperties : MonoBehaviour
         Debug.Log("YOU WIN****************************************");
         }
 
+//-------- Move Adder Tile --------
 // Check if the player has enough moves to move to the tile and if the tile is a MoveAdd tile
         else if (playerProperties.CanModifyMove(CustomMoveCost) && tileState == TileState.MoveAdd )
         {
@@ -181,6 +182,8 @@ public class TileProperties : MonoBehaviour
         tileState = TileState.Tile;
         SetTileMaterial();
         }
+
+// -------- Obstacle Tile --------
 // Check if the player has enough moves to conquer the obstacle and if the player has the same element as the obstacle
         else if (canConquerObstacle)
         {
@@ -192,6 +195,8 @@ public class TileProperties : MonoBehaviour
         SetTileMaterial();
         playerProperties.UpdateRespawnPoint(cords,playerProperties.currentMoves,transform.position);
         }
+
+// -------- Wall Tile --------        
 // Check if the player tries to move to a wall, dont move
         else if ( tileState == TileState.Wall)
         {
@@ -210,8 +215,6 @@ public class TileProperties : MonoBehaviour
         // Debug.Log("Current Moves: " + playerProperties.currentMoves );
         
     }
-
-
 
 
 }

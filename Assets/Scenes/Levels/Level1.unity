@@ -987,7 +987,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MapCreator
   level:
-  - ',.,.,i,#,. '
+  - '.,.,.,i,#,. '
   - F1,m4,.,.,I1,X
   - f,.,.,.,.,#
   - O,#,.,m5,.,.

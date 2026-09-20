@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
@@ -18,12 +19,12 @@ public Vector3 playerPos;
 [SerializeField] Vector3 respawnTransform;
 bool hasRespawned = false;
 bool gotRespawnPoint = false;
-
+[SerializeField] ElementState respawnElementState;
 public ElementState playerElement = ElementState.Base;
 
     void Start()
     {
-        
+        respawnElementState = playerElement;
         respawnPoint = playerCords;
         respawnMoves = maxMoves;
         respawnTransform = gameObject.transform.position;
@@ -52,7 +53,9 @@ public ElementState playerElement = ElementState.Base;
         //Current problem if the moves used to get an obstcle is at the same time they get to respawn.
         else if( currentMoves <= 0)
         {
-            RespawnPlayer();
+            FindAnyObjectByType<InteractionManager>().enabled = false;
+            Invoke("RespawnPlayer",1);
+            
         }
          movesText.text = currentMoves.ToString();
     }
@@ -82,6 +85,8 @@ public void UpdateRespawnPoint(Vector2Int NewRespawnPoint, int NewRespawnMoves, 
         respawnMoves = NewRespawnMoves;
         respawnTransform = NewRespawnTransform;
         gotRespawnPoint = true;
+        respawnElementState = playerElement;
+    
 
         TileProperties[] tiles = FindObjectsByType<TileProperties>();
         foreach (var tile in tiles)
@@ -92,6 +97,34 @@ public void UpdateRespawnPoint(Vector2Int NewRespawnPoint, int NewRespawnMoves, 
         
     }
     
+
+    public void UpdatePlayerColor()
+    {
+        
+            if (playerElement == ElementState.Acid)
+            {
+                GetComponent<Renderer>().material.color = Color.green;
+            }
+            else if (playerElement == ElementState.Electro)
+            {
+                GetComponent<Renderer>().material.color = Color.yellow;
+            }           
+             else if (playerElement == ElementState.Fire)
+            {
+            GetComponent<Renderer>().material.color = Color.red;
+            }
+            else if (playerElement == ElementState.Ice)
+            {
+               GetComponent<Renderer>().material.color = Color.cyan;
+            }
+            else
+            {
+               GetComponent<Renderer>().material.color = Color.white;
+            }
+
+            
+    }
+    
     
 public void RespawnPlayer()
     {
@@ -99,10 +132,13 @@ public void RespawnPlayer()
        
         playerCords = respawnPoint;
         this.transform.position = respawnTransform;
+        playerElement = respawnElementState;
+        UpdatePlayerColor();
         hasRespawned = true;
         gotRespawnPoint =false;
         // Update the text counter
         movesText.text = currentMoves.ToString();
+
 
         TileProperties[] tiles = FindObjectsByType<TileProperties>();
         foreach (var tile in tiles)
@@ -110,6 +146,9 @@ public void RespawnPlayer()
             tile.RefreshTilesOnRespawn();
             
         }
+
+        
+            FindAnyObjectByType<InteractionManager>().enabled = true;
     }
 
 
