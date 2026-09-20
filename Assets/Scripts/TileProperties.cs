@@ -182,8 +182,7 @@ public class TileProperties : MonoBehaviour
         {
         playerProperties.ModifyMoves(CustomMoveCost);
         MadeAMove = true;
-        //if its a moveAdd tile, remove the type and set it to a normal tile
-        tileState = TileState.Tile;
+
         SetTileMaterial();
         }
 
