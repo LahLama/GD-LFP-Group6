@@ -40,11 +40,14 @@ public class TileProperties : MonoBehaviour
         col = cords.y;
 
         if (tileState == TileState.Obstacle || tileState == TileState.Element)
-            CustomMoveCost *= -1;
+            {CustomMoveCost *= -1;
+            if (transform.childCount > 0)
+            this.transform.GetChild(0).GetComponent<TextMeshPro>().text = CustomMoveCost.ToString(); }
 
-        if (tileState == TileState.MoveAdd)
+        if (tileState == TileState.MoveAdd){
             CustomMoveCost *= 1;
-
+            this.transform.GetChild(0).GetComponent<TextMeshPro>().text = CustomMoveCost.ToString(); 
+}
         if(tileState == TileState.StartTile)
         {
             playerProperties.UpdateRespawnPoint(cords,playerProperties.maxMoves,transform.position);
