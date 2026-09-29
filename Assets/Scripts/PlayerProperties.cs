@@ -20,6 +20,7 @@ public Vector3 playerPos;
 
 [SerializeField] ElementState respawnElementState;
 public ElementState playerElement = ElementState.Base;
+public GameObject previousTile;
 
     void Start()
     {

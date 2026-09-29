@@ -17,6 +17,7 @@ public enum TileType
     ObstacleElectro, // OE
     ObstacleAcid, // ON
     NormalTile, // .
+    OneWayTile,
     EndTile, // X
     WallTile, // W
     StartTile // W
@@ -52,6 +53,7 @@ public class MapCreator : MonoBehaviour
         {"E", TileType.ObstacleElectro},
         {"A", TileType.ObstacleAcid},
 
+        {"]", TileType.OneWayTile},
         {"#", TileType.WallTile},
         {"m", TileType.MoveAdd},
         {".", TileType.NormalTile},

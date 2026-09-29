@@ -1,6 +1,8 @@
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Tilemaps;
 public class TileProperties : MonoBehaviour
 {
     private int row = 0;
@@ -12,6 +14,7 @@ public class TileProperties : MonoBehaviour
    
     public TileState tileState = TileState.Tile;
     public ElementState tileElement = ElementState.Base;
+  
     private bool MadeAMove = false;
     private PlayerProperties playerProperties;
     private LevelManager levelManager;
@@ -19,6 +22,7 @@ public class TileProperties : MonoBehaviour
     private int obstacleMoveCost = -2;
     private int moveAddCost = +2;
     public int CustomMoveCost = 0;
+    
     
     TextMeshPro moveText;
     [SerializeField]
@@ -120,6 +124,10 @@ public class TileProperties : MonoBehaviour
                     break;
             }
         }
+        else if (tileState == TileState.OneWay)
+        {
+            tileMaterial = Resources.Load<Material>("Materials/Achetypes/obstacleBase");
+        }
         else if (tileState == TileState.MoveAdd)
         {
             tileMaterial = Resources.Load<Material>("Materials/Achetypes/moveAdd");
@@ -145,7 +153,16 @@ public class TileProperties : MonoBehaviour
 
     public bool ExecuteType()
     {   
-        MadeAMove = false; 
+        MadeAMove = false;
+
+        // Check if the previous was a OneWay
+        if (playerProperties.previousTile != null){
+        if (playerProperties.previousTile.GetComponent<TileProperties>().tileState == TileState.OneWay)
+        {
+            Debug.Log("Previous tile was DISAPPEAR ");
+            playerProperties.previousTile.gameObject.SetActive(false);
+        }
+}
         
 // Check if the player has enough moves to conquer the obstacle and if the player has the same element as the obstacle
         bool canConquerObstacle = playerProperties.CanModifyMove(CustomMoveCost) 
@@ -209,7 +226,16 @@ public class TileProperties : MonoBehaviour
                MadeAMove = true;
         }
 
-        
+// -------- One Way tile --------
+        else if (tileState == TileState.OneWay)
+        {
+            MadeAMove = true;
+        }
+        else if (tileState == TileState.StartTile)
+        {
+            MadeAMove = true;
+        }
+
 
 // If the player does not have enough moves to move to the tile, do not allow the player to move
         else 
@@ -217,9 +243,11 @@ public class TileProperties : MonoBehaviour
             MadeAMove = false;
         }
     // Debug.Log("Can move? " + MadeAMove);
+   playerProperties.previousTile = this.gameObject;
     return MadeAMove;
         // Debug.Log("Current Moves: " + playerProperties.currentMoves );
-        
+    
+
     }
 
 

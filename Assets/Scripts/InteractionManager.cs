@@ -5,7 +5,7 @@ using UnityEditor;
 using UnityEngine;
 
 
-public enum TileState { Tile,Obstacle, MoveAdd, Element, Wall, EndPoint, StartTile}
+public enum TileState { Tile,Obstacle, MoveAdd, Element, OneWay, Wall, EndPoint, StartTile}
 
 public enum ElementState { Acid,Electro,Fire,Ice, Base }
 
