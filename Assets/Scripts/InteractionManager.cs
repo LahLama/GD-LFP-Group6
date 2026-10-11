@@ -65,6 +65,7 @@ public class InteractionManager : MonoBehaviour
         {
             FindAnyObjectByType<TileFunctions>().PerMoveChecker(t.radius,playerCords,t.cords,t);
         }
+
     }
 
     int unitDirection = 1;

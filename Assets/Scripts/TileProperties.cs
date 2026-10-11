@@ -79,7 +79,7 @@ public class TileProperties : MonoBehaviour
 
     private void StartElectroPulse()
     {
-        FindAnyObjectByType<TileFunctions>().ElectroPulse(this);
+        FindAnyObjectByType<TileFunctions>().ElectroPulse(this, transform.GetChild(2).localScale);
     }
 
     private void SetMoveText()

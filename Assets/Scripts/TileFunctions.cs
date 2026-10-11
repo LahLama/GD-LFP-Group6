@@ -1,25 +1,59 @@
-using Unity.VisualScripting;
+using System.Collections;
 using UnityEngine;
-using UnityEngine.Assemblies;
-using UnityEngine.Tilemaps;
 
 public class TileFunctions : MonoBehaviour
 {
 
     TileProperties CurrentTile; // DEBUG
     Material tileMaterial; // DEBUG
-    public void ElectroPulse(TileProperties tile)
+    public void ElectroPulse(TileProperties tile, Vector3 initScale)
     {
-        // The pulse happens every 5 seconds
+    StartCoroutine(ElectroPulseRoutine(tile,initScale));
+    }
+
+    
+    private IEnumerator ElectroPulseRoutine(TileProperties tile, Vector3 initScale)
+    {
+    GameObject AOE = tile.transform.GetChild(2).gameObject;
+    
+    const float pulseDuration = 5f - 1f; //Minus 1 for the delay before the pulse starts, which is 1 second.
+
+    PlayerProperties player = FindAnyObjectByType<PlayerProperties>();
+
+    while (tile != null) // stop automatically if the tile is destroyed
+    {
+        // Start each pulse from zero
+        AOE.transform.localScale = Vector3.zero;
+        float elapsed = 0f;
+
+        // Grow from 0 -> initScale over 5 seconds
+        while (elapsed < pulseDuration)
+        {
+            elapsed += Time.deltaTime;
+            float t = Mathf.Clamp01(elapsed / pulseDuration);
+            AOE.transform.localScale = Vector3.Lerp(Vector3.zero, initScale, t);
+            yield return null;
+        }
+
+        // Make sure it ends exactly at full size
+        AOE.transform.localScale = initScale;
+
+        // Pulse peaks: check for the player
         Debug.Log("**********MAXIMUM PULSE***********");
-        bool isNearForShock = CheckIfPlayerNearby(tile.radius, FindAnyObjectByType<PlayerProperties>().playerCords, tile.cords, tile) ;
+        bool isNearForShock = CheckIfPlayerNearby(tile.radius, player.playerCords, tile.cords, tile);
         Debug.Log("NEAR SHOCK: " + isNearForShock);
+
         if (isNearForShock)
         {
             Debug.Log("HIT PLAYER TO RESPAWN");
- FindAnyObjectByType<PlayerProperties>().RespawnPlayer();
+            player.RespawnPlayer();
         }
+
+        yield return new WaitForSeconds(1f); // Wait for 1 second at full size before shrinking
     }
+    }
+
+
 
     private void ReverseControls(TileProperties tile)
     {
@@ -41,8 +75,11 @@ public class TileFunctions : MonoBehaviour
     public void PerMoveChecker(int r,Vector2Int playerPos,Vector2Int tilePos, TileProperties tile)
     {   
         
-        ReverseControls(tile);
-        
+   
+         if (tile.tileState == TileState.Obstacle && tile.tileElement == ElementState.Acid)
+        {
+            ReverseControls(tile);
+        }
         CheckIfPlayerNearby(r,playerPos,tilePos,tile);
     }
 
