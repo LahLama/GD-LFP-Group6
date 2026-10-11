@@ -2101,8 +2101,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MapCreator
   level:
-  - .,.,a,m5,.,A
-  - f,.,.,.,.,#
+  - .,.,.,m5,.,.,.,.,m5
+  - .,.,.,m5,.,.,.,.,m5
+  - .,.,.,m5,.,.,.,.,m5
+  - .,.,.,m5,.,.,.,.,m5
+  - .,.,.,m5,.,A,.,.,m5
+  - .,.,.,m5,.,.,.,.,m5
+  - .,.,.,m5,.,.,.,.,m5
+  - .,.,.,m5,.,.,.,.,m5
+  - .,.,.,m5,.,.,.,.,m5
   - O,#,.,m5,.,.
   tilePrefabs:
   - type: 9

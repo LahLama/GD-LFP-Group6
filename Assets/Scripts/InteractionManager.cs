@@ -55,40 +55,44 @@ public class InteractionManager : MonoBehaviour
     void Update()
 {
         
-    Vector2 playerSuggestedMove  = inputActions.Player.Move.ReadValue<Vector2>();
+     if (!inputActions.Player.Move.WasPressedThisFrame()) return;
+    Vector2Int playerCords = playerProperties.GetPlayerCords();
+    //Per Move, check the situation of the tiles:
+    TileProperties[] tiles = FindObjectsByType<TileProperties>();
+    foreach (var t in tiles)
+    {
+        if (t.tileState == TileState.Obstacle && t.tileElement == ElementState.Acid)
+        {
+            FindAnyObjectByType<TileFunctions>().PerMoveChecker(t.radius,playerCords,t.cords,t);
+        }
+    }
+
+    int unitDirection = 1;
+    if (isMovementReversed) unitDirection = -1;
+    else if (!isMovementReversed) unitDirection = 1;
+     // Change the direction of the ray here based on unit direction.
+    Vector2 playerSuggestedMove  = inputActions.Player.Move.ReadValue<Vector2>() * unitDirection;
     Vector3 translatedMove = new Vector3( playerSuggestedMove.x,0,playerSuggestedMove.y);
     ray = new Ray(playerProperties.transform.position, translatedMove);
     Physics.Raycast(ray, out hit);
     
     if (hit.collider == null) return;
     if (!hit.collider.gameObject.TryGetComponent<TileProperties>(out var tile)) return;
-    if (!inputActions.Player.Move.WasPressedThisFrame()) return;
+   
     if (tile.tileState == TileState.Wall) return;
-    
-    Vector2Int newCords = tile.cords;
-    Vector2Int playerCords = playerProperties.GetPlayerCords();
+        Vector2Int newCords = tile.cords;
+   
+
 // Debug.Log("input : " +inputActions.Player.Move.ReadValue<Vector2>());
 
 
 
-    int unitDirection = 1;
-    if (isMovementReversed) unitDirection = -1;
-    else if (!isMovementReversed) unitDirection = 1;
 
 
-        //Per Move, check the situation of the tiles:
-        TileProperties[] tiles = FindObjectsByType<TileProperties>();
-        foreach (var t in tiles)
-        {
-            if (t.tileState == TileState.Obstacle && t.tileElement == ElementState.Acid)
-            {
-                FindAnyObjectByType<TileFunctions>().PerMoveChecker(t.radius,playerCords,t.cords,t);
-            }}
+       
 
-    Debug.Log("Normal Move Vector: " + inputActions.Player.Move.ReadValue<Vector2>());
-    Debug.Log("Reversed Move Vector: " + inputActions.Player.Move.ReadValue<Vector2>() * unitDirection);
 
-    switch ( inputActions.Player.Move.ReadValue<Vector2>())
+    switch (playerSuggestedMove)
     {       
     // Check if WASD - then move accordiling.
         case Vector2 v when v == Vector2.up :
@@ -133,6 +137,12 @@ public class InteractionManager : MonoBehaviour
                 }
         
         
+            break;
+        
+        // Deafault case where it debugs no movement was detected
+        default:
+            Debug.Log("No movement detected");
+            Debug.Log(inputActions.Player.Move.ReadValue<Vector2>());
             break;
     
     }

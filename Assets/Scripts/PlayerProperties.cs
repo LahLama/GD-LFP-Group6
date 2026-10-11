@@ -54,7 +54,7 @@ public GameObject previousTile;
         else if( currentMoves <= 0)
         {
             FindAnyObjectByType<InteractionManager>().enabled = false;
-            Invoke("RespawnPlayer",0.25f);
+            Invoke("RespawnPlayer",0.55f);
             
         }
          movesText.text = currentMoves.ToString();
@@ -130,7 +130,7 @@ public void RespawnPlayer()
         UpdatePlayerColor();
         // Update the text counter
         movesText.text = currentMoves.ToString();
-
+        FindAnyObjectByType<InteractionManager>().isMovementReversed = false;
 
         TileProperties[] tiles = FindObjectsByType<TileProperties>();
         foreach (var tile in tiles)

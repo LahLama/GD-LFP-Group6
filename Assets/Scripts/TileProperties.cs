@@ -117,7 +117,7 @@ public class TileProperties : MonoBehaviour
             if (tileElement == ElementState.Acid)
             {
                 //Reverse the movement of the player
-                radius = 4;
+                radius = 3;
             }
             else if (tileElement == ElementState.Electro)
             {
