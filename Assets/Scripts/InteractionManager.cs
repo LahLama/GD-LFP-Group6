@@ -80,13 +80,18 @@ public class InteractionManager : MonoBehaviour
         TileProperties[] tiles = FindObjectsByType<TileProperties>();
         foreach (var t in tiles)
         {
-            FindAnyObjectByType<TileFunctions>().PerMoveChecker(t.radius,playerCords,t.cords,t);
-        }
+            if (t.tileState == TileState.Obstacle && t.tileElement == ElementState.Acid)
+            {
+                FindAnyObjectByType<TileFunctions>().PerMoveChecker(t.radius,playerCords,t.cords,t);
+            }}
 
-    switch (unitDirection * inputActions.Player.Move.ReadValue<Vector2>())
+    Debug.Log("Normal Move Vector: " + inputActions.Player.Move.ReadValue<Vector2>());
+    Debug.Log("Reversed Move Vector: " + inputActions.Player.Move.ReadValue<Vector2>() * unitDirection);
+
+    switch ( inputActions.Player.Move.ReadValue<Vector2>())
     {       
     // Check if WASD - then move accordiling.
-        case Vector2 v when v == Vector2.up * unitDirection:
+        case Vector2 v when v == Vector2.up :
             if (movementChecker.CheckAbovePlayer(playerCords,newCords))
                 // Check if the player has enough moves to move to the tile
                 if( tile.ExecuteType())
@@ -97,7 +102,7 @@ public class InteractionManager : MonoBehaviour
          
             break;
         
-        case Vector2 v when v == Vector2.down * unitDirection:
+        case Vector2 v when v == Vector2.down :
             if (movementChecker.CheckBelowPlayer(playerCords,newCords))          
                 // Check if the player has enough moves to move to the tile
                 if( tile.ExecuteType())
@@ -108,7 +113,7 @@ public class InteractionManager : MonoBehaviour
         
         break;
 
-        case Vector2 v when v == Vector2.left * unitDirection:
+        case Vector2 v when v == Vector2.left :
             if (movementChecker.CheckLeftOfPlayer(playerCords,newCords))
                 // Check if the player has enough moves to move to the tile
                 if( tile.ExecuteType())
@@ -118,7 +123,7 @@ public class InteractionManager : MonoBehaviour
                 }
         
             break;
-        case Vector2 v when v == Vector2.right * unitDirection:
+        case Vector2 v when v == Vector2.right :
         if (movementChecker.CheckRightOfPlayer(playerCords,newCords))
                 // Check if the player has enough moves to move to the tile
                 if( tile.ExecuteType())

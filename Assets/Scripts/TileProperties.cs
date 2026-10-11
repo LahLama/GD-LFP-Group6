@@ -11,7 +11,7 @@ public class TileProperties : MonoBehaviour
     public Vector2Int newCords = new Vector2Int(0, 0);
     private int row = 0;
     private int col = 0;
-    public int radius = 1;
+    public int radius =0;
 
     // ---------- Tile state ----------
     public TileState tileState = TileState.Tile;

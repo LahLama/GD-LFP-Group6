@@ -6,7 +6,8 @@ using UnityEngine.Tilemaps;
 public class TileFunctions : MonoBehaviour
 {
 
-
+    TileProperties CurrentTile; // DEBUG
+    Material tileMaterial; // DEBUG
     public void ElectroPulse(TileProperties tile)
     {
         // The pulse happens every 5 seconds
@@ -23,21 +24,23 @@ public class TileFunctions : MonoBehaviour
     private void ReverseControls(TileProperties tile)
     {
         //This will be checked every move to see if the player is still in range.
-        
+        if (tile.tileState == TileState.Obstacle && tile.tileElement == ElementState.Acid)
+        {
         Debug.Log("=-=-=-=-=-=ACID SPIT=-=-=-=-=-=-=-");
         bool isNearForAcid = CheckIfPlayerNearby(tile.radius, FindAnyObjectByType<PlayerProperties>().playerCords, tile.cords, tile) ;
         Debug.Log("NEAR ACID: " + isNearForAcid);
-        if (CheckIfPlayerNearby(tile.radius, FindAnyObjectByType<PlayerProperties>().playerCords, tile.cords, tile))
+        FindAnyObjectByType<InteractionManager>().isMovementReversed = isNearForAcid; 
+        }
+        else
         {
-            FindAnyObjectByType<InteractionManager>().isMovementReversed = !FindAnyObjectByType<InteractionManager>().isMovementReversed; 
-            Debug.Log(FindAnyObjectByType<InteractionManager>().isMovementReversed);
-            Debug.Log("REVERSE THE CONTROLE");
+            Debug.Log("Was testing on a" + tile.name + " tile, but it was not an ACID tile.",tile);
+             FindAnyObjectByType<InteractionManager>().isMovementReversed = false;
         }
     }
 
     public void PerMoveChecker(int r,Vector2Int playerPos,Vector2Int tilePos, TileProperties tile)
     {   
-        if (tile.tileElement == ElementState.Acid)
+        
         ReverseControls(tile);
         
         CheckIfPlayerNearby(r,playerPos,tilePos,tile);
@@ -46,7 +49,13 @@ public class TileFunctions : MonoBehaviour
 
    public bool CheckIfPlayerNearby(int r,Vector2Int playerPos,Vector2Int tilePos,TileProperties tile)
     {
-       
+       //set the material to be red for 1 second, then back to normal.
+       CurrentTile= tile; // DEBUG
+       tileMaterial = tile.GetComponent<Renderer>().material;  // DEBUG
+       tile.GetComponent<Renderer>().material.color = Color.red; // DEBUG
+        Invoke("ResetTileColor", 1f); // DEBUG
+
+
         // Debug.Log("Player Cords: "+playerPos);
         for (int i = -r; i < r+1; i++)
         {
@@ -68,5 +77,13 @@ public class TileFunctions : MonoBehaviour
 
 
         return false;
+    }
+
+    private void ResetTileColor() // DEBUG
+    {
+        if (CurrentTile != null)
+        {
+            CurrentTile.GetComponent<Renderer>().material = tileMaterial;
+        }
     }
 }
