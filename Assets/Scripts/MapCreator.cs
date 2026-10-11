@@ -129,7 +129,7 @@ public class MapCreator : MonoBehaviour
                     // if row 2, tile 0 = x = (2*maxCount) + 0
                     // if row 2, tile 1 = x = (2*maxCount) + 1
 
-                    tileProperties.CustomMoveCost = customMovementNumbers[index];
+                    tileProperties.CustomMoveCost = customMovementNumbers[index];                     
                       
                     }
                 }
@@ -138,7 +138,7 @@ public class MapCreator : MonoBehaviour
         }
         // for (int i = 0; i < customMovementNumbers.Count; i++)
         // {
-        //     Debug.Log(customMovementNumbers[i] + " @ "+ i);
+        //     // Debug.Log(customMovementNumbers[i] + " @ "+ i);
         // }
     }
 

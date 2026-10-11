@@ -1,35 +1,40 @@
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
+
 public class TileProperties : MonoBehaviour
 {
+    private const string MaterialFolder = "Materials/Achetypes/";
+
+    // ---------- Grid position ----------
+    public Vector2Int cords = new Vector2Int(0, 0);
+    public Vector2Int newCords = new Vector2Int(0, 0);
     private int row = 0;
     private int col = 0;
-    public Vector2Int cords = new Vector2Int(0,0);
-        public Vector2Int newCords = new Vector2Int(0,0);
-    // public Material tileMaterial;
+    public int radius = 1;
 
-   
+    // ---------- Tile state ----------
     public TileState tileState = TileState.Tile;
     public ElementState tileElement = ElementState.Base;
-  
-    private bool MadeAMove = false;
-    private PlayerProperties playerProperties;
-    private LevelManager levelManager;
+
+    [SerializeField]
+    private TileState preRespawnState = TileState.Tile;
+
+    // ---------- Move costs ----------
     private int tileMoveCost = -1;
     private int obstacleMoveCost = -2;
     private int moveAddCost = +2;
-    public int CustomMoveCost = 0;
-    
-    
-    TextMeshPro moveText;
-    [SerializeField]
-    TileState preRespawnState = TileState.Tile;
+    public int CustomMoveCost = 1;
 
+    // ---------- References / runtime ----------
+    private PlayerProperties playerProperties;
+    private LevelManager levelManager;
+    private TextMeshPro moveText;
+    private bool MadeAMove = false;
 
-
+    // =====================================================================
+    // Setup
+    // =====================================================================
 
     void OnEnable()
     {
@@ -38,156 +43,172 @@ public class TileProperties : MonoBehaviour
         playerProperties = FindAnyObjectByType<PlayerProperties>();
         levelManager = FindAnyObjectByType<LevelManager>();
         preRespawnState = tileState;
-        
-        // Divide the cordinate vector
+
+        // Split the coordinate vector
         row = cords.x;
         col = cords.y;
 
         if (tileState == TileState.Obstacle || tileState == TileState.Element)
-            {CustomMoveCost *= -1;
-            if (transform.childCount > 0)
-            this.transform.GetChild(0).GetComponent<TextMeshPro>().text = CustomMoveCost.ToString(); }
-
-        if (tileState == TileState.MoveAdd){
-            CustomMoveCost *= 1;
-            this.transform.GetChild(0).GetComponent<TextMeshPro>().text = CustomMoveCost.ToString(); 
-}
-        if(tileState == TileState.StartTile)
         {
-            playerProperties.UpdateRespawnPoint(cords,playerProperties.maxMoves,transform.position);
-            playerProperties.SetPlayerCords(cords,this.transform.position);
+            CustomMoveCost *= -1;
+            if (transform.childCount > 0)
+                SetMoveText();
+        }
+
+        // Check if its a obstacle and electro, then enable the timing function
+        if (tileState == TileState.Obstacle && tileElement == ElementState.Electro)
+        {
+            InvokeRepeating(nameof(StartElectroPulse), 5f, 5f);
+        }
+
+        if (tileState == TileState.MoveAdd)
+        {
+            CustomMoveCost *= 1;
+            SetMoveText();
+        }
+
+        if (tileState == TileState.StartTile)
+        {
+            playerProperties.UpdateRespawnPoint(cords, playerProperties.maxMoves, transform.position);
+            playerProperties.SetPlayerCords(cords, transform.position);
             playerProperties.RespawnPlayer();
         }
+
+        SetTileRadius();
     }
- 
- public void CacheTilesState()
+
+    private void StartElectroPulse()
+    {
+        FindAnyObjectByType<TileFunctions>().ElectroPulse(this);
+    }
+
+    private void SetMoveText()
+    {
+        transform.GetChild(0).GetComponent<TextMeshPro>().text = CustomMoveCost.ToString();
+    }
+
+    // =====================================================================
+    // Respawn state
+    // =====================================================================
+
+    public void CacheTilesState()
     {
         preRespawnState = tileState;
     }
 
- public void RefreshTilesOnRespawn()
+    public void RefreshTilesOnRespawn()
     {
         tileState = preRespawnState;
         SetTileMaterial();
-    }   
+    }
+
+    // =====================================================================
+    // Material
+    // =====================================================================
 
     private void SetTileMaterial()
     {
-        Material tileMaterial = GetComponent<Renderer>().material;
-        if (tileState == TileState.Element)
-        {
-            switch (tileElement)
-            {
-                case ElementState.Base:
-                // Load the material from the assets/materials folder
-                    tileMaterial = Resources.Load<Material>("Materials/Achetypes/swapElectro");
-                    break;
-                case ElementState.Ice:
-                    tileMaterial = Resources.Load<Material>("Materials/Achetypes/swapIce");
-                   break;
-                case ElementState.Electro:
-                    tileMaterial = Resources.Load<Material>("Materials/Achetypes/swapElectro");
-                    break;
-                case ElementState.Fire:
-                    tileMaterial = Resources.Load<Material>("Materials/Achetypes/swapFire");
-                    break;
-                case ElementState.Acid:
-                    tileMaterial = Resources.Load<Material>("Materials/Achetypes/swapAcid");
-                    break;
-                default:
-                    tileMaterial = Resources.Load<Material>("Materials/Achetypes/swapBase");
-                    break;
-            }
-        }
-
-        else if (tileState == TileState.Obstacle)
-        {
-            switch (tileElement)
-            {
-                case ElementState.Base:
-                    tileMaterial = Resources.Load<Material>("Materials/Achetypes/obstacleBase");
-                    break;
-                case ElementState.Ice:
-                    tileMaterial = Resources.Load<Material>("Materials/Achetypes/obstacleIce");
-                    break;
-                case ElementState.Electro:
-                    tileMaterial = Resources.Load<Material>("Materials/Achetypes/obstacleElectro");
-                    break;
-                case ElementState.Fire:
-                    tileMaterial = Resources.Load<Material>("Materials/Achetypes/obstacleFire");
-                    break;
-                case ElementState.Acid:
-                    tileMaterial = Resources.Load<Material>("Materials/Achetypes/obstacleAcid");
-                    break;
-                default:
-                    tileMaterial = Resources.Load<Material>("Materials/Achetypes/obstacleBase");
-                    break;
-            }
-        }
-        else if (tileState == TileState.OneWay)
-        {
-            tileMaterial = Resources.Load<Material>("Materials/Achetypes/obstacleBase");
-        }
-        else if (tileState == TileState.MoveAdd)
-        {
-            tileMaterial = Resources.Load<Material>("Materials/Achetypes/moveAdd");
-        }
-        else if (tileState == TileState.Wall)
-        {
-            tileMaterial = Resources.Load<Material>("Materials/Achetypes/wall");
-        }
-        else if (tileState == TileState.EndPoint)
-        {
-        tileMaterial = Resources.Load<Material>("Materials/Achetypes/endPoint");    
-        }
-        else if (tileState == TileState.StartTile)
-        {
-        tileMaterial = Resources.Load<Material>("Materials/Achetypes/startPoint");    
-        }
-        else
-        {
-            tileMaterial = Resources.Load<Material>("Materials/Achetypes/baseTile");
-        }
-        this.GetComponent<Renderer>().material = tileMaterial;
+        GetComponent<Renderer>().material = Resources.Load<Material>(MaterialFolder + GetMaterialName());
     }
 
+    public void SetTileRadius()
+    {
+        
+            if (tileElement == ElementState.Acid)
+            {
+                //Reverse the movement of the player
+                radius = 4;
+            }
+            else if (tileElement == ElementState.Electro)
+            {
+                //Send out a 1 block shockwave out that respawns player
+                radius = 1;
+            }
+            else if (tileElement == ElementState.Ice)
+            {
+                //Simple lock and Key puzzle, no effect here.
+                // radius = 4;
+            }
+            else if (tileElement == ElementState.Fire)
+            {
+                //Has effected the map already, no effect here.
+                // radius = 4;
+            }
+    }
+
+    private string GetMaterialName()
+    {
+        switch (tileState)
+        {
+            case TileState.Element:
+                switch (tileElement)
+                {
+                    case ElementState.Base:    return "swapElectro"; // Base intentionally uses the Electro material
+                    case ElementState.Ice:     return "swapIce";
+                    case ElementState.Electro: return "swapElectro";
+                    case ElementState.Fire:    return "swapFire";
+                    case ElementState.Acid:    return "swapAcid";
+                    default:                   return "swapBase";
+                }
+
+            case TileState.Obstacle:
+                switch (tileElement)
+                {
+                    case ElementState.Base:    return "obstacleBase";
+                    case ElementState.Ice:     return "obstacleIce";
+                    case ElementState.Electro: return "obstacleElectro";
+                    case ElementState.Fire:    return "obstacleFire";
+                    case ElementState.Acid:    return "obstacleAcid";
+                    default:                   return "obstacleBase";
+                }
+
+            case TileState.OneWay:    return "obstacleBase";
+            case TileState.MoveAdd:   return "moveAdd";
+            case TileState.Wall:      return "wall";
+            case TileState.EndPoint:  return "endPoint";
+            case TileState.StartTile: return "startPoint";
+            default:                  return "baseTile";
+        }
+    }
+
+    // =====================================================================
+    // Move handling
+    // =====================================================================
+
     public bool ExecuteType()
-    {   
+    {
         MadeAMove = false;
 
-        // Check if the previous was a OneWay
-        if (playerProperties.previousTile != null){
-        if (playerProperties.previousTile.GetComponent<TileProperties>().tileState == TileState.OneWay)
-        {
+        // If the previous tile was a OneWay, it disappears
+                if (playerProperties.previousTile != null){
+        if (playerProperties.previousTile.GetComponent<TileProperties>().tileState == TileState.OneWay){
             Debug.Log("Previous tile was DISAPPEAR ");
             playerProperties.previousTile.gameObject.SetActive(false);
         }
-}
-        
-// Check if the player has enough moves to conquer the obstacle and if the player has the same element as the obstacle
-        bool canConquerObstacle = playerProperties.CanModifyMove(CustomMoveCost) 
-                        && tileState == TileState.Obstacle
-                        && playerProperties.playerElement == tileElement;
-        
-// -------- Normal Tile ---------
-// Check if the player has enough moves to move to the tile
-        if (playerProperties.CanModifyMove(tileMoveCost) && tileState == TileState.Tile )
+                }
+
+        // Player needs enough moves AND the same element as the obstacle to conquer it
+        bool canConquerObstacle = playerProperties.CanModifyMove(CustomMoveCost)
+                                  && tileState == TileState.Obstacle
+                                  && playerProperties.playerElement == tileElement;
+
+        // -------- Normal Tile --------
+        if (playerProperties.CanModifyMove(tileMoveCost) && tileState == TileState.Tile)
         {
             playerProperties.ModifyMoves(tileMoveCost);
             MadeAMove = true;
         }
-// -------- Element Tile --------    
-// Check if the player has enough moves to move to the tile and if the tile is an Element tile
+        // -------- Element Tile --------
         else if (playerProperties.CanModifyMove(tileMoveCost) && tileState == TileState.Element)
         {
             playerProperties.ModifyMoves(tileMoveCost);
             playerProperties.playerElement = tileElement;
             playerProperties.UpdatePlayerColor();
-            
+
             MadeAMove = true;
         }
-//-------- End Point Tile --------        
-// Check if the player tries to move to a Endpoint, dont move
+        // -------- End Point Tile --------
+        // Player doesn't move onto the endpoint; the next level takes over
         else if (playerProperties.CanModifyMove(tileMoveCost) && tileState == TileState.EndPoint)
         {
             playerProperties.ModifyMoves(tileMoveCost);
@@ -195,59 +216,66 @@ public class TileProperties : MonoBehaviour
             Debug.Log("YOU WIN");
             MadeAMove = false;          // don't let InteractionManager move the player onto this old tile
         }
-
-//-------- Move Adder Tile --------
-// Check if the player has enough moves to move to the tile and if the tile is a MoveAdd tile
-        else if (playerProperties.CanModifyMove(CustomMoveCost) && tileState == TileState.MoveAdd )
+        // -------- Move Adder Tile --------
+        else if (playerProperties.CanModifyMove(CustomMoveCost) && tileState == TileState.MoveAdd)
         {
-        playerProperties.ModifyMoves(CustomMoveCost);
-        MadeAMove = true;
+            playerProperties.ModifyMoves(CustomMoveCost);
+            MadeAMove = true;
 
-        SetTileMaterial();
+            SetTileMaterial();
         }
-
-// -------- Obstacle Tile --------
-// Check if the player has enough moves to conquer the obstacle and if the player has the same element as the obstacle
+        // -------- Obstacle Tile --------
         else if (canConquerObstacle)
         {
-        
-        playerProperties.ModifyMoves(CustomMoveCost);
-        MadeAMove = true;
-        //if its a obstacle tile and its broken, remove the type and set it to a normal tile
-        tileState = TileState.Tile;
-        SetTileMaterial();
-        playerProperties.UpdateRespawnPoint(cords,playerProperties.currentMoves,transform.position);
-        }
+            playerProperties.ModifyMoves(CustomMoveCost);
+            MadeAMove = true;
 
-// -------- Wall Tile --------        
-// Check if the player tries to move to a wall, dont move
-        else if ( tileState == TileState.Wall)
+//only if it has a post capture effect:
+            if (tileElement == ElementState.Acid)
+            {
+                //Reverse the movement of the player
+            }
+            else if (tileElement == ElementState.Electro)
+            {
+                //Send out a 1 block shockwave out that respawns player
+            }
+            else if (tileElement == ElementState.Ice)
+            {
+                //Simple lock and Key puzzle, no effect here.
+            }
+            else if (tileElement == ElementState.Fire)
+            {
+                //Has effected the map already, no effect here.
+            }
+
+            // Obstacle is broken: turn it into a normal tile
+            tileState = TileState.Tile;
+            SetTileMaterial();
+            playerProperties.UpdateRespawnPoint(cords, playerProperties.currentMoves, transform.position);
+        }
+        // -------- Wall Tile --------
+        else if (tileState == TileState.Wall)
         {
-               MadeAMove = true;
+            MadeAMove = true;
         }
-
-// -------- One Way tile --------
+        // -------- One Way Tile --------
         else if (tileState == TileState.OneWay)
         {
             MadeAMove = true;
         }
+        // -------- Start Tile --------
         else if (tileState == TileState.StartTile)
         {
             MadeAMove = true;
         }
-
-
-// If the player does not have enough moves to move to the tile, do not allow the player to move
-        else 
+        // Not enough moves: the player can't move here
+        else
         {
             MadeAMove = false;
         }
-    // Debug.Log("Can move? " + MadeAMove);
-   playerProperties.previousTile = this.gameObject;
-    return MadeAMove;
-        // Debug.Log("Current Moves: " + playerProperties.currentMoves );
-    
 
+        playerProperties.previousTile = gameObject;
+        return MadeAMove;
     }
 
 

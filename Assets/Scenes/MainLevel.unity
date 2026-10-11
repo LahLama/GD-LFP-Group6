@@ -1064,6 +1064,7 @@ GameObject:
   m_Component:
   - component: {fileID: 455100132}
   - component: {fileID: 455100133}
+  - component: {fileID: 455100134}
   m_Layer: 0
   m_Name: GRID
   m_TagString: gridStart
@@ -1102,6 +1103,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bc938d9dee1ed34f93e8a35197bf343, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractionManager
+  isMovementReversed: 0
+--- !u!114 &455100134
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 455100130}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56e7cee3f159b5d44b74c54918a77fd0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TileFunctions
 --- !u!1 &596269184
 GameObject:
   m_ObjectHideFlags: 0
@@ -1519,10 +1533,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LevelManager
   GameLevels:
+  - {fileID: 1801482580}
   - {fileID: 2011047488}
   - {fileID: 2112808626}
   - {fileID: 1938458094}
-  - {fileID: 1801482580}
   CurrentLevel: 0
 --- !u!4 &1257220983
 Transform:
@@ -2087,10 +2101,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MapCreator
   level:
-  - '.,.,.,i,#,. '
-  - F1,m4,.,.,I1,X
+  - .,.,a,m5,.,A
   - f,.,.,.,.,#
-  - O,.,],],.,.
+  - O,#,.,m5,.,.
   tilePrefabs:
   - type: 9
     prefab: {fileID: 8994451080318423122, guid: f582545e406b3b2468e54ec95ca7648a, type: 3}
@@ -2279,6 +2292,7 @@ MonoBehaviour:
   respawnTransform: {x: 0, y: 0, z: 0}
   respawnElementState: 0
   playerElement: 4
+  previousTile: {fileID: 0}
 --- !u!114 &2084505432
 MonoBehaviour:
   m_ObjectHideFlags: 0
