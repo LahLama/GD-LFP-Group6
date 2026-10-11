@@ -1104,6 +1104,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractionManager
   isMovementReversed: 0
+  isOneWaysActive: 0
 --- !u!114 &455100134
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1974,8 +1975,6 @@ MonoBehaviour:
     prefab: {fileID: 315693433892697118, guid: 812105c394128534d8982315cfb28487, type: 3}
   - type: 8
     prefab: {fileID: 679312585255815843, guid: d7bc6089d27f67f47a81c3bb60d9767f, type: 3}
-  - type: 6
-    prefab: {fileID: 2170937572372596738, guid: dbea91cdf44c3c44ab540e1de498cb6a, type: 3}
   - type: 10
     prefab: {fileID: 7398251300928073039, guid: 6c9450d3ef4f59d48bb8a5cdb072d89e, type: 3}
   - type: 11
@@ -2058,8 +2057,6 @@ MonoBehaviour:
     prefab: {fileID: 315693433892697118, guid: 812105c394128534d8982315cfb28487, type: 3}
   - type: 8
     prefab: {fileID: 679312585255815843, guid: d7bc6089d27f67f47a81c3bb60d9767f, type: 3}
-  - type: 6
-    prefab: {fileID: 2170937572372596738, guid: dbea91cdf44c3c44ab540e1de498cb6a, type: 3}
   - type: 10
     prefab: {fileID: 7398251300928073039, guid: 6c9450d3ef4f59d48bb8a5cdb072d89e, type: 3}
   - type: 11
@@ -2103,11 +2100,11 @@ MonoBehaviour:
   level:
   - .,.,.,m5,.,.,.,.,m5
   - .,.,.,m5,.,.,.,.,m5
+  - .,f,.,m5,.,.,.,.,m5
+  - .,.,.,m5,.,B,.,.,m5
+  - .,e,.,m5,.,F,B,.,m5
   - .,.,.,m5,.,.,.,.,m5
-  - .,.,.,m5,.,.,.,.,m5
-  - .,.,.,m5,.,E,.,.,m5
-  - .,.,.,m5,.,.,.,.,m5
-  - .,.,.,m5,.,.,.,.,m5
+  - .,f,.,m5,.,B,.,.,m5
   - .,.,.,m5,.,.,.,.,m5
   - .,.,.,m5,.,.,.,.,m5
   - O,#,.,m5,.,.
@@ -2132,8 +2129,6 @@ MonoBehaviour:
     prefab: {fileID: 315693433892697118, guid: 812105c394128534d8982315cfb28487, type: 3}
   - type: 8
     prefab: {fileID: 679312585255815843, guid: d7bc6089d27f67f47a81c3bb60d9767f, type: 3}
-  - type: 6
-    prefab: {fileID: 2170937572372596738, guid: dbea91cdf44c3c44ab540e1de498cb6a, type: 3}
   - type: 10
     prefab: {fileID: 7398251300928073039, guid: 6c9450d3ef4f59d48bb8a5cdb072d89e, type: 3}
   - type: 11
@@ -2374,8 +2369,6 @@ MonoBehaviour:
     prefab: {fileID: 315693433892697118, guid: 812105c394128534d8982315cfb28487, type: 3}
   - type: 8
     prefab: {fileID: 679312585255815843, guid: d7bc6089d27f67f47a81c3bb60d9767f, type: 3}
-  - type: 6
-    prefab: {fileID: 2170937572372596738, guid: dbea91cdf44c3c44ab540e1de498cb6a, type: 3}
   - type: 10
     prefab: {fileID: 7398251300928073039, guid: 6c9450d3ef4f59d48bb8a5cdb072d89e, type: 3}
   - type: 11

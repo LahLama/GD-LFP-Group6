@@ -17,6 +17,7 @@ public class InteractionManager : MonoBehaviour
 	RaycastHit hit;
     PlayerProperties playerProperties;
     public bool isMovementReversed = false;
+    public bool isOneWaysActive = false;
     
  MovementChecker movementChecker;
     // Create a global struct with the tile types that i can use in other scripts
@@ -65,8 +66,23 @@ public class InteractionManager : MonoBehaviour
         {
             FindAnyObjectByType<TileFunctions>().PerMoveChecker(t.radius,playerCords,t.cords,t);
         }
+        
+        if (t.tileState == TileState.OneWay){
+        //Handles changing the material of the tile depending on the player's element
+        if (playerProperties.playerElement == ElementState.Fire)
+        {
+            
+            t.GetComponent<Renderer>().material = Resources.Load<Material>("Materials/Achetypes/oneWay");
+            isOneWaysActive = true;
+        }
+        else
+        {
+            t.GetComponent<Renderer>().material = Resources.Load<Material>("Materials/Achetypes/baseTile");   
+            isOneWaysActive = false;
+        }}
 
     }
+
 
     int unitDirection = 1;
     if (isMovementReversed) unitDirection = -1;

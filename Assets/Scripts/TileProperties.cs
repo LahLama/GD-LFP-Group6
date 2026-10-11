@@ -162,7 +162,7 @@ public class TileProperties : MonoBehaviour
                     default:                   return "obstacleBase";
                 }
 
-            case TileState.OneWay:    return "obstacleBase";
+            case TileState.OneWay:    return "baseTile";
             case TileState.MoveAdd:   return "moveAdd";
             case TileState.Wall:      return "wall";
             case TileState.EndPoint:  return "endPoint";
@@ -180,11 +180,16 @@ public class TileProperties : MonoBehaviour
         MadeAMove = false;
 
         // If the previous tile was a OneWay, it disappears
-                if (playerProperties.previousTile != null){
-        if (playerProperties.previousTile.GetComponent<TileProperties>().tileState == TileState.OneWay){
+        if (playerProperties.previousTile != null){
+        if (FindAnyObjectByType<InteractionManager>().isOneWaysActive && playerProperties.previousTile.GetComponent<TileProperties>().tileState == TileState.OneWay){
             Debug.Log("Previous tile was DISAPPEAR ");
             playerProperties.previousTile.gameObject.SetActive(false);
+            MadeAMove = true;
         }
+        else
+            {
+            MadeAMove = true;
+            }
                 }
 
         // Player needs enough moves AND the same element as the obstacle to conquer it
@@ -258,13 +263,12 @@ public class TileProperties : MonoBehaviour
         {
             MadeAMove = true;
         }
-        // -------- One Way Tile --------
-        else if (tileState == TileState.OneWay)
+        // -------- Start Tile --------
+        else if (tileState == TileState.StartTile)
         {
             MadeAMove = true;
         }
-        // -------- Start Tile --------
-        else if (tileState == TileState.StartTile)
+        else if (tileState == TileState.OneWay)
         {
             MadeAMove = true;
         }

@@ -53,7 +53,13 @@ public class TileFunctions : MonoBehaviour
     }
     }
 
-
+    public void SetOneWayTile(TileProperties tile)
+    {
+        if (tile.tileState == TileState.OneWay)
+        {
+            
+        }
+    }
 
     private void ReverseControls(TileProperties tile)
     {

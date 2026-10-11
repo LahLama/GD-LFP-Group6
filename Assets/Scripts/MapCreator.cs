@@ -53,7 +53,8 @@ public class MapCreator : MonoBehaviour
         {"E", TileType.ObstacleElectro},
         {"A", TileType.ObstacleAcid},
 
-        {"]", TileType.OneWayTile},
+        {"B", TileType.OneWayTile},
+   
         {"#", TileType.WallTile},
         {"m", TileType.MoveAdd},
         {".", TileType.NormalTile},
