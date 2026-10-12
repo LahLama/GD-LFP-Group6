@@ -88,9 +88,11 @@ public class MapCreator : MonoBehaviour
     }
 
 
-     void SpawnGrid()
+    void SpawnGrid()
     {
-        // Debug.Log($"SpawnGrid called on {name}", this);
+        // Use a flat counter to track the index across varying row lengths
+        int tileIndex = 0; 
+
         for (int y = 0; y < rows.Count; y++)
         {
             var row = rows[y];
@@ -101,46 +103,41 @@ public class MapCreator : MonoBehaviour
                 if (!_prefabLookup.TryGetValue(type, out var prefab))
                 {
                     Debug.LogError($"No prefab mapped for {type}");
+                    tileIndex++; // Increment to keep the flat list in sync
                     continue;
                 }
 
                 Vector3 pos = new Vector3(x * cellSize, 0f, -y * cellSize);
-            prefab.TryGetComponent<TileProperties>(out var tileProperties);
-                if (tileProperties != null)
+                
+                // 1. Instantiate the object FIRST
+                GameObject spawnedTile = Instantiate(prefab, pos, Quaternion.identity, gridParent);
+                
+                // 2. Modify the properties of the SPAWNED instance, not the prefab
+                if (spawnedTile.TryGetComponent<TileProperties>(out var tileProperties))
                 {
-                    // this arrangement will make it be row, col according to TileProperties script
-                    tileProperties.cords = new Vector2Int(x+1,y+1);
-                   
-                    int index = x + ( y * row.tiles.Count );
-                    if (index < customMovementNumbers.Count )
-                       {
-                    // this sets the value of the correct index,
-                    //Examples
+                    tileProperties.cords = new Vector2Int(x + 1, y + 1);
                     
-                    // 0 1 2  
-                    // 3 4 5
-                    // 6 7 8
+                    if (tileIndex < customMovementNumbers.Count)
+                    {
+                        if (tileProperties.transform.childCount > 1){
 
-                    // if row 0, tile 0 = x = 0
-                    // if row 0, tile 1 = x = 1
-                    
-                    // if row 1, tile 0 = x = (maxCount ) + 0
-                    // if row 1, tile 1 = x = (maxCount ) + 1
-
-                    // if row 2, tile 0 = x = (2*maxCount) + 0
-                    // if row 2, tile 1 = x = (2*maxCount) + 1
-
-                    tileProperties.CustomMoveCost = customMovementNumbers[index];                     
-                      
+                        int customMoveCost = customMovementNumbers[tileIndex];
+                        tileProperties.CustomMoveCost = customMovementNumbers[tileIndex];
+                        tileProperties.SetMoveText(customMoveCost); 
+                        }
+                        
+                        tileProperties.InitAfterPlacement();
                     }
                 }
-                Instantiate(prefab, pos, Quaternion.identity, gridParent);
+
+                tileIndex++; // Move to the next index for the next tile
             }
         }
-        // for (int i = 0; i < customMovementNumbers.Count; i++)
-        // {
-        //     // Debug.Log(customMovementNumbers[i] + " @ "+ i);
-        // }
+        
+        for (int i = 0; i < customMovementNumbers.Count; i++)
+        {
+            Debug.Log(customMovementNumbers[i] + " @ "+ i);
+        }
     }
 
 
@@ -170,7 +167,7 @@ public class MapCreator : MonoBehaviour
                 {
                     customMovementNumbers.Add(0);
                 }
-                // Debug.Log("Value: " + token + "\n Char: " + charToken + "\t Number: " + numberToken);
+                // Debug.Log("Value: " + token + "\n Char: " + charToken + "\t Number: " + numberToken, );
                 row.tiles.Add(CharMap[charToken]);
             }
             result.Add(row);

@@ -125,7 +125,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98fd6c91bf9c51841bb7e3062ae08aa3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TileProperties
-  cords: {x: 1, y: 3}
+  cords: {x: 8, y: 3}
   newCords: {x: 0, y: 0}
-  tileState: 5
+  radius: 1
+  tileState: 6
   tileElement: 4
+  preRespawnState: 0
+  CustomMoveCost: 0

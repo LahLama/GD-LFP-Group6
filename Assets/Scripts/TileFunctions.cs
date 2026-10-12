@@ -67,7 +67,7 @@ public class TileFunctions : MonoBehaviour
         if (tile.tileState == TileState.Obstacle && tile.tileElement == ElementState.Acid)
         {
         Debug.Log("=-=-=-=-=-=ACID SPIT=-=-=-=-=-=-=-");
-        bool isNearForAcid = CheckIfPlayerNearby(tile.radius, FindAnyObjectByType<PlayerProperties>().playerCords, tile.cords, tile) ;
+         bool isNearForAcid = CheckIfPlayerNearby(tile.radius, FindAnyObjectByType<PlayerProperties>().playerCords, tile.cords, tile) ;
         Debug.Log("NEAR ACID: " + isNearForAcid);
         FindAnyObjectByType<InteractionManager>().isMovementReversed = isNearForAcid; 
         }

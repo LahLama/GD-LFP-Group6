@@ -127,6 +127,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TileProperties
   cords: {x: 1, y: 3}
   newCords: {x: 0, y: 0}
-  tileState: 6
+  radius: 1
+  tileState: 7
   tileElement: 4
+  preRespawnState: 0
   CustomMoveCost: 0

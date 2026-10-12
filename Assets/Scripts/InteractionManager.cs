@@ -101,14 +101,6 @@ public class InteractionManager : MonoBehaviour
    
 
 // Debug.Log("input : " +inputActions.Player.Move.ReadValue<Vector2>());
-
-
-
-
-
-       
-
-
     switch (playerSuggestedMove)
     {       
     // Check if WASD - then move accordiling.

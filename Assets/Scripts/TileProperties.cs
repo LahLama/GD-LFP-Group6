@@ -31,60 +31,51 @@ public class TileProperties : MonoBehaviour
     private LevelManager levelManager;
     private TextMeshPro moveText;
     private bool MadeAMove = false;
+    private bool isTileActive = true;
 
     // =====================================================================
     // Setup
     // =====================================================================
 
-    void OnEnable()
+   void OnEnable()
+{
+    SetTileMaterial();
+
+    playerProperties = FindAnyObjectByType<PlayerProperties>();
+    levelManager = FindAnyObjectByType<LevelManager>();
+    preRespawnState = tileState;
+
+    if (tileState == TileState.Obstacle && tileElement == ElementState.Electro)
+        InvokeRepeating(nameof(StartElectroPulse), 5f, 5f);
+
+    SetTileRadius();
+}
+
+// Called by MapCreator once cords and move cost are assigned
+public void InitAfterPlacement()
+{
+    row = cords.x;
+    col = cords.y;
+
+    if (tileState == TileState.StartTile)
     {
-        SetTileMaterial();
-
-        playerProperties = FindAnyObjectByType<PlayerProperties>();
-        levelManager = FindAnyObjectByType<LevelManager>();
-        preRespawnState = tileState;
-
-        // Split the coordinate vector
-        row = cords.x;
-        col = cords.y;
-
-        if (tileState == TileState.Obstacle || tileState == TileState.Element)
-        {
-            CustomMoveCost *= -1;
-            if (transform.childCount > 0)
-                SetMoveText();
-        }
-
-        // Check if its a obstacle and electro, then enable the timing function
-        if (tileState == TileState.Obstacle && tileElement == ElementState.Electro)
-        {
-            InvokeRepeating(nameof(StartElectroPulse), 5f, 5f);
-        }
-
-        if (tileState == TileState.MoveAdd)
-        {
-            CustomMoveCost *= 1;
-            SetMoveText();
-        }
-
-        if (tileState == TileState.StartTile)
-        {
-            playerProperties.UpdateRespawnPoint(cords, playerProperties.maxMoves, transform.position);
-            playerProperties.SetPlayerCords(cords, transform.position);
-            playerProperties.RespawnPlayer();
-        }
-
-        SetTileRadius();
+        playerProperties.UpdateRespawnPoint(cords, playerProperties.maxMoves, transform.position);
+        playerProperties.SetPlayerCords(cords, transform.position);
+        playerProperties.RespawnPlayer();
     }
+}
 
     private void StartElectroPulse()
     {
         FindAnyObjectByType<TileFunctions>().ElectroPulse(this, transform.GetChild(2).localScale);
     }
 
-    private void SetMoveText()
+    public void SetMoveText(int val)
     {
-        transform.GetChild(0).GetComponent<TextMeshPro>().text = CustomMoveCost.ToString();
+        if (CustomMoveCost > 0)
+            transform.GetChild(0).GetComponent<TextMeshPro>().text = "+" + val.ToString();
+        else
+            transform.GetChild(0).GetComponent<TextMeshPro>().text = val.ToString();
     }
 
     // =====================================================================
@@ -94,6 +85,8 @@ public class TileProperties : MonoBehaviour
     public void CacheTilesState()
     {
         preRespawnState = tileState;
+        
+
     }
 
     public void RefreshTilesOnRespawn()
@@ -183,14 +176,15 @@ public class TileProperties : MonoBehaviour
         if (playerProperties.previousTile != null){
         if (FindAnyObjectByType<InteractionManager>().isOneWaysActive && playerProperties.previousTile.GetComponent<TileProperties>().tileState == TileState.OneWay){
             Debug.Log("Previous tile was DISAPPEAR ");
-            playerProperties.previousTile.gameObject.SetActive(false);
+            playerProperties.previousTile.GetComponent<TileProperties>().tileState = TileState.Wall;
+            playerProperties.previousTile.GetComponent<TileProperties>().SetTileMaterial();
             MadeAMove = true;
         }
         else
-            {
-            MadeAMove = true;
-            }
-                }
+        {
+        MadeAMove = true;
+        }
+        }
 
         // Player needs enough moves AND the same element as the obstacle to conquer it
         bool canConquerObstacle = playerProperties.CanModifyMove(CustomMoveCost)
@@ -234,25 +228,6 @@ public class TileProperties : MonoBehaviour
         {
             playerProperties.ModifyMoves(CustomMoveCost);
             MadeAMove = true;
-
-//only if it has a post capture effect:
-            if (tileElement == ElementState.Acid)
-            {
-                //Reverse the movement of the player
-            }
-            else if (tileElement == ElementState.Electro)
-            {
-                //Send out a 1 block shockwave out that respawns player
-            }
-            else if (tileElement == ElementState.Ice)
-            {
-                //Simple lock and Key puzzle, no effect here.
-            }
-            else if (tileElement == ElementState.Fire)
-            {
-                //Has effected the map already, no effect here.
-            }
-
             // Obstacle is broken: turn it into a normal tile
             tileState = TileState.Tile;
             SetTileMaterial();
@@ -270,6 +245,7 @@ public class TileProperties : MonoBehaviour
         }
         else if (tileState == TileState.OneWay)
         {
+             playerProperties.ModifyMoves(tileMoveCost);
             MadeAMove = true;
         }
         // Not enough moves: the player can't move here
