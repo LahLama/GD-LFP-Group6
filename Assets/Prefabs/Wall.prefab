@@ -9,8 +9,16 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 533352407080823762, guid: f582545e406b3b2468e54ec95ca7648a, type: 3}
+      propertyPath: cords.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 533352407080823762, guid: f582545e406b3b2468e54ec95ca7648a, type: 3}
+      propertyPath: cords.y
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 533352407080823762, guid: f582545e406b3b2468e54ec95ca7648a, type: 3}
       propertyPath: tileState
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5348584230258827944, guid: f582545e406b3b2468e54ec95ca7648a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -53,15 +61,20 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8328631378275113550, guid: f582545e406b3b2468e54ec95ca7648a, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8328631378275113550, guid: f582545e406b3b2468e54ec95ca7648a, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 1a15570b10cc54046b21005b174658a2, type: 2}
+      objectReference: {fileID: 2100000, guid: 03dd9e18ea674a34fb01ab6a526fd551, type: 2}
     - target: {fileID: 8994451080318423122, guid: f582545e406b3b2468e54ec95ca7648a, type: 3}
       propertyPath: m_Name
-      value: Wall Variant
+      value: Wall
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 5346496821838299167, guid: f582545e406b3b2468e54ec95ca7648a, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f582545e406b3b2468e54ec95ca7648a, type: 3}

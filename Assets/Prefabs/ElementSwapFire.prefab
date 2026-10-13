@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &3733550392747239141
+--- !u!1001 &2253038850179284500
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -9,40 +9,36 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2633827486789168956, guid: ec03d551cd394b841bc744b52fc45a55, type: 3}
-      propertyPath: cords.y
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 2633827486789168956, guid: ec03d551cd394b841bc744b52fc45a55, type: 3}
       propertyPath: tileElement
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 2633827486789168956, guid: ec03d551cd394b841bc744b52fc45a55, type: 3}
-      propertyPath: tileMaterial
+    - target: {fileID: 4754316316906523713, guid: ec03d551cd394b841bc744b52fc45a55, type: 3}
+      propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 2100000, guid: d33fe726361e22f4f8dca5e9aea53f03, type: 2}
+      objectReference: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
     - target: {fileID: 5800314204868976288, guid: ec03d551cd394b841bc744b52fc45a55, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: d33fe726361e22f4f8dca5e9aea53f03, type: 2}
+      objectReference: {fileID: 2100000, guid: 341d7ca5210b0b34884f3f67334b29e5, type: 2}
     - target: {fileID: 6861604084023989436, guid: ec03d551cd394b841bc744b52fc45a55, type: 3}
       propertyPath: m_Name
-      value: 4 Variant
+      value: ElementSwapFire
       objectReference: {fileID: 0}
     - target: {fileID: 7625183583846131270, guid: ec03d551cd394b841bc744b52fc45a55, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.0301476
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7625183583846131270, guid: ec03d551cd394b841bc744b52fc45a55, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -7.700001
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7625183583846131270, guid: ec03d551cd394b841bc744b52fc45a55, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 3.299775
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7625183583846131270, guid: ec03d551cd394b841bc744b52fc45a55, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.7071226
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7625183583846131270, guid: ec03d551cd394b841bc744b52fc45a55, type: 3}
       propertyPath: m_LocalRotation.x
@@ -50,7 +46,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7625183583846131270, guid: ec03d551cd394b841bc744b52fc45a55, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.707091
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 7625183583846131270, guid: ec03d551cd394b841bc744b52fc45a55, type: 3}
       propertyPath: m_LocalRotation.z

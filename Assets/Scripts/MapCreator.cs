@@ -1,23 +1,26 @@
 using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 
 
 public enum TileType
 {
-    ElementWater, // EW
+    ElementIce, // EW
     ElementFire, // EF
-    ElementEarth, // EE
-    ElementNature, // EN
+    ElementElectro, // EE
+    ElementAcid, // EN
     MoveAdd, // MA
-    ObstacleWater, // OW
+    ObstacleIce, // OW
     ObstacleFire, // OF
-    ObstacleEarth, // OE
-    ObstacleNature, // ON
+    ObstacleElectro, // OE
+    ObstacleAcid, // ON
     NormalTile, // .
+    OneWayTile,
     EndTile, // X
-    WallTile // W
+    WallTile, // W
+    StartTile // W
 }
 
 [System.Serializable]
@@ -35,20 +38,28 @@ public class RowData
 
 public class MapCreator : MonoBehaviour
 {
+    List<int> customMovementNumbers = new List<int>();
+    public string[] level;
+
     static readonly Dictionary<string, TileType> CharMap = new Dictionary<string, TileType>
     {
-        {"w", TileType.ElementWater},
+        {"i", TileType.ElementIce},
         {"f", TileType.ElementFire},
-        {"e", TileType.ElementEarth},
-        {"n", TileType.ElementNature},
-        {"W", TileType.ObstacleWater},
+        {"e", TileType.ElementElectro},
+        {"a", TileType.ElementAcid},
+
+        {"I", TileType.ObstacleIce},
         {"F", TileType.ObstacleFire},
-        {"E", TileType.ObstacleEarth},
-        {"N", TileType.ObstacleNature},
+        {"E", TileType.ObstacleElectro},
+        {"A", TileType.ObstacleAcid},
+
+        {"B", TileType.OneWayTile},
+   
         {"#", TileType.WallTile},
         {"m", TileType.MoveAdd},
         {".", TileType.NormalTile},
-        {"END", TileType.EndTile}
+        {"O", TileType.StartTile},
+        {"X", TileType.EndTile}
     };
 
 
@@ -77,8 +88,11 @@ public class MapCreator : MonoBehaviour
     }
 
 
-     void SpawnGrid()
+    void SpawnGrid()
     {
+        // Use a flat counter to track the index across varying row lengths
+        int tileIndex = 0; 
+
         for (int y = 0; y < rows.Count; y++)
         {
             var row = rows[y];
@@ -89,18 +103,40 @@ public class MapCreator : MonoBehaviour
                 if (!_prefabLookup.TryGetValue(type, out var prefab))
                 {
                     Debug.LogError($"No prefab mapped for {type}");
+                    tileIndex++; // Increment to keep the flat list in sync
                     continue;
                 }
 
                 Vector3 pos = new Vector3(x * cellSize, 0f, -y * cellSize);
-            prefab.TryGetComponent<TileProperties>(out var tileProperties);
-                if (tileProperties != null)
+                
+                // 1. Instantiate the object FIRST
+                GameObject spawnedTile = Instantiate(prefab, pos, Quaternion.identity, gridParent);
+                
+                // 2. Modify the properties of the SPAWNED instance, not the prefab
+                if (spawnedTile.TryGetComponent<TileProperties>(out var tileProperties))
                 {
-                    // this arrangement will make it be row, col according to TileProperties script
-                    tileProperties.cords = new Vector2Int(y+1,x+1);
+                    tileProperties.cords = new Vector2Int(x + 1, y + 1);
+                    
+                    if (tileIndex < customMovementNumbers.Count)
+                    {
+                        if (tileProperties.transform.childCount > 1){
+
+                        int customMoveCost = customMovementNumbers[tileIndex];
+                        tileProperties.CustomMoveCost = customMovementNumbers[tileIndex];
+                        tileProperties.SetMoveText(customMoveCost); 
+                        }
+                        
+                        tileProperties.InitAfterPlacement();
+                    }
                 }
-                Instantiate(prefab, pos, Quaternion.identity, gridParent);
+
+                tileIndex++; // Move to the next index for the next tile
             }
+        }
+        
+        for (int i = 0; i < customMovementNumbers.Count; i++)
+        {
+            Debug.Log(customMovementNumbers[i] + " @ "+ i);
         }
     }
 
@@ -117,37 +153,53 @@ public class MapCreator : MonoBehaviour
         {
             var row = new RowData();
             var tokens = line.Split(',');
-            foreach (var token in tokens)
+            foreach (string token in tokens)
             {
-                row.tiles.Add(CharMap[token]);
+                string charToken = token[0].ToShortString();
+                int numberToken = 0;
+
+                if (token.Length > 1){
+                    numberToken = (int)Char.GetNumericValue(token[1]);
+                    // Set the customMoveCost to be this numberToken
+                    customMovementNumbers.Add(numberToken);
+                    }
+                    else
+                {
+                    customMovementNumbers.Add(0);
+                }
+                // Debug.Log("Value: " + token + "\n Char: " + charToken + "\t Number: " + numberToken, );
+                row.tiles.Add(CharMap[charToken]);
             }
             result.Add(row);
+            
         }
+    
         return result;
     }
 
-    void Awake()
+    void OnEnable()
     {
-        string[] level =
-         {
+    //     string[] level =
+    //      {
         
-        ".,e,E,.,.,.,.,.,.",
-        "m,E,#,#,.,.,.,.,.,.",
-        ".,#,#,#,.,.,.,.,.,.",
-        ".,w,.,.,W,.,.,.,.,END",
+    //     ".,m3,n,N2",
+    //     ".,m6,w,W3",
+    //     ".,m5,#",
 
 
-    };
+    // };
 
         rows = CreateLevel(level);
         BuildPrefabLookup();
         SpawnGrid();
 
+        
+
         foreach (var row in rows)
         {
             foreach (var tile in row.tiles)
             {
-                Debug.Log(tile);
+                // Debug.Log(tile);
             }
         }
     }
