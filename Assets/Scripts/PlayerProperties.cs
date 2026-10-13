@@ -18,6 +18,7 @@ public GameObject turningUp;
 public GameObject turningDown;
 public GameObject turningLeft;
 public GameObject turningRight;
+public GameObject RespawningTooltip;
 
 [SerializeField] Vector2Int respawnPoint;
 [SerializeField] int respawnMoves;
@@ -26,6 +27,7 @@ public GameObject turningRight;
 [SerializeField] ElementState respawnElementState;
 public ElementState playerElement = ElementState.Base;
 public GameObject previousTile;
+int RespawnCounter = 0;
 
     void Start()
     {
@@ -143,6 +145,15 @@ public void UpdateRespawnPoint(Vector2Int NewRespawnPoint, int NewRespawnMoves, 
     
 public void RespawnPlayer()
     {
+        RespawnCounter++;
+        // pause the game, show a tooltip then resume the game after a click
+        if (RespawnCounter > 1)
+        {
+            StartCoroutine(RespawnGuideCoroutine());
+        }
+
+
+
         currentMoves = respawnMoves;
        
         playerCords = respawnPoint;
@@ -163,5 +174,13 @@ public void RespawnPlayer()
        FindAnyObjectByType<InteractionManager>().enabled = true;
     }
 
+    IEnumerator RespawnGuideCoroutine()
+    {
+        RespawningTooltip.SetActive(true);
+        Time.timeScale = 0f; // Pause the game
+        yield return new WaitUntil(() => FindAnyObjectByType<InteractionManager>().inputActions.UI.Click.ReadValue<float>()>0); // Wait for a click
+        Time.timeScale = 1f; // Resume the game
+        RespawningTooltip.SetActive(false);
+    }
 
 }

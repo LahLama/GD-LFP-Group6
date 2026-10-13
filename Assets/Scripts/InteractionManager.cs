@@ -26,7 +26,7 @@ public class InteractionManager : MonoBehaviour
   // Create a region
 #region InputSystem
     
-    InputSystem_Actions inputActions;
+   public InputSystem_Actions inputActions;
     void Awake()
     {
         inputActions = new InputSystem_Actions();
