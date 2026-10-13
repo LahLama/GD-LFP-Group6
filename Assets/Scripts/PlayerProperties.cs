@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
@@ -70,8 +71,24 @@ public void SetPlayerCords(Vector2Int newCords, Vector3 newPos)
     {
         playerCords = newCords;
         playerPos = newPos;
-        gameObject.transform.position = newPos;
+
+        //Move the player smoothly to the new position
+        StartCoroutine(MoveTo(newPos, 0.3f));
     }
+IEnumerator MoveTo(Vector3 target, float duration)
+{
+    Vector3 start = transform.position;
+    float t = 0f;
+
+    while (t < 1f)
+    {
+        t += Time.deltaTime / duration;
+        transform.position = Vector3.Lerp(start, target, t);
+        yield return null;
+    }
+    transform.position = target;
+}
+
 
 public Vector2Int GetPlayerCords()
     {

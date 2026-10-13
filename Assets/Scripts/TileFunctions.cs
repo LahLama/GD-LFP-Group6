@@ -93,10 +93,10 @@ public class TileFunctions : MonoBehaviour
    public bool CheckIfPlayerNearby(int r,Vector2Int playerPos,Vector2Int tilePos,TileProperties tile)
     {
        //set the material to be red for 1 second, then back to normal.
-       CurrentTile= tile; // DEBUG
-       tileMaterial = tile.GetComponent<Renderer>().material;  // DEBUG
-       tile.GetComponent<Renderer>().material.color = Color.red; // DEBUG
-        Invoke("ResetTileColor", 1f); // DEBUG
+    //    CurrentTile= tile; // DEBUG
+    //    tileMaterial = tile.GetComponent<Renderer>().material;  // DEBUG
+    //    tile.GetComponent<Renderer>().material.color = Color.red; // DEBUG
+        // Invoke("ResetTileColor", 1f); // DEBUG
 
 
         // Debug.Log("Player Cords: "+playerPos);
