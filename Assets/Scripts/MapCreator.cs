@@ -134,10 +134,10 @@ public class MapCreator : MonoBehaviour
             }
         }
         
-        for (int i = 0; i < customMovementNumbers.Count; i++)
-        {
-            Debug.Log(customMovementNumbers[i] + " @ "+ i);
-        }
+        // for (int i = 0; i < customMovementNumbers.Count; i++)
+        // {
+        //     Debug.Log(customMovementNumbers[i] + " @ "+ i);
+        // }
     }
 
 

@@ -14,13 +14,19 @@ public class TileFunctions : MonoBehaviour
     
     private IEnumerator ElectroPulseRoutine(TileProperties tile, Vector3 initScale)
     {
+        //if tile is defeated
+    if (tile.tileState != TileState.Obstacle)
+    {
+        // Debug.LogWarning("ElectroPulse called on a non-obstacle tile: " + tile.name, tile);
+        yield break;
+    }
     GameObject AOE = tile.transform.GetChild(2).gameObject;
     
     const float pulseDuration = 5f - 1f; //Minus 1 for the delay before the pulse starts, which is 1 second.
 
     PlayerProperties player = FindAnyObjectByType<PlayerProperties>();
 
-    while (tile != null) // stop automatically if the tile is destroyed
+    while (tile.tileState == TileState.Obstacle) // stop automatically if the tile is changed
     {
         // Start each pulse from zero
         AOE.transform.localScale = Vector3.zero;
@@ -60,35 +66,22 @@ public class TileFunctions : MonoBehaviour
             
         }
     }
+private bool IsReversingControls(TileProperties tile)
+{
+    if (tile.tileState != TileState.Obstacle || tile.tileElement != ElementState.Acid)
+        return false;
 
-    private void ReverseControls(TileProperties tile)
-    {
-        //This will be checked every move to see if the player is still in range.
-        if (tile.tileState == TileState.Obstacle && tile.tileElement == ElementState.Acid)
-        {
-        Debug.Log("=-=-=-=-=-=ACID SPIT=-=-=-=-=-=-=-");
-         bool isNearForAcid = CheckIfPlayerNearby(tile.radius, FindAnyObjectByType<PlayerProperties>().playerCords, tile.cords, tile) ;
-        Debug.Log("NEAR ACID: " + isNearForAcid);
-        FindAnyObjectByType<InteractionManager>().isMovementReversed = isNearForAcid; 
-        }
-        else
-        {
-            Debug.Log("Was testing on a" + tile.name + " tile, but it was not an ACID tile.",tile);
-             FindAnyObjectByType<InteractionManager>().isMovementReversed = false;
-        }
-    }
+    PlayerProperties player = FindAnyObjectByType<PlayerProperties>();
+    return CheckIfPlayerNearby(tile.radius, player.playerCords, tile.cords, tile);
+}
 
-    public void PerMoveChecker(int r,Vector2Int playerPos,Vector2Int tilePos, TileProperties tile)
-    {   
-        
-   
-         if (tile.tileState == TileState.Obstacle && tile.tileElement == ElementState.Acid)
-        {
-            ReverseControls(tile);
-        }
-        CheckIfPlayerNearby(r,playerPos,tilePos,tile);
-    }
-
+// Returns true if this tile is a live acid obstacle with the player in range
+public bool PerMoveChecker(int r, Vector2Int playerPos, Vector2Int tilePos, TileProperties tile)
+{
+    bool reversing = IsReversingControls(tile);
+    CheckIfPlayerNearby(r, playerPos, tilePos, tile); // existing debug flash
+    return reversing;
+}
 
    public bool CheckIfPlayerNearby(int r,Vector2Int playerPos,Vector2Int tilePos,TileProperties tile)
     {

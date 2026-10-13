@@ -27,7 +27,7 @@ public GameObject RespawningTooltip;
 [SerializeField] ElementState respawnElementState;
 public ElementState playerElement = ElementState.Base;
 public GameObject previousTile;
-int RespawnCounter = 0;
+public int RespawnCounter = 0;
 
     void Start()
     {

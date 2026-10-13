@@ -102,6 +102,15 @@ public void InitAfterPlacement()
     private void SetTileMaterial()
     {
         GetComponent<Renderer>().material = Resources.Load<Material>(MaterialFolder + GetMaterialName());
+        // if the tile is a obstacle and has a child named "AOE", set the AOE to be invisible
+        if (tileState != TileState.Obstacle)
+        {
+            Transform AOE = transform.Find("AOE");
+            if (AOE != null)
+            {
+                AOE.gameObject.SetActive(false);
+            }
+        }
     }
 
     public void SetTileRadius()
