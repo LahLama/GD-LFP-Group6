@@ -29,20 +29,27 @@ public class TileFunctions : MonoBehaviour
     while (tile.tileState == TileState.Obstacle) // stop automatically if the tile is changed
     {
         // Start each pulse from zero
+        if  (AOE != null)
         AOE.transform.localScale = Vector3.zero;
         float elapsed = 0f;
 
         // Grow from 0 -> initScale over 5 seconds
-        while (elapsed < pulseDuration)
+        while (elapsed < pulseDuration && tile.tileState == TileState.Obstacle)
         {
             elapsed += Time.deltaTime;
             float t = Mathf.Clamp01(elapsed / pulseDuration);
-            AOE.transform.localScale = Vector3.Lerp(Vector3.zero, initScale, t);
+            if (AOE != null)
+            {
+                AOE.transform.localScale = Vector3.Lerp(Vector3.zero, initScale, t);
+            }
             yield return null;
         }
 
         // Make sure it ends exactly at full size
-        AOE.transform.localScale = initScale;
+        if (AOE != null)
+        {
+            AOE.transform.localScale = initScale;
+        }
 
         // Pulse peaks: check for the player
         Debug.Log("**********MAXIMUM PULSE***********");
