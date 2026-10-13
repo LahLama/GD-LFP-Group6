@@ -176,8 +176,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Watch out for this enemy! If you are in its GREEN radius your moves are
-    reversed!
+  m_text: ' Watch out! GREEN radius reverses your moves. Collecting the element doesn''t
+    grant immunity inside it; defeat the enemy to pass safely.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -204,7 +204,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 64.45
+  m_fontSize: 50.05
   m_fontSizeBase: 176.31
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -632,7 +632,7 @@ RectTransform:
   m_GameObject: {fileID: 168664804}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.64, y: 0.89, z: 1}
+  m_LocalScale: {x: 1.403184, y: 0.71022, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 100028889}
@@ -693,7 +693,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d255ce7fa2774f74995e90e503e5de55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AutoHidePanel
-  displayTime: 7
+  displayTime: 9
 --- !u!1 &207948955
 GameObject:
   m_ObjectHideFlags: 0
@@ -858,14 +858,14 @@ RectTransform:
   m_GameObject: {fileID: 217543834}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.76442736, y: 0.7068, z: 1}
+  m_LocalScale: {x: 0.8026487, y: 0.832045, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1906353744}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 216, y: 60}
+  m_AnchoredPosition: {x: 250, y: 74}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &217543836
@@ -2585,14 +2585,14 @@ RectTransform:
   m_GameObject: {fileID: 1084405959}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.8277554, y: 0.5853875, z: 1}
+  m_LocalScale: {x: 0.8112003, y: 0.8763392, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1995080447}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 246, y: 69}
+  m_AnchoredPosition: {x: 246, y: 81}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1084405961
@@ -2615,8 +2615,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Sometimes you might be blocked by enemies. Collect the element to go right
-    through them
+  m_text: Sometimes enemy obstacles block your path. Collect the corresponding element
+    to pass through.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2643,13 +2643,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 55.35
+  m_fontSize: 50.6
   m_fontSizeBase: 176.31
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -3271,7 +3271,7 @@ RectTransform:
   m_GameObject: {fileID: 1530425033}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.4929537, y: 0.75382495, z: 1}
+  m_LocalScale: {x: 1.3287287, y: 0.7236719, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1617814314}
@@ -3332,7 +3332,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d255ce7fa2774f74995e90e503e5de55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AutoHidePanel
-  displayTime: 6
+  displayTime: 12
 --- !u!1 &1549616225
 GameObject:
   m_ObjectHideFlags: 0
@@ -3360,14 +3360,14 @@ RectTransform:
   m_GameObject: {fileID: 1549616225}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.94, y: 0.72720003, z: 1}
+  m_LocalScale: {x: 0.94, y: 0.81446403, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1796388516}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 304, y: 63}
+  m_AnchoredPosition: {x: 288, y: 63}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1549616227
@@ -3390,8 +3390,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: This one seems okay, until you get the  fire element. Watch out for burning
-    tiles!
+  m_text: This one seems okay, until you get the  fire element! Watch out for burning
+    tiles! You can walk on them, but they burn away, so you can't go back.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3418,7 +3418,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 67.15
+  m_fontSize: 47.35
   m_fontSizeBase: 176.31
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -3631,7 +3631,7 @@ RectTransform:
   m_GameObject: {fileID: 1617814313}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.80648994, y: 0.59432006, z: 1}
+  m_LocalScale: {x: 0.88713896, y: 0.727248, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1530425034}
@@ -3661,7 +3661,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: This enemy is electrofying! Make sure you are not near it when it discharges!
+  m_text: ' This enemy is electric! It discharges every 5 seconds. If it catches
+    you within 1 block, you''ll be sent back to the start.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3688,7 +3689,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 67.65
+  m_fontSize: 50.6
   m_fontSizeBase: 176.31
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -4080,7 +4081,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d255ce7fa2774f74995e90e503e5de55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AutoHidePanel
-  displayTime: 7
+  displayTime: 12
 --- !u!1 &1801482578
 GameObject:
   m_ObjectHideFlags: 0
@@ -4494,7 +4495,7 @@ RectTransform:
   m_GameObject: {fileID: 1906353743}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.8196, y: 0.94848, z: 1}
+  m_LocalScale: {x: 1.3285081, y: 0.7777536, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 217543835}
@@ -4518,7 +4519,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.60169005, g: 0.38357747, b: 0.801, a: 0.7607843}
+  m_Color: {r: 0.60169005, g: 0.38357747, b: 0.801, a: 0.87058824}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -4555,7 +4556,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d255ce7fa2774f74995e90e503e5de55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AutoHidePanel
-  displayTime: 7
+  displayTime: 9
 --- !u!1 &1938458092
 GameObject:
   m_ObjectHideFlags: 0
@@ -4666,7 +4667,7 @@ RectTransform:
   m_GameObject: {fileID: 1995080446}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.6904641, y: 0.95001, z: 1}
+  m_LocalScale: {x: 1.3523713, y: 0.72203606, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1084405960}
@@ -4727,7 +4728,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d255ce7fa2774f74995e90e503e5de55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AutoHidePanel
-  displayTime: 7
+  displayTime: 9
 --- !u!1 &2011047487
 GameObject:
   m_ObjectHideFlags: 0
