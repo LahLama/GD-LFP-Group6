@@ -13,6 +13,10 @@ int movesCheck =0;
 public int maxMoves = 6;
 public TextMeshProUGUI movesText;
 public Vector3 playerPos;
+public GameObject turningUp;
+public GameObject turningDown;
+public GameObject turningLeft;
+public GameObject turningRight;
 
 [SerializeField] Vector2Int respawnPoint;
 [SerializeField] int respawnMoves;

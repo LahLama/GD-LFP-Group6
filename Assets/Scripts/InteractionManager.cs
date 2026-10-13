@@ -109,6 +109,10 @@ public class InteractionManager : MonoBehaviour
                 // Check if the player has enough moves to move to the tile
                 if( tile.ExecuteType())
                 {
+                                    playerProperties.turningUp.SetActive(true);
+                    playerProperties.turningDown.SetActive(false);
+                    playerProperties.turningLeft.SetActive(false);
+                    playerProperties.turningRight.SetActive(false);
                     // Update the player's position and coordinates
                     playerProperties.SetPlayerCords(newCords, tile.transform.position);
                 }
@@ -119,7 +123,11 @@ public class InteractionManager : MonoBehaviour
             if (movementChecker.CheckBelowPlayer(playerCords,newCords))          
                 // Check if the player has enough moves to move to the tile
                 if( tile.ExecuteType())
-                {
+                {   
+                    playerProperties.turningUp.SetActive(false);
+                    playerProperties.turningDown.SetActive(true);
+                    playerProperties.turningLeft.SetActive(false);
+                    playerProperties.turningRight.SetActive(false);
                     // Update the player's position and coordinates
                     playerProperties.SetPlayerCords(newCords, tile.transform.position);
                 }
@@ -131,6 +139,11 @@ public class InteractionManager : MonoBehaviour
                 // Check if the player has enough moves to move to the tile
                 if( tile.ExecuteType())
                 {
+                    
+                    playerProperties.turningUp.SetActive(false);
+                    playerProperties.turningDown.SetActive(false);
+                    playerProperties.turningLeft.SetActive(true);
+                    playerProperties.turningRight.SetActive(false);
                     // Update the player's position and coordinates
                     playerProperties.SetPlayerCords(newCords, tile.transform.position);
                 }
@@ -141,6 +154,10 @@ public class InteractionManager : MonoBehaviour
                 // Check if the player has enough moves to move to the tile
                 if( tile.ExecuteType())
                 {
+                    playerProperties.turningUp.SetActive(false);
+                    playerProperties.turningDown.SetActive(false);
+                    playerProperties.turningLeft.SetActive(false);
+                    playerProperties.turningRight.SetActive(true);
                     // Update the player's position and coordinates
                     playerProperties.SetPlayerCords(newCords, tile.transform.position);
                 }

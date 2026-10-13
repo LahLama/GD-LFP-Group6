@@ -12,8 +12,10 @@ public class LevelManager : MonoBehaviour
     {
         ClearGrid(GameLevels[CurrentLevel]);
         GameLevels[CurrentLevel].enabled = false;
+        GameLevels[CurrentLevel].gameObject.transform.GetChild(0).gameObject.SetActive(false);
         CurrentLevel++;
         GameLevels[CurrentLevel].enabled = true;
+         GameLevels[CurrentLevel].gameObject.transform.GetChild(0).gameObject.SetActive(true);
     }
 }
 
