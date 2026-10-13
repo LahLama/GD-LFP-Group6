@@ -14,8 +14,10 @@ public class LevelManager : MonoBehaviour
         GameLevels[CurrentLevel].enabled = false;
         GameLevels[CurrentLevel].gameObject.transform.GetChild(0).gameObject.SetActive(false);
         CurrentLevel++;
+                FindAnyObjectByType<PlayerProperties>().RespawnCounter = 0;
         GameLevels[CurrentLevel].enabled = true;
-         GameLevels[CurrentLevel].gameObject.transform.GetChild(0).gameObject.SetActive(true);
+        GameLevels[CurrentLevel].gameObject.transform.GetChild(0).gameObject.SetActive(true);
+
     }
 }
 

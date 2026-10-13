@@ -59,30 +59,7 @@ public class InteractionManager : MonoBehaviour
      if (!inputActions.Player.Move.WasPressedThisFrame()) return;
     Vector2Int playerCords = playerProperties.GetPlayerCords();
     //Per Move, check the situation of the tiles:
-    TileProperties[] tiles = FindObjectsByType<TileProperties>();
-    foreach (var t in tiles)
-    {
-        if (t.tileState == TileState.Obstacle && t.tileElement == ElementState.Acid)
-        {
-            FindAnyObjectByType<TileFunctions>().PerMoveChecker(t.radius,playerCords,t.cords,t);
-        }
-        
-        if (t.tileState == TileState.OneWay){
-        //Handles changing the material of the tile depending on the player's element
-        if (playerProperties.playerElement == ElementState.Fire)
-        {
-            
-            t.GetComponent<Renderer>().material = Resources.Load<Material>("Materials/Achetypes/oneWay");
-            isOneWaysActive = true;
-        }
-        else
-        {
-            t.GetComponent<Renderer>().material = Resources.Load<Material>("Materials/Achetypes/baseTile");   
-            isOneWaysActive = false;
-        }}
-
-    }
-
+    
 
     int unitDirection = 1;
     if (isMovementReversed) unitDirection = -1;
@@ -172,7 +149,35 @@ public class InteractionManager : MonoBehaviour
             break;
     
     }
+TileFunctions tileFunctions = FindAnyObjectByType<TileFunctions>();
+TileProperties[] tiles = FindObjectsByType<TileProperties>();
+bool reversed = false;
+foreach (var t in tiles)
+{
+    if (t.tileState == TileState.Obstacle)
+    {
+        if (tileFunctions.PerMoveChecker(t.radius, playerCords, t.cords, t))
+            reversed = true;
+    }
 
+    if (t.tileState == TileState.OneWay)
+    {
+        //Handles changing the material of the tile depending on the player's element
+        if (playerProperties.playerElement == ElementState.Fire)
+        {
+            
+            t.GetComponent<Renderer>().material = Resources.Load<Material>("Materials/Achetypes/oneWay");
+            isOneWaysActive = true;
+        }
+        else
+        {
+            t.GetComponent<Renderer>().material = Resources.Load<Material>("Materials/Achetypes/baseTile");   
+            isOneWaysActive = false;
+        }
+        }
+isMovementReversed = reversed;
+
+    }
 
 
 
