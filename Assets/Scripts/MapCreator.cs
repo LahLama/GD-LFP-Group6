@@ -39,7 +39,9 @@ public class RowData
 public class MapCreator : MonoBehaviour
 {
     List<int> customMovementNumbers = new List<int>();
+    public int StartingMoves = 6;
     public string[] level;
+    
 
     static readonly Dictionary<string, TileType> CharMap = new Dictionary<string, TileType>
     {
