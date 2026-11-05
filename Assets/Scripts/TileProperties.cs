@@ -72,10 +72,12 @@ public void InitAfterPlacement()
 
     public void SetMoveText(int val)
     {
-        if (CustomMoveCost > 0)
+        if (CustomMoveCost > 0 && tileState == TileState.MoveAdd)
             transform.GetChild(0).GetComponent<TextMeshPro>().text = "+" + val.ToString();
-        else
-            transform.GetChild(0).GetComponent<TextMeshPro>().text = val.ToString();
+        else if (tileState == TileState.Obstacle){
+            transform.GetChild(0).GetComponent<TextMeshPro>().text = "-" + val.ToString();
+            CustomMoveCost = -1*val;
+            }
     }
 
     // =====================================================================
