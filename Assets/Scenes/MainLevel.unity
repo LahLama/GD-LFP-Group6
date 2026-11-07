@@ -1915,13 +1915,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MapCreator
   StartingMoves: 4
   level:
-  - '#,#,#,#,#,#,#,#,#,X '
-  - '.,m3,#,#,.,f,#,#,.,. '
-  - 'O,.,.,.,m4,.,.,m3,B,m2 '
-  - '.,.,#,#,.,.,.,B,F1,B '
-  - .,m5,#,#,.,m4,.,B,B,B
-  - '.,.,.,.,.,.,.,.,.,m2 '
-  - '.,.,.,.,.,m6,#,#,.,. '
+  - '.,.,.,i,#,X '
+  - '.,m4,.,.,I1,. '
+  - '.,.,.,.,.,# '
+  - 'O,#,.,m5,.,. '
   tilePrefabs:
   - type: 9
     prefab: {fileID: 8994451080318423122, guid: f582545e406b3b2468e54ec95ca7648a, type: 3}
@@ -2850,13 +2847,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MapCreator
   StartingMoves: 4
   level:
-  - '#,#,#,#,#,#,#,#,#,X '
-  - '.,m3,#,#,.,f,#,#,.,. '
-  - 'O,.,.,.,m4,.,.,m3,B,m2 '
-  - '.,.,#,#,.,.,.,B,F1,B '
-  - .,m5,#,#,.,m4,.,B,B,B
-  - '.,.,.,.,.,.,.,.,.,m2 '
-  - '.,.,.,.,.,m6,#,#,.,. '
+  - '.,.,.,i,#,X '
+  - '.,m4,.,.,I1,. '
+  - '.,.,.,.,.,# '
+  - 'O,#,.,m5,.,. '
   tilePrefabs:
   - type: 9
     prefab: {fileID: 8994451080318423122, guid: f582545e406b3b2468e54ec95ca7648a, type: 3}
@@ -3414,13 +3408,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MapCreator
   StartingMoves: 4
   level:
-  - '#,#,#,#,#,#,#,#,#,X '
-  - '.,m3,#,#,.,f,#,#,.,. '
-  - 'O,.,.,.,m4,.,.,m3,B,m2 '
-  - '.,.,#,#,.,.,.,B,F1,B '
-  - .,m5,#,#,.,m4,.,B,B,B
-  - '.,.,.,.,.,.,.,.,.,m2 '
-  - '.,.,.,.,.,m6,#,#,.,. '
+  - '.,.,.,i,#,X '
+  - '.,m4,.,.,I1,. '
+  - '.,.,.,.,.,# '
+  - 'O,#,.,m5,.,. '
   tilePrefabs:
   - type: 9
     prefab: {fileID: 8994451080318423122, guid: f582545e406b3b2468e54ec95ca7648a, type: 3}
@@ -3572,6 +3563,12 @@ MonoBehaviour:
   - {fileID: 1283690227}
   - {fileID: 1471304726}
   - {fileID: 983979706}
+  - {fileID: 1238918428}
+  - {fileID: 2031098999}
+  - {fileID: 520508692}
+  - {fileID: 441144544}
+  - {fileID: 770923766}
+  - {fileID: 1223021247}
   - {fileID: 1938458094}
   - {fileID: 1938458094}
   CurrentLevel: 0
