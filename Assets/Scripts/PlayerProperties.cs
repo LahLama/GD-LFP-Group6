@@ -19,6 +19,7 @@ public GameObject turningDown;
 public GameObject turningLeft;
 public GameObject turningRight;
 public GameObject RespawningTooltip;
+public GameObject ElementIdentifier;
 
 [SerializeField] Vector2Int respawnPoint;
 [SerializeField] int respawnMoves;
@@ -120,23 +121,23 @@ public void UpdateRespawnPoint(Vector2Int NewRespawnPoint, int NewRespawnMoves, 
         
             if (playerElement == ElementState.Acid)
             {
-                GetComponent<Renderer>().material.color = Color.green;
+                ElementIdentifier.GetComponent<Renderer>().material.color = Color.green;
             }
             else if (playerElement == ElementState.Electro)
             {
-                GetComponent<Renderer>().material.color = Color.yellow;
+                ElementIdentifier.GetComponent<Renderer>().material.color = Color.yellow;
             }           
              else if (playerElement == ElementState.Fire)
             {
-            GetComponent<Renderer>().material.color = Color.red;
+            ElementIdentifier.GetComponent<Renderer>().material.color = Color.red;
             }
             else if (playerElement == ElementState.Ice)
             {
-               GetComponent<Renderer>().material.color = Color.cyan;
+              ElementIdentifier.GetComponent<Renderer>().material.color = Color.cyan;
             }
             else
             {
-               GetComponent<Renderer>().material.color = Color.white;
+               ElementIdentifier.GetComponent<Renderer>().material.color = Color.white;
             }
 
             
