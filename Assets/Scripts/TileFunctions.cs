@@ -11,59 +11,59 @@ public class TileFunctions : MonoBehaviour
     StartCoroutine(ElectroPulseRoutine(tile,initScale));
     }
 
-    
+    GameObject AOE = null;
     private IEnumerator ElectroPulseRoutine(TileProperties tile, Vector3 initScale)
     {
         //if tile is defeated
-    if (tile.tileState != TileState.Obstacle)
-    {
-        // Debug.LogWarning("ElectroPulse called on a non-obstacle tile: " + tile.name, tile);
-        yield break;
-    }
-    GameObject AOE = tile.transform.GetChild(2).gameObject;
-    
-    const float pulseDuration = 5f - 1f; //Minus 1 for the delay before the pulse starts, which is 1 second.
-
-    PlayerProperties player = FindAnyObjectByType<PlayerProperties>();
-
-    while (tile.tileState == TileState.Obstacle) // stop automatically if the tile is changed
-    {
-        // Start each pulse from zero
-        if  (AOE != null)
-        AOE.transform.localScale = Vector3.zero;
-        float elapsed = 0f;
-
-        // Grow from 0 -> initScale over 5 seconds
-        while (elapsed < pulseDuration && tile.tileState == TileState.Obstacle)
+        if (tile.tileState != TileState.Obstacle)
         {
-            elapsed += Time.deltaTime;
-            float t = Mathf.Clamp01(elapsed / pulseDuration);
+            // Debug.LogWarning("ElectroPulse called on a non-obstacle tile: " + tile.name, tile);
+            yield break;
+        }
+        AOE = tile.transform.Find("AOE").gameObject;
+        
+        const float pulseDuration = 5f - 1f; //Minus 1 for the delay before the pulse starts, which is 1 second.
+
+        PlayerProperties player = FindAnyObjectByType<PlayerProperties>();
+
+        while (tile.tileState == TileState.Obstacle) // stop automatically if the tile is changed
+        {
+            // Start each pulse from zero
+            if  (AOE != null)
+            AOE.transform.localScale = Vector3.zero;
+            float elapsed = 0f;
+
+            // Grow from 0 -> initScale over 5 seconds
+            while (elapsed < pulseDuration && tile.tileState == TileState.Obstacle)
+            {
+                elapsed += Time.deltaTime;
+                float t = Mathf.Clamp01(elapsed / pulseDuration);
+                if (AOE != null)
+                {
+                    AOE.transform.localScale = Vector3.Lerp(Vector3.zero, initScale, t);
+                }
+                yield return null;
+            }
+
+            // Make sure it ends exactly at full size
             if (AOE != null)
             {
-                AOE.transform.localScale = Vector3.Lerp(Vector3.zero, initScale, t);
+                AOE.transform.localScale = initScale;
             }
-            yield return null;
+
+            // Pulse peaks: check for the player
+            Debug.Log("**********MAXIMUM PULSE***********");
+            bool isNearForShock = CheckIfPlayerNearby(tile.radius, player.playerCords, tile.cords, tile);
+            Debug.Log("NEAR SHOCK: " + isNearForShock);
+
+            if (isNearForShock)
+            {
+                Debug.Log("HIT PLAYER TO RESPAWN");
+                player.RespawnPlayer();
+            }
+
+            yield return new WaitForSeconds(1f); // Wait for 1 second at full size before shrinking
         }
-
-        // Make sure it ends exactly at full size
-        if (AOE != null)
-        {
-            AOE.transform.localScale = initScale;
-        }
-
-        // Pulse peaks: check for the player
-        Debug.Log("**********MAXIMUM PULSE***********");
-        bool isNearForShock = CheckIfPlayerNearby(tile.radius, player.playerCords, tile.cords, tile);
-        Debug.Log("NEAR SHOCK: " + isNearForShock);
-
-        if (isNearForShock)
-        {
-            Debug.Log("HIT PLAYER TO RESPAWN");
-            player.RespawnPlayer();
-        }
-
-        yield return new WaitForSeconds(1f); // Wait for 1 second at full size before shrinking
-    }
     }
 
     public void SetOneWayTile(TileProperties tile)
@@ -72,6 +72,16 @@ public class TileFunctions : MonoBehaviour
         {
             
         }
+    }
+
+    public void SetAOEsize(float radius, TileProperties tile)
+    {
+        AOE = tile.transform.Find("AOE").gameObject;
+        float cellSize = FindAnyObjectByType<MapCreator>().cellSize;
+
+        float radiusAccounted = 2*radius + 1; // Add 1 to the radius to account for the tile itself, 2*radius is for scaling diameter 
+        AOE.transform.localScale = new Vector3(radiusAccounted * cellSize, radiusAccounted * cellSize, 0.4f);
+        
     }
 private bool IsReversingControls(TileProperties tile)
 {

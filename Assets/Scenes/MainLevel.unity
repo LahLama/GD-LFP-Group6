@@ -1298,7 +1298,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.34887695, y: 33}
+  m_AnchoredPosition: {x: 0.3486328, y: 33}
   m_SizeDelta: {x: 0.70032, y: -596.759}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &318208703
@@ -1803,10 +1803,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MapCreator
   StartingMoves: 4
   level:
-  - '.,.,.,i,#,X '
-  - '.,m4,.,.,I1,. '
-  - '.,.,.,.,.,# '
-  - 'O,#,.,m5,.,. '
+  - '.,.,.,m6,.,.,.,.,#,#,#,#,#,# '
+  - '.,.,#,#,#,#,.,.,.,.,#,#,#,# '
+  - '.,.,.,.,#,#,.,.,m4,.,.,#,#,# '
+  - '.,.,.,m4,#,#,.,m2,.,.,.,.,#,# '
+  - '.,.,#,.,.,a,.,.,A2,.,.,A1,.,X '
+  - '.,m6,#,#,#,#,.,.,.,.,.,.,#,# '
+  - '.,.,.,.,.,.,.,.,.,.,m4,#,#,# '
+  - '.,.,.,.,.,.,.,.,.,.,#,#,#,# '
+  - '.,.,O,.,.,.,.,.,#,#,#,#,#,# '
   tilePrefabs:
   - type: 9
     prefab: {fileID: 8994451080318423122, guid: f582545e406b3b2468e54ec95ca7648a, type: 3}

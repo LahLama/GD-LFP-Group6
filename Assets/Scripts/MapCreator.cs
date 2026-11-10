@@ -125,7 +125,7 @@ public class MapCreator : MonoBehaviour
 
                         int customMoveCost = customMovementNumbers[tileIndex];
                         tileProperties.CustomMoveCost = customMovementNumbers[tileIndex];
-                        tileProperties.SetMoveText(customMoveCost); 
+                            tileProperties.SetMoveText(customMoveCost);
                         }
                         
                         tileProperties.InitAfterPlacement();
