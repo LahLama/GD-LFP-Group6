@@ -3449,6 +3449,66 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2084505430}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!1 &1408838948
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1408838950}
+  - component: {fileID: 1408838949}
+  m_Layer: 0
+  m_Name: SoundManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1408838949
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1408838948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22cff7cfdded6f84894518a1290081c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SoundManager
+  music: {fileID: 8300000, guid: f7c28343dc4c59e4da76af74cee8fd89, type: 3}
+  musicVolume: 0.05
+  step: {fileID: 8300000, guid: d0aebfc1215ab9c438e6a3701a1b2934, type: 3}
+  moveAdd: {fileID: 8300000, guid: f8870c8384d02a448aed43d1ad8af3ef, type: 3}
+  pickupIce: {fileID: 8300000, guid: 5ad326901a1983e4ea56621eb62c3524, type: 3}
+  pickupFire: {fileID: 8300000, guid: d84c981daff044e4daead3973f9434d6, type: 3}
+  pickupAcid: {fileID: 8300000, guid: ff7224bd0d2bf5044ae5f71f61b88ebd, type: 3}
+  pickupElectro: {fileID: 8300000, guid: 574745fdb71e5fb42b3d90fbec00b9a5, type: 3}
+  obstacleClear: {fileID: 8300000, guid: 12c0f17e72a1f99419d990bf39f317f5, type: 3}
+  respawn: {fileID: 8300000, guid: 54c169eca0c696c4ca9f1957c0b15cea, type: 3}
+  levelComplete: {fileID: 8300000, guid: 12c0f17e72a1f99419d990bf39f317f5, type: 3}
+  acidControlsReversed: {fileID: 8300000, guid: 7c3de5b03f5b8064f8a01984d7a1f102, type: 3}
+  fireOneWayActive: {fileID: 8300000, guid: bcff93270240c04429fc35132d98d84d, type: 3}
+  buttonClick: {fileID: 8300000, guid: 324ee7bf6ab12ec48b2058161068cee6, type: 3}
+  buttonHover: {fileID: 0}
+  sfxVolume: 0.6
+--- !u!4 &1408838950
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1408838948}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.05692, y: 1.95369, z: -0.97061}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1413618485
 GameObject:
   m_ObjectHideFlags: 0
@@ -5752,3 +5812,4 @@ SceneRoots:
   - {fileID: 1257220983}
   - {fileID: 720522506}
   - {fileID: 968491527}
+  - {fileID: 1408838950}
