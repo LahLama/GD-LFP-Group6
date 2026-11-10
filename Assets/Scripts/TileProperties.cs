@@ -48,7 +48,7 @@ public class TileProperties : MonoBehaviour
     if (tileState == TileState.Obstacle && tileElement == ElementState.Electro)
         InvokeRepeating(nameof(StartElectroPulse), 5f, 5f);
 
-    SetTileRadius();
+    
 }
 
 // Called by MapCreator once cords and move cost are assigned
@@ -63,6 +63,8 @@ public void InitAfterPlacement()
         playerProperties.SetPlayerCords(cords, transform.position);
         playerProperties.RespawnPlayer();
     }
+
+    SetTileRadius();
 }
 
     private void StartElectroPulse()
@@ -75,7 +77,13 @@ public void InitAfterPlacement()
         if (CustomMoveCost > 0 && tileState == TileState.MoveAdd)
             transform.GetChild(0).GetComponent<TextMeshPro>().text = "+" + val.ToString();
         else if (tileState == TileState.Obstacle){
+            if (tileElement == ElementState.Acid)
+             transform.GetChild(0).GetComponent<TextMeshPro>().text = "-1";
+            
+            else
             transform.GetChild(0).GetComponent<TextMeshPro>().text = "-" + val.ToString();
+            
+              
             CustomMoveCost = -1*val;
             }
     }
@@ -121,7 +129,9 @@ public void InitAfterPlacement()
             if (tileElement == ElementState.Acid)
             {
                 //Reverse the movement of the player
-                radius = 3;
+                radius = Mathf.Abs(CustomMoveCost); //to accoutnt for obstacles having negative movement costs
+                FindAnyObjectByType<TileFunctions>().SetAOEsize(radius, this);
+                
             }
             else if (tileElement == ElementState.Electro)
             {

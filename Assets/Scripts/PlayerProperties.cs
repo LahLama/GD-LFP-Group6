@@ -14,11 +14,9 @@ int movesCheck =0;
 public int maxMoves = 6;
 public TextMeshProUGUI movesText;
 public Vector3 playerPos;
-public GameObject turningUp;
-public GameObject turningDown;
-public GameObject turningLeft;
-public GameObject turningRight;
+
 public GameObject RespawningTooltip;
+public GameObject ElementIdentifier;
 
 [SerializeField] Vector2Int respawnPoint;
 [SerializeField] int respawnMoves;
@@ -117,32 +115,38 @@ public void UpdateRespawnPoint(Vector2Int NewRespawnPoint, int NewRespawnMoves, 
 
     public void UpdatePlayerColor()
     {
-        
-            if (playerElement == ElementState.Acid)
-            {
-                GetComponent<Renderer>().material.color = Color.green;
-            }
-            else if (playerElement == ElementState.Electro)
-            {
-                GetComponent<Renderer>().material.color = Color.yellow;
-            }           
-             else if (playerElement == ElementState.Fire)
-            {
-            GetComponent<Renderer>().material.color = Color.red;
-            }
-            else if (playerElement == ElementState.Ice)
-            {
-               GetComponent<Renderer>().material.color = Color.cyan;
-            }
-            else
-            {
-               GetComponent<Renderer>().material.color = Color.white;
-            }
+        Renderer identifierRenderer = ElementIdentifier.GetComponent<Renderer>();
+        Material identifierMaterial = identifierRenderer.material;
+        Color targetColor = Color.white;
 
-            
+        if (playerElement == ElementState.Acid)
+        {
+            //sets to green with 25% opacity
+            targetColor = new Color(0f, 1f, 0f, 0.25f);
+        }
+        else if (playerElement == ElementState.Electro)
+        {
+            //sets to yellow with 25% opacity
+            targetColor = new Color(1f, 1f, 0f, 0.25f);
+        }
+        else if (playerElement == ElementState.Fire)
+        {
+            //sets to red with 25% opacity
+            targetColor = new Color(1f, 0f, 0f, 0.25f);
+        }
+        else if (playerElement == ElementState.Ice)
+        {
+            //sets to cyan with 25% opacity
+            targetColor = new Color(0f, 1f, 1f, 0.25f);
+        }
+        else
+        {
+            //sets to white with 25% opacity
+            targetColor = new Color(1f, 1f, 1f, 0.25f);
+        }
+
+        identifierMaterial.color = targetColor;
     }
-    
-    
 public void RespawnPlayer()
     {
         RespawnCounter++;
