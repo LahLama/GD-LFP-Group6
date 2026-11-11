@@ -5691,11 +5691,8 @@ MonoBehaviour:
   maxMoves: 6
   movesText: {fileID: 446878355}
   playerPos: {x: 0, y: 0, z: 0}
-  turningUp: {fileID: 1728219324}
-  turningDown: {fileID: 270528138}
-  turningLeft: {fileID: 1413618485}
-  turningRight: {fileID: 1329020242}
   RespawningTooltip: {fileID: 318208701}
+  ElementIdentifier: {fileID: 0}
   respawnPoint: {x: 0, y: 0}
   respawnMoves: 0
   respawnTransform: {x: 0, y: 0, z: 0}
