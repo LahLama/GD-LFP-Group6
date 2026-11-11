@@ -76,17 +76,17 @@ public class TileFunctions : MonoBehaviour
 
     public void SetAOEsize(float radius, TileProperties tile)
     {
-        AOE = tile.transform.Find("AOE").gameObject;
-        float cellSize = FindAnyObjectByType<MapCreator>().cellSize;
+            AOE = tile.transform.Find("AOE").gameObject;
+            float cellSize = FindAnyObjectByType<MapCreator>().cellSize;
 
-        float radiusAccounted = 2*radius + 1; // Add 1 to the radius to account for the tile itself, 2*radius is for scaling diameter 
-        AOE.transform.localScale = new Vector3(radiusAccounted * cellSize, radiusAccounted * cellSize, 0.4f);
-        
-    }
-private bool IsReversingControls(TileProperties tile)
-{
-    if (tile.tileState != TileState.Obstacle || tile.tileElement != ElementState.Acid)
-        return false;
+            float radiusAccounted = 2*radius + 1; // Add 1 to the radius to account for the tile itself, 2*radius is for scaling diameter 
+            AOE.transform.localScale = new Vector3(radiusAccounted * cellSize, radiusAccounted * cellSize, 0.4f);
+            
+        }
+    private bool IsReversingControls(TileProperties tile)
+    {
+        if (tile.tileState != TileState.Obstacle || tile.tileElement != ElementState.Acid)
+            return false;
 
     PlayerProperties player = FindAnyObjectByType<PlayerProperties>();
     return CheckIfPlayerNearby(tile.radius, player.playerCords, tile.cords, tile);
