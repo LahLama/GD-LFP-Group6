@@ -10,11 +10,6 @@ public class TileFunctions : MonoBehaviour
     {
     StartCoroutine(ElectroPulseRoutine(tile,initScale));
     }
-public void GotElement(ElementState TileElement)
-    {
-        //Whatever codes goes here
-        Debug.Log("the player got this element: " + TileElement);
-    }
 
     GameObject AOE = null;
     private IEnumerator ElectroPulseRoutine(TileProperties tile, Vector3 initScale)
