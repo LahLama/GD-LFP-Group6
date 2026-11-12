@@ -24,6 +24,17 @@ public class LevelManager : MonoBehaviour
     }
 }
 
+public void ResetLevel()
+{
+    ClearGrid(GameLevels[CurrentLevel]);
+    GameLevels[CurrentLevel].enabled = false;
+    if ( GameLevels[CurrentLevel].gameObject.transform.childCount > 0)
+    GameLevels[CurrentLevel].gameObject.transform.GetChild(0).gameObject.SetActive(false);
+    GameLevels[CurrentLevel].enabled = true;
+    if ( GameLevels[CurrentLevel].gameObject.transform.childCount > 0)
+    GameLevels[CurrentLevel].gameObject.transform.GetChild(0).gameObject.SetActive(true);
+}
+
 void ClearGrid(MapCreator level)
 {
     Transform parent = level.gridParent.transform;

@@ -71,7 +71,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 0e05dc06e84797647b03006e2f043a65, type: 2}
+  - {fileID: 2100000, guid: f17655f3df3338547987b8ae87896c01, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -117,6 +117,80 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1001 &1161753337944750627
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 4577398490681276505}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 651d519a5c7b33e42bc3fc0991ea7ad5, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 651d519a5c7b33e42bc3fc0991ea7ad5, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 651d519a5c7b33e42bc3fc0991ea7ad5, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 651d519a5c7b33e42bc3fc0991ea7ad5, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 651d519a5c7b33e42bc3fc0991ea7ad5, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.7700321
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 651d519a5c7b33e42bc3fc0991ea7ad5, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.03
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 651d519a5c7b33e42bc3fc0991ea7ad5, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 651d519a5c7b33e42bc3fc0991ea7ad5, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 651d519a5c7b33e42bc3fc0991ea7ad5, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 651d519a5c7b33e42bc3fc0991ea7ad5, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 651d519a5c7b33e42bc3fc0991ea7ad5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 651d519a5c7b33e42bc3fc0991ea7ad5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 651d519a5c7b33e42bc3fc0991ea7ad5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 651d519a5c7b33e42bc3fc0991ea7ad5, type: 3}
+      propertyPath: m_Name
+      value: AlienAcid
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 651d519a5c7b33e42bc3fc0991ea7ad5, type: 3}
+--- !u!4 &1699504110999395784 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 651d519a5c7b33e42bc3fc0991ea7ad5, type: 3}
+  m_PrefabInstance: {fileID: 1161753337944750627}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6220658270567046687
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -183,6 +257,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7625183583846131270, guid: ac3e82bbb8915c1449bef988af53dfae, type: 3}
       insertIndex: -1
       addedObject: {fileID: 327941033917018229}
+    - targetCorrespondingSourceObject: {fileID: 7625183583846131270, guid: ac3e82bbb8915c1449bef988af53dfae, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1699504110999395784}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ac3e82bbb8915c1449bef988af53dfae, type: 3}
 --- !u!4 &4577398490681276505 stripped
