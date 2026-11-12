@@ -1,20 +1,66 @@
-using System.Collections;
+ using System.Collections;
 using UnityEngine;
 
 public class TileFunctions : MonoBehaviour
 {
+    // --- ADDED: UI Collection Setup ---
+    [Header("UI Collection Setup")]
+    public CollectionHUD collectionHUD; 
+    
+    [Header("Element Icons")]
+    public Sprite fireIcon;
+    public Sprite iceIcon;     // Changed from waterIcon
+    public Sprite acidIcon;
+    public Sprite electroIcon; // Changed from earthIcon
+    // ----------------------------------
 
     TileProperties CurrentTile; // DEBUG
     Material tileMaterial; // DEBUG
     public void ElectroPulse(TileProperties tile, Vector3 initScale)
     {
-    StartCoroutine(ElectroPulseRoutine(tile,initScale));
+        StartCoroutine(ElectroPulseRoutine(tile,initScale));
     }
-public void GotElement(ElementState TileElement)
+    
+    // --- CHANGED: GotElement Method ---
+    public void GotElement(ElementState TileElement)
     {
-        //Whatever codes goes here
         Debug.Log("the player got this element: " + TileElement);
+
+        if (collectionHUD != null)
+        {
+            Sprite iconToShow = null;
+
+            // FIXED: Now uses your actual elements (Ice, Acid, Fire, Electro)
+            switch (TileElement)
+            {
+                case ElementState.Fire:
+                    iconToShow = fireIcon;
+                    break;
+                case ElementState.Ice:
+                    iconToShow = iceIcon;
+                    break;
+                case ElementState.Acid:
+                    iconToShow = acidIcon;
+                    break;
+                case ElementState.Electro:
+                    iconToShow = electroIcon;
+                    break;
+                default:
+                    Debug.LogWarning("No icon set up for element: " + TileElement);
+                    break;
+            }
+
+            if (iconToShow != null)
+            {
+                collectionHUD.OnElementCollected(iconToShow);
+            }
+        }
+        else
+        {
+            Debug.LogError("CollectionHUD is not assigned in the TileFunctions Inspector!");
+        }
     }
+    // ----------------------------------
 
     GameObject AOE = null;
     private IEnumerator ElectroPulseRoutine(TileProperties tile, Vector3 initScale)

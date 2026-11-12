@@ -2791,7 +2791,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.28102723, g: 0.2830189, b: 0.27073693, a: 1}
+  m_Color: {r: 0.81737924, g: 0.82641506, b: 0.2728728, a: 0.10980392}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2879,6 +2879,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56e7cee3f159b5d44b74c54918a77fd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TileFunctions
+  collectionHUD: {fileID: 1221472974}
+  fireIcon: {fileID: 1662343390, guid: 7ae3f6fc2e7f9444da9c48584d0d36b7, type: 3}
+  iceIcon: {fileID: 1885484628, guid: c1498b26bb6d82f4e816de0aea7791eb, type: 3}
+  acidIcon: {fileID: -302731276, guid: c7bc02e3a7622ae4aa61e0dab46bd3fe, type: 3}
+  electroIcon: {fileID: -1117663235, guid: 83dba4f8a1119bd49ba082fc6ab2e8f2, type: 3}
 --- !u!1 &455988134
 GameObject:
   m_ObjectHideFlags: 0
@@ -7659,8 +7664,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1221472973}
+  - component: {fileID: 1221472974}
   m_Layer: 5
-  m_Name: element feedback
+  m_Name: ' HUDContainer'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7687,6 +7693,21 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1221472974
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1221472972}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 844a76b033c5d614f846b8d7c04588f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CollectionHUD
+  hudContainer: {fileID: 1221472972}
+  centerIcon: {fileID: 1702775620}
+  beamGlow: {fileID: 438548441}
 --- !u!1 &1233525789
 GameObject:
   m_ObjectHideFlags: 0
@@ -10618,7 +10639,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1702775619
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10628,14 +10649,14 @@ RectTransform:
   m_GameObject: {fileID: 1702775618}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.8874102, y: 0.76528203, z: 1}
+  m_LocalScale: {x: 1.1181369, y: 0.96425533, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1221472973}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -184, y: 395}
+  m_AnchoredPosition: {x: -179, y: 395}
   m_SizeDelta: {x: 148.7736, y: 157.6416}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1702775620
