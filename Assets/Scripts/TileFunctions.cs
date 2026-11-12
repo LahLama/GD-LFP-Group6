@@ -13,6 +13,7 @@ public class TileFunctions : MonoBehaviour
 public void GotElement(ElementState TileElement)
     {
         //Whatever codes goes here
+        Debug.Log("the player got this element: " + TileElement);
     }
 
     GameObject AOE = null;
