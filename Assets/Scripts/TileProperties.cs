@@ -228,7 +228,6 @@ public void InitAfterPlacement()
 
             MadeAMove = true;
             TileFunctions tileFunctions = FindAnyObjectByType<TileFunctions>();
-            tileFunctions.GotElement(tileElement);
         }
         // -------- End Point Tile --------
         // Player doesn't move onto the endpoint; the next level takes over

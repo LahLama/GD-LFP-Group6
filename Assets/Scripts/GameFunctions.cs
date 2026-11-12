@@ -6,4 +6,12 @@ public class GameFunctions : MonoBehaviour
     {
         Application.Quit();
     }
+
+    public void GotElement(ElementState TileElement)
+    {
+        //Whatever codes goes here
+        Debug.Log("the player got this element: " + TileElement);
+    }
+
 }
+
