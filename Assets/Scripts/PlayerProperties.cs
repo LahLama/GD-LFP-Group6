@@ -146,6 +146,8 @@ public void UpdateRespawnPoint(Vector2Int NewRespawnPoint, int NewRespawnMoves, 
         }
 
         identifierMaterial.color = targetColor;
+        GameFunctions gameFunctions = FindAnyObjectByType<GameFunctions>();
+        gameFunctions.GotElement(playerElement);
     }
 public void RespawnPlayer()
     {
