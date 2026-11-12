@@ -51,10 +51,6 @@ public class TileProperties : MonoBehaviour
     
 }
 
-void GotElement(ElementState TileElement)
-    {
-        //Whatever codes goes here
-    }
 
 // Called by MapCreator once cords and move cost are assigned
 public void InitAfterPlacement()
@@ -231,8 +227,8 @@ public void InitAfterPlacement()
             playerProperties.UpdatePlayerColor();
 
             MadeAMove = true;
-            GotElement(tileElement);
-            
+            TileFunctions tileFunctions = FindAnyObjectByType<TileFunctions>();
+            tileFunctions.GotElement(tileElement);
         }
         // -------- End Point Tile --------
         // Player doesn't move onto the endpoint; the next level takes over
