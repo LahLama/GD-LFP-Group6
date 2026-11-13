@@ -100,12 +100,12 @@ TextureImporter:
       name: IceIconGlow_0
       rect:
         serializedVersion: 2
-        x: 1529
-        y: 710
-        width: 2903
-        height: 2280
+        x: 1787
+        y: 844
+        width: 2099
+        height: 1869
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
