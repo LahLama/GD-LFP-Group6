@@ -21555,6 +21555,7 @@ MonoBehaviour:
   - {fileID: 1987916588}
   - {fileID: 672613198}
   CurrentLevel: 0
+  playerShip: {fileID: 0}
   isFinalLevel: 0
 --- !u!4 &2016995341
 Transform:
