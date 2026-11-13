@@ -5,6 +5,7 @@ public class LevelControls : MonoBehaviour
     [Header("Drag these in")]
     public GameObject buttonsRoot;       // parent holding both buttons
     public GameObject skipButtonObject;  // the Skip button (hidden on the last level)
+    public GameObject resetButtonObject;  // the Reset button (hidden on the last level)
 
     [Header("Show the buttons on these level numbers")]
     public int firstLevelNumber = 5;
@@ -28,13 +29,14 @@ public class LevelControls : MonoBehaviour
         int index = CurrentIndex();
         int number = index + 1; // Level 1 is index 0
         bool show = index >= 0 && number >= firstLevelNumber && number <= lastLevelNumber;
-        if (buttonsRoot.activeSelf != show) buttonsRoot.SetActive(show);
+        // if (buttonsRoot.activeSelf != show) buttonsRoot.SetActive(show);
 
         if (show && skipButtonObject != null)
         {
             bool isLast = index >= levels.GameLevels.Count - 1;
             if (skipButtonObject.activeSelf == isLast) skipButtonObject.SetActive(!isLast);
         }
+
     }
 
    
