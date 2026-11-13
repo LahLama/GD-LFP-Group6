@@ -4659,6 +4659,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad417521cf1e44e4b852cd1a7bae5576, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameFunctions
+  hudContainer: {fileID: 0}
+  centerIcon: {fileID: 0}
+  beamGlow: {fileID: 0}
+  fireIcon: {fileID: 0}
+  iceIcon: {fileID: 0}
+  acidIcon: {fileID: 0}
+  electroIcon: {fileID: 0}
 --- !u!4 &720522506
 Transform:
   m_ObjectHideFlags: 0
@@ -11481,8 +11488,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::LevelManager
   GameLevels:
   - {fileID: 950441363}
-  - {fileID: 1124595618}
   - {fileID: 501283778}
+  - {fileID: 1124595618}
   - {fileID: 687568648}
   - {fileID: 922053772}
   - {fileID: 697235195}
@@ -11843,6 +11850,7 @@ MonoBehaviour:
   playerElement: 4
   previousTile: {fileID: 0}
   RespawnCounter: 0
+  MovingTime: 0.1
 --- !u!114 &2084505432
 MonoBehaviour:
   m_ObjectHideFlags: 0
