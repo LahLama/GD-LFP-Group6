@@ -21,6 +21,7 @@ public class TileProperties : MonoBehaviour
     private TileState preRespawnState = TileState.Tile;
 private Transform aoeChild, alienChild;
 private bool aoeStartActive, alienStartActive;
+private Vector3 aoeStartScale;
 
     // ---------- Move costs ----------
     private int tileMoveCost = -1;
@@ -43,6 +44,7 @@ private bool aoeStartActive, alienStartActive;
 {
         aoeChild   = transform.Find("AOE");
     alienChild = transform.Find("Alien");
+    
     aoeStartActive   = aoeChild   != null && aoeChild.gameObject.activeSelf;
     alienStartActive = alienChild != null && alienChild.gameObject.activeSelf;
     SetTileMaterial();
@@ -61,7 +63,7 @@ public void InitAfterPlacement()
     preRespawnState = tileState;  
     row = cords.x;
     col = cords.y;
-
+aoeStartScale = aoeChild != null ? aoeChild.localScale : Vector3.zero;
     if (tileState == TileState.StartTile)
     {
         playerProperties.UpdateRespawnPoint(cords, playerProperties.maxMoves, transform.position);
@@ -79,7 +81,7 @@ public void InitAfterPlacement()
 private void StartElectroPulse()
 {
     if (tileState != TileState.Obstacle) return;
-    FindAnyObjectByType<TileFunctions>().ElectroPulse(this, transform.GetChild(2).localScale);
+    FindAnyObjectByType<TileFunctions>().ElectroPulse(this, aoeStartScale, aoeChild.gameObject);
 }
 
     public void SetMoveText(int val)
@@ -236,13 +238,11 @@ private void StartElectroPulse()
         }
         // -------- End Point Tile --------
         // Player doesn't move onto the endpoint; the next level takes over
-        else if (playerProperties.CanModifyMove(tileMoveCost) && tileState == TileState.EndPoint)
-        {
-            // playerProperties.ModifyMoves(tileMoveCost);
-            levelManager.NextLevel();   // new level's StartTile places the player
-            Debug.Log("YOU WIN");
-            MadeAMove = false;          // don't let InteractionManager move the player onto this old tile
-        }
+ else if (playerProperties.CanModifyMove(tileMoveCost) && tileState == TileState.EndPoint)
+{
+    levelManager.NextLevel();
+    MadeAMove = false;
+}
         // -------- Move Adder Tile --------
         else if (playerProperties.CanModifyMove(CustomMoveCost) && tileState == TileState.MoveAdd)
         {

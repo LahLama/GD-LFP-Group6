@@ -69,6 +69,8 @@ public class LevelControls : MonoBehaviour
         PrepareForReset();
         ClearOldTiles(levels.GameLevels[index]);
         levels.NextLevel();
+
+        
     }
 
     int CurrentIndex()

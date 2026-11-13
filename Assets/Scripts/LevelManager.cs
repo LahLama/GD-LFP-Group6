@@ -1,51 +1,50 @@
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class LevelManager : MonoBehaviour
 {
    public List<MapCreator> GameLevels = new List<MapCreator>();
-   [SerializeField] int CurrentLevel = 0;
+   [SerializeField] public int CurrentLevel = 1;
 
-    bool isFinalLevel = false;
-    public void NextLevel()
+   public bool isFinalLevel = false;
+
+
+     public void NextLevel()
 {
-      if (isFinalLevel)
-        {
-        // Load the end scene
-        
-        }
-        
-    if (CurrentLevel + 1 < GameLevels.Count)
+    Debug.Log($"NextLevel called. CurrentLevel={CurrentLevel}, Count={GameLevels.Count}");
+
+    // Finishing the last level in the list ends the game
+    if (CurrentLevel >= GameLevels.Count - 1 || isFinalLevel)
     {
-        ClearGrid(GameLevels[CurrentLevel]);
-        GameLevels[CurrentLevel].enabled = false;
-        if ( GameLevels[CurrentLevel].gameObject.transform.childCount > 0)
-        GameLevels[CurrentLevel].gameObject.transform.GetChild(0).gameObject.SetActive(false);
-        CurrentLevel++;
-        FindAnyObjectByType<PlayerProperties>().RespawnCounter = 0;
-        FindAnyObjectByType<PlayerProperties>().playerElement = ElementState.Base;
-        FindAnyObjectByType<PlayerProperties>().currentMoves = GameLevels[CurrentLevel].StartingMoves;
-        GameLevels[CurrentLevel].enabled = true;
-        if ( GameLevels[CurrentLevel].gameObject.transform.childCount > 0)
-        GameLevels[CurrentLevel].gameObject.transform.GetChild(0).gameObject.SetActive(true);
+        SceneManager.LoadScene("End Scene");
+        return;
+    }
 
-      
+    ClearGrid(GameLevels[CurrentLevel]);
+    GameLevels[CurrentLevel].enabled = false;
+    if (GameLevels[CurrentLevel].transform.childCount > 0)
+        GameLevels[CurrentLevel].transform.GetChild(0).gameObject.SetActive(false);
 
-        if (GameLevels[CurrentLevel].gameObject.transform.childCount > 1)
-        {
-            // find the child with the "PlayerShip" tag and set it to active
-            Transform playerShip = GameLevels[CurrentLevel].gameObject.transform.Find("PlayerShip");
-            if (playerShip != null)
-            {
-                playerShip.gameObject.SetActive(true);
-                isFinalLevel = true;
-            }
-        }
+    CurrentLevel++;
 
+    var player = FindAnyObjectByType<PlayerProperties>();
+    player.RespawnCounter = 0;
+    player.playerElement = ElementState.Base;
+    player.currentMoves = GameLevels[CurrentLevel].StartingMoves;
 
+    GameLevels[CurrentLevel].enabled = true;
+    if (GameLevels[CurrentLevel].transform.childCount > 0)
+        GameLevels[CurrentLevel].transform.GetChild(0).gameObject.SetActive(true);
 
-    }   
+    // Optional: still show the ship on the final level
+    Transform playerShip = GameLevels[CurrentLevel].transform.Find("PlayerShip");
+    if (playerShip != null)
+    {
+        playerShip.gameObject.SetActive(true);
+        isFinalLevel = true;
+    }
 }
+
 
 public void ResetLevel()
 {

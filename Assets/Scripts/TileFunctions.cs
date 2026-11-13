@@ -6,13 +6,13 @@ public class TileFunctions : MonoBehaviour
 
     TileProperties CurrentTile; // DEBUG
     Material tileMaterial; // DEBUG
-    public void ElectroPulse(TileProperties tile, Vector3 initScale)
+    public void ElectroPulse(TileProperties tile, Vector3 initScale, GameObject areaEffectObject)
     {
-    StartCoroutine(ElectroPulseRoutine(tile,initScale));
+    StartCoroutine(ElectroPulseRoutine(tile,initScale, areaEffectObject));
     }
 
-    GameObject AOE = null;
-    private IEnumerator ElectroPulseRoutine(TileProperties tile, Vector3 initScale)
+
+    private IEnumerator ElectroPulseRoutine(TileProperties tile, Vector3 initScale, GameObject areaEffectObject)
     {
         //if tile is defeated
         if (tile.tileState != TileState.Obstacle)
@@ -20,7 +20,7 @@ public class TileFunctions : MonoBehaviour
             // Debug.LogWarning("ElectroPulse called on a non-obstacle tile: " + tile.name, tile);
             yield break;
         }
-        AOE = tile.transform.Find("AOE").gameObject;
+        GameObject AOE = areaEffectObject;
         
         const float pulseDuration = 5f - 1f; //Minus 1 for the delay before the pulse starts, which is 1 second.
 

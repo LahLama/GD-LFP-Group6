@@ -20,7 +20,7 @@ public class MainMenuController : MonoBehaviour
 
     public void PlayGame()
     {
-        SceneManager.LoadScene("GameScene"); 
+        SceneManager.LoadScene("Final Main Level"); 
     }
 
     public void OpenSettings()
