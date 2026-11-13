@@ -3740,6 +3740,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3192071bb6d3eb140a777bc2dbe3c09b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PauseMenuController
+  pauseMenuUI: {fileID: 0}
+  settingsPanel: {fileID: 0}
 --- !u!114 &854121199
 MonoBehaviour:
   m_ObjectHideFlags: 0

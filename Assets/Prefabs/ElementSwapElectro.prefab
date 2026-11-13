@@ -4782,7 +4782,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e823cd5b5d27c0f4b8256e7c12ee3e6d, type: 2}
+  - {fileID: 2100000, guid: f6c9730b3e538a743b1db5deb631445e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4851,7 +4851,7 @@ PrefabInstance:
     - target: {fileID: 5800314204868976288, guid: ec03d551cd394b841bc744b52fc45a55, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 1c58a07a006ef254b9fb9c8157f5566f, type: 2}
+      objectReference: {fileID: 2100000, guid: 4254806513ea0a84eafc30cd3c4df8a9, type: 2}
     - target: {fileID: 6861604084023989436, guid: ec03d551cd394b841bc744b52fc45a55, type: 3}
       propertyPath: m_Name
       value: ElementSwapElectro

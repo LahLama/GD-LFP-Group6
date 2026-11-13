@@ -154,12 +154,12 @@ foreach (var t in tiles)
         if (playerProperties.playerElement == ElementState.Fire)
         {
             
-            t.GetComponent<Renderer>().material = Resources.Load<Material>("Materials/Achetypes/oneWay");
+            t.GetComponent<Renderer>().material = Resources.Load<Material>("Materials/BurnTile");
             isOneWaysActive = true;
         }
         else
         {
-            t.GetComponent<Renderer>().material = Resources.Load<Material>("Materials/Achetypes/baseTile");   
+            t.GetComponent<Renderer>().material = Resources.Load<Material>("Materials/NormalTile");   
             isOneWaysActive = false;
         }
         }

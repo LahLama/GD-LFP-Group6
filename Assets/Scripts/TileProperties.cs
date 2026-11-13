@@ -4,7 +4,7 @@ using UnityEngine.Tilemaps;
 
 public class TileProperties : MonoBehaviour
 {
-    private const string MaterialFolder = "Materials/Achetypes/";
+    private const string MaterialFolder = "Materials/";
 
     // ---------- Grid position ----------
     public Vector2Int cords = new Vector2Int(0, 0);
@@ -117,9 +117,15 @@ public void InitAfterPlacement()
         if (tileState != TileState.Obstacle)
         {
             Transform AOE = transform.Find("AOE");
+            
+            Transform AlienGO = transform.Find("Alien");
             if (AOE != null)
             {
                 AOE.gameObject.SetActive(false);
+            }
+            if (AlienGO != null)
+            {
+                AlienGO.gameObject.SetActive(false);
             }
         }
     }
@@ -158,31 +164,31 @@ public void InitAfterPlacement()
             case TileState.Element:
                 switch (tileElement)
                 {
-                    case ElementState.Base:    return "swapElectro"; // Base intentionally uses the Electro material
-                    case ElementState.Ice:     return "swapIce";
-                    case ElementState.Electro: return "swapElectro";
-                    case ElementState.Fire:    return "swapFire";
-                    case ElementState.Acid:    return "swapAcid";
-                    default:                   return "swapBase";
+                    case ElementState.Base:    return "NormalTile"; // Base intentionally uses the Electro material
+                    // case ElementState.Ice:     return "swapIce";
+                    //  case ElementState.Electro: return "swapElectro";
+                    // case ElementState.Fire:    return "swapFire";
+                    //  case ElementState.Acid:    return "swapAcid";
+                    default:                   return "NormalTile";
                 }
 
-            case TileState.Obstacle:
-                switch (tileElement)
-                {
-                    case ElementState.Base:    return "obstacleBase";
-                    case ElementState.Ice:     return "obstacleIce";
-                    case ElementState.Electro: return "obstacleElectro";
-                    case ElementState.Fire:    return "obstacleFire";
-                    case ElementState.Acid:    return "obstacleAcid";
-                    default:                   return "obstacleBase";
-                }
+            // case TileState.Obstacle:
+            //     switch (tileElement)
+            //     {
+            //         case ElementState.Base:    return "obstacleBase";
+            //         case ElementState.Ice:     return "obstacleIce";
+            //         case ElementState.Electro: return "obstacleElectro";
+            //         case ElementState.Fire:    return "obstacleFire";
+            //         case ElementState.Acid:    return "obstacleAcid";
+            //         default:                   return "obstacleBase";
+            //     }
 
-            case TileState.OneWay:    return "baseTile";
-            case TileState.MoveAdd:   return "moveAdd";
-            case TileState.Wall:      return "wall";
-            case TileState.EndPoint:  return "endPoint";
-            case TileState.StartTile: return "startPoint";
-            default:                  return "baseTile";
+            case TileState.OneWay:    return "NormalTile";
+            case TileState.MoveAdd:   return "Achetypes/moveAdd";
+            case TileState.Wall:      return "Achetypes/wall";
+            case TileState.EndPoint:  return "Achetypes/endPoint";
+            case TileState.StartTile: return "Achetypes/startPoint";
+            default:                  return "NormalTile";
         }
     }
 
