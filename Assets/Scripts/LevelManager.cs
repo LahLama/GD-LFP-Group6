@@ -21,7 +21,11 @@ public class LevelManager : MonoBehaviour
         if ( GameLevels[CurrentLevel].gameObject.transform.childCount > 0)
         GameLevels[CurrentLevel].gameObject.transform.GetChild(0).gameObject.SetActive(true);
 
-    }
+        if (GameLevels[CurrentLevel].gameObject.transform.childCount > 0)
+        {
+            GameLevels[CurrentLevel].gameObject.transform.GetChild(0).gameObject.SetActive(true);
+        }
+    }   
 }
 
 public void ResetLevel()
