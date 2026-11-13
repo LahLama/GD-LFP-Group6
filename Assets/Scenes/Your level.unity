@@ -4452,7 +4452,7 @@ MonoBehaviour:
   level:
   - .,.,.,i,.,.,#
   - .,m4,.,.,.,.,#
-  - '.,.,.,.,.,I1,X '
+  - 'f,B,B,B,.,.,I1,X '
   - 'O,.,.,m6,.,.,# '
   tilePrefabs:
   - type: 9
