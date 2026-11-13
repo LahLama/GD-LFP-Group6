@@ -22,10 +22,18 @@ public class LevelManager : MonoBehaviour
         if ( GameLevels[CurrentLevel].gameObject.transform.childCount > 0)
         GameLevels[CurrentLevel].gameObject.transform.GetChild(0).gameObject.SetActive(true);
 
-        if (GameLevels[CurrentLevel].gameObject.transform.childCount > 0)
+        
+
+        if (GameLevels[CurrentLevel].gameObject.transform.childCount > 1)
         {
-            GameLevels[CurrentLevel].gameObject.transform.GetChild(0).gameObject.SetActive(true);
+            // find the child with the "PlayerShip" tag and set it to active
+            Transform playerShip = GameLevels[CurrentLevel].gameObject.transform.Find("PlayerShip");
+            if (playerShip != null)
+            {
+                playerShip.gameObject.SetActive(true);
+            }
         }
+
     }   
 }
 
