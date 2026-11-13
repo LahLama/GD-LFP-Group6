@@ -1,4 +1,4 @@
-using System.Collections;
+ using System.Collections;
 using UnityEngine;
 
 public class SoundManager : MonoBehaviour
@@ -43,6 +43,7 @@ public class SoundManager : MonoBehaviour
         musicSource = gameObject.AddComponent<AudioSource>();
         sfxSource = gameObject.AddComponent<AudioSource>();
         stepSource = gameObject.AddComponent<AudioSource>();
+        
         musicSource.playOnAwake = sfxSource.playOnAwake = stepSource.playOnAwake = false;
         musicSource.loop = true;
     }
@@ -65,8 +66,41 @@ public class SoundManager : MonoBehaviour
     // ---------- UI: call these from Button / Slider events ----------
     public void PlayButtonClick() { Play(buttonClick); }
     public void PlayButtonHover() { Play(buttonHover); }
-    public void SetMusicVolume(float value) { musicVolume = value; musicSource.volume = value; }
-    public void SetSfxVolume(float value) { sfxVolume = value; }
+    
+    public void SetMusicVolume(float value) 
+    { 
+        musicVolume = value; 
+        musicSource.volume = value; 
+        if (value > 0) musicSource.mute = false; // Auto-unmute if slider moves
+    }
+    
+    public void SetSfxVolume(float value) 
+    { 
+        sfxVolume = value; 
+        if (value > 0) 
+        {
+            sfxSource.mute = false;
+            stepSource.mute = false;
+        }
+    }
+
+    // --- NEW: DIRECT ON / OFF BUTTON METHODS ---
+    
+    public void SetMusicOn() { musicSource.mute = false; }
+    public void SetMusicOff() { musicSource.mute = true; }
+    
+    public void SetSFXOn() 
+    { 
+        sfxSource.mute = false; 
+        stepSource.mute = false; 
+    }
+    
+    public void SetSFXOff() 
+    { 
+        sfxSource.mute = true; 
+        stepSource.mute = true; 
+    }
+    // --------------------------------------------
 
     // ---------- Game triggers (read-only watching of the game) ----------
     IEnumerator RefreshTiles()

@@ -1,4 +1,4 @@
-using System;
+ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -8,24 +8,27 @@ using UnityEngine.Rendering;
 
 public class PlayerProperties : MonoBehaviour
 {
-public Vector2Int playerCords = new Vector2Int(1,1);
-public int currentMoves = 6;
-int movesCheck =0;
-public int maxMoves = 6;
-public TextMeshProUGUI movesText;
-public Vector3 playerPos;
+    public Vector2Int playerCords = new Vector2Int(1,1);
+    public int currentMoves = 6;
+    int movesCheck = 0;
+    public int maxMoves = 6;
+    public TextMeshProUGUI movesText;
+    public Vector3 playerPos;
 
-public GameObject RespawningTooltip;
-public GameObject ElementIdentifier;
+    public GameObject RespawningTooltip;
+    public GameObject ElementIdentifier;
 
-[SerializeField] Vector2Int respawnPoint;
-[SerializeField] int respawnMoves;
-[SerializeField] Vector3 respawnTransform;
+    [SerializeField] Vector2Int respawnPoint;
+    [SerializeField] int respawnMoves;
+    [SerializeField] Vector3 respawnTransform;
 
-[SerializeField] ElementState respawnElementState;
-public ElementState playerElement = ElementState.Base;
-public GameObject previousTile;
-public int RespawnCounter = 0;
+    [SerializeField] ElementState respawnElementState;
+    public ElementState playerElement = ElementState.Base;
+    public GameObject previousTile;
+    public int RespawnCounter = 0;
+
+    // Cached reference for performance and safety
+    private GameFunctions gameFunctions; 
 
     void Start()
     {
@@ -33,18 +36,20 @@ public int RespawnCounter = 0;
         respawnPoint = playerCords;
         respawnMoves = maxMoves;
         respawnTransform = gameObject.transform.position;
-         movesText.text = currentMoves.ToString();
+        movesText.text = currentMoves.ToString();
         respawnPoint = playerCords;
+
+        // Find the GameFunctions script once at the start
+        gameFunctions = FindAnyObjectByType<GameFunctions>(); 
     }
 
     public bool CanModifyMove(int val)
     {
-   
         movesCheck = currentMoves;
         if ((movesCheck+=val) < 0)
-        return false;
+            return false;
         else
-        return true;
+            return true;
     }
 
     public void ModifyMoves(int val)
@@ -60,58 +65,65 @@ public int RespawnCounter = 0;
         {
             FindAnyObjectByType<InteractionManager>().enabled = false;
             Invoke("RespawnPlayer",0.55f);
-            
         }
-         movesText.text = currentMoves.ToString();
+        movesText.text = currentMoves.ToString();
     }
 
- 
-
-public void SetPlayerCords(Vector2Int newCords, Vector3 newPos)
+    public void SetPlayerCords(Vector2Int newCords, Vector3 newPos)
     {
         playerCords = newCords;
         playerPos = newPos;
 
+        // --- FIX FOR LEVEL CHANGING (SAME SCENE) ---
+        if (newCords == new Vector2Int(1, 1)) 
+        {
+            if (gameFunctions != null) 
+            {
+                gameFunctions.ResetHUD();
+            }
+            
+            playerElement = ElementState.Base; 
+            UpdatePlayerColor(); 
+        }
+        // -------------------------------------------
+
         //Move the player smoothly to the new position
         StartCoroutine(MoveTo(newPos, 0.3f));
     }
-IEnumerator MoveTo(Vector3 target, float duration)
-{
-    Vector3 start = transform.position;
-    float t = 0f;
 
-    while (t < 1f)
+    IEnumerator MoveTo(Vector3 target, float duration)
     {
-        t += Time.deltaTime / duration;
-        transform.position = Vector3.Lerp(start, target, t);
-        yield return null;
+        Vector3 start = transform.position;
+        float t = 0f;
+
+        while (t < 1f)
+        {
+            t += Time.deltaTime / duration;
+            transform.position = Vector3.Lerp(start, target, t);
+            yield return null;
+        }
+        transform.position = target;
     }
-    transform.position = target;
-}
 
-
-public Vector2Int GetPlayerCords()
+    public Vector2Int GetPlayerCords()
     {
         return playerCords;
     }
-public void UpdateRespawnPoint(Vector2Int NewRespawnPoint, int NewRespawnMoves, Vector3 NewRespawnTransform)
+
+    public void UpdateRespawnPoint(Vector2Int NewRespawnPoint, int NewRespawnMoves, Vector3 NewRespawnTransform)
     {
         respawnPoint = NewRespawnPoint;
         respawnMoves = NewRespawnMoves;
         respawnTransform = NewRespawnTransform;
 
         respawnElementState = playerElement;
-    
 
         TileProperties[] tiles = FindObjectsByType<TileProperties>();
         foreach (var tile in tiles)
         {
             tile.CacheTilesState();
-            
         }
-        
     }
-    
 
     public void UpdatePlayerColor()
     {
@@ -121,35 +133,34 @@ public void UpdateRespawnPoint(Vector2Int NewRespawnPoint, int NewRespawnMoves, 
 
         if (playerElement == ElementState.Acid)
         {
-            //sets to green with 25% opacity
             targetColor = new Color(0f, 1f, 0f, 0.25f);
         }
         else if (playerElement == ElementState.Electro)
         {
-            //sets to yellow with 25% opacity
             targetColor = new Color(1f, 1f, 0f, 0.25f);
         }
         else if (playerElement == ElementState.Fire)
         {
-            //sets to red with 25% opacity
             targetColor = new Color(1f, 0f, 0f, 0.25f);
         }
         else if (playerElement == ElementState.Ice)
         {
-            //sets to cyan with 25% opacity
             targetColor = new Color(0f, 1f, 1f, 0.25f);
         }
         else
         {
-            //sets to white with 25% opacity
             targetColor = new Color(1f, 1f, 1f, 0.25f);
         }
 
         identifierMaterial.color = targetColor;
-        GameFunctions gameFunctions = FindAnyObjectByType<GameFunctions>();
-        gameFunctions.GotElement(playerElement);
+        
+        if (gameFunctions != null)
+        {
+            gameFunctions.GotElement(playerElement);
+        }
     }
-public void RespawnPlayer()
+
+    public void RespawnPlayer()
     {
         RespawnCounter++;
         // pause the game, show a tooltip then resume the game after a click
@@ -158,14 +169,22 @@ public void RespawnPlayer()
             StartCoroutine(RespawnGuideCoroutine());
         }
 
-
-
         currentMoves = respawnMoves;
-       
         playerCords = respawnPoint;
         this.transform.position = respawnTransform;
+        
+        // Reset player element to whatever the checkpoint was
         playerElement = respawnElementState;
         UpdatePlayerColor();
+        
+        // --- FIX FOR RUNNING OUT OF MOVES ---
+        // Force the HUD to disappear when respawning! 
+        if (gameFunctions != null)
+        {
+            gameFunctions.ResetHUD();
+        }
+        // ------------------------------------
+
         // Update the text counter
         movesText.text = currentMoves.ToString();
         FindAnyObjectByType<InteractionManager>().isMovementReversed = false;
@@ -174,7 +193,6 @@ public void RespawnPlayer()
         foreach (var tile in tiles)
         {
             tile.RefreshTilesOnRespawn();
-            
         }
 
        FindAnyObjectByType<InteractionManager>().enabled = true;
@@ -188,5 +206,4 @@ public void RespawnPlayer()
         Time.timeScale = 1f; // Resume the game
         RespawningTooltip.SetActive(false);
     }
-
 }
