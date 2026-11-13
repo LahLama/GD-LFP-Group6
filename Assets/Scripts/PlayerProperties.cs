@@ -190,12 +190,7 @@ public class PlayerProperties : MonoBehaviour
 
         // Update the text counter
         movesText.text = currentMoves.ToString();
-        
-        previousTile = null;   // forget the last tile so nothing collapses after respawn
-
-        var im = FindAnyObjectByType<InteractionManager>();
-        im.isMovementReversed = false;
-        im.isOneWaysActive = (playerElement == ElementState.Fire);
+        FindAnyObjectByType<InteractionManager>().isMovementReversed = false;
 
         TileProperties[] tiles = FindObjectsByType<TileProperties>();
         foreach (var tile in tiles)

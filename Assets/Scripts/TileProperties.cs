@@ -238,7 +238,7 @@ private void StartElectroPulse()
         // Player doesn't move onto the endpoint; the next level takes over
         else if (playerProperties.CanModifyMove(tileMoveCost) && tileState == TileState.EndPoint)
         {
-            playerProperties.ModifyMoves(tileMoveCost);
+            // playerProperties.ModifyMoves(tileMoveCost);
             levelManager.NextLevel();   // new level's StartTile places the player
             Debug.Log("YOU WIN");
             MadeAMove = false;          // don't let InteractionManager move the player onto this old tile
