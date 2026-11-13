@@ -21098,9 +21098,9 @@ MonoBehaviour:
   playerCords: {x: 1, y: 1}
   currentMoves: 6
   maxMoves: 6
-  movesText: {fileID: 0}
+  movesText: {fileID: 226364099}
   playerPos: {x: 0, y: 0, z: 0}
-  RespawningTooltip: {fileID: 0}
+  RespawningTooltip: {fileID: 1603926906}
   ElementIdentifier: {fileID: 21311202}
   respawnPoint: {x: 0, y: 0}
   respawnMoves: 0
