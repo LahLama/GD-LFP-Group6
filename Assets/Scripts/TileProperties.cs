@@ -19,7 +19,8 @@ public class TileProperties : MonoBehaviour
 
     [SerializeField]
     private TileState preRespawnState = TileState.Tile;
-
+private Transform aoeChild, alienChild;
+private bool aoeStartActive, alienStartActive;
 
     // ---------- Move costs ----------
     private int tileMoveCost = -1;
@@ -40,14 +41,15 @@ public class TileProperties : MonoBehaviour
 
    void OnEnable()
 {
+        aoeChild   = transform.Find("AOE");
+    alienChild = transform.Find("Alien");
+    aoeStartActive   = aoeChild   != null && aoeChild.gameObject.activeSelf;
+    alienStartActive = alienChild != null && alienChild.gameObject.activeSelf;
     SetTileMaterial();
 
     playerProperties = FindAnyObjectByType<PlayerProperties>();
     levelManager = FindAnyObjectByType<LevelManager>();
-    preRespawnState = tileState;
-
-    if (tileState == TileState.Obstacle && tileElement == ElementState.Electro)
-        InvokeRepeating(nameof(StartElectroPulse), 5f, 5f);
+  
 
     
 }
@@ -55,7 +57,8 @@ public class TileProperties : MonoBehaviour
 
 // Called by MapCreator once cords and move cost are assigned
 public void InitAfterPlacement()
-{
+{ 
+    preRespawnState = tileState;  
     row = cords.x;
     col = cords.y;
 
@@ -67,12 +70,17 @@ public void InitAfterPlacement()
     }
 
     SetTileRadius();
+    
+
+    if (tileState == TileState.Obstacle && tileElement == ElementState.Electro)
+        InvokeRepeating(nameof(StartElectroPulse), 5f, 5f);
 }
 
-    private void StartElectroPulse()
-    {
-        FindAnyObjectByType<TileFunctions>().ElectroPulse(this, transform.GetChild(2).localScale);
-    }
+private void StartElectroPulse()
+{
+    if (tileState != TileState.Obstacle) return;
+    FindAnyObjectByType<TileFunctions>().ElectroPulse(this, transform.GetChild(2).localScale);
+}
 
     public void SetMoveText(int val)
     {
@@ -114,20 +122,20 @@ public void InitAfterPlacement()
     private void SetTileMaterial()
     {
         GetComponent<Renderer>().material = Resources.Load<Material>(MaterialFolder + GetMaterialName());
+        if (tileState == TileState.OneWay)
+        GetComponent<Renderer>().material = Resources.Load<Material>(MaterialFolder + "NormalTile");
+        
         // if the tile is a obstacle and has a child named "AOE", set the AOE to be invisible
         if (tileState != TileState.Obstacle)
         {
-            Transform AOE = transform.Find("AOE");
-            
-            Transform AlienGO = transform.Find("Alien");
-            if (AOE != null)
-            {
-                AOE.gameObject.SetActive(false);
-            }
-            if (AlienGO != null)
-            {
-                AlienGO.gameObject.SetActive(false);
-            }
+            if (aoeChild != null)   aoeChild.gameObject.SetActive(false);
+            if (alienChild != null) alienChild.gameObject.SetActive(false);
+        }
+        else
+        {
+            // Obstacle restored on respawn: bring its visuals back
+            if (aoeChild != null)   aoeChild.gameObject.SetActive(aoeStartActive);
+            if (alienChild != null) alienChild.gameObject.SetActive(alienStartActive);
         }
     }
 
@@ -185,11 +193,11 @@ public void InitAfterPlacement()
             //         default:                   return "obstacleBase";
             //     }
 
-            case TileState.OneWay:    return "NormalTile";
-            case TileState.MoveAdd:   return "Achetypes/moveAdd";
-            case TileState.Wall:      return "Achetypes/wall";
-            case TileState.EndPoint:  return "Achetypes/endPoint";
-            case TileState.StartTile: return "Achetypes/startPoint";
+            // case TileState.OneWay:    return "NormalTile";
+            // case TileState.MoveAdd:   return "Achetypes/moveAdd";
+            case TileState.Wall:      return "WallTile";
+            // case TileState.EndPoint:  return "Achetypes/endPoint";
+            // case TileState.StartTile: return "Achetypes/startPoint";
             default:                  return "NormalTile";
         }
     }
@@ -203,18 +211,7 @@ public void InitAfterPlacement()
         MadeAMove = false;
 
         // If the previous tile was a OneWay, it disappears
-        if (playerProperties.previousTile != null){
-        if (FindAnyObjectByType<InteractionManager>().isOneWaysActive && playerProperties.previousTile.GetComponent<TileProperties>().tileState == TileState.OneWay){
-            Debug.Log("Previous tile was DISAPPEAR ");
-            playerProperties.previousTile.GetComponent<TileProperties>().tileState = TileState.Wall;
-            playerProperties.previousTile.GetComponent<TileProperties>().SetTileMaterial();
-            MadeAMove = true;
-        }
-        else
-        {
-        MadeAMove = true;
-        }
-        }
+        
 
         // Player needs enough moves AND the same element as the obstacle to conquer it
         bool canConquerObstacle = playerProperties.CanModifyMove(CustomMoveCost)
@@ -241,7 +238,7 @@ public void InitAfterPlacement()
         // Player doesn't move onto the endpoint; the next level takes over
         else if (playerProperties.CanModifyMove(tileMoveCost) && tileState == TileState.EndPoint)
         {
-            playerProperties.ModifyMoves(tileMoveCost);
+            // playerProperties.ModifyMoves(tileMoveCost);
             levelManager.NextLevel();   // new level's StartTile places the player
             Debug.Log("YOU WIN");
             MadeAMove = false;          // don't let InteractionManager move the player onto this old tile
@@ -285,9 +282,28 @@ public void InitAfterPlacement()
             MadeAMove = false;
         }
 
+        if (MadeAMove)
+        {
+        CollapsePreviousOneWay();
         playerProperties.previousTile = gameObject;
-        return MadeAMove;
     }
-
-
+    return MadeAMove;
 }
+
+void CollapsePreviousOneWay()
+{
+    var prev = playerProperties.previousTile;
+    if (prev == null) return;
+
+    var prevTile = prev.GetComponent<TileProperties>();
+    if (prevTile.tileState == TileState.OneWay &&
+        FindAnyObjectByType<InteractionManager>().isOneWaysActive)
+    {
+        prevTile.tileState = TileState.Wall;
+        prevTile.SetTileMaterial();
+    }
+}
+    }
+    
+
+
