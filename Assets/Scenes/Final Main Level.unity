@@ -21003,7 +21003,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::LevelManager
   GameLevels:
   - {fileID: 950441363}
-  - {fileID: 672613198}
   - {fileID: 1124595618}
   - {fileID: 501283778}
   - {fileID: 687568648}
@@ -21012,6 +21011,7 @@ MonoBehaviour:
   - {fileID: 991025151}
   - {fileID: 1236989280}
   - {fileID: 1987916588}
+  - {fileID: 672613198}
   - {fileID: 72270581}
   - {fileID: 72270581}
   CurrentLevel: 0
