@@ -6,8 +6,15 @@ public class LevelManager : MonoBehaviour
    public List<MapCreator> GameLevels = new List<MapCreator>();
    [SerializeField] int CurrentLevel = 0;
 
+    bool isFinalLevel = false;
     public void NextLevel()
 {
+      if (isFinalLevel)
+        {
+        // Load the end scene
+        
+        }
+        
     if (CurrentLevel + 1 < GameLevels.Count)
     {
         ClearGrid(GameLevels[CurrentLevel]);
@@ -22,7 +29,7 @@ public class LevelManager : MonoBehaviour
         if ( GameLevels[CurrentLevel].gameObject.transform.childCount > 0)
         GameLevels[CurrentLevel].gameObject.transform.GetChild(0).gameObject.SetActive(true);
 
-        
+      
 
         if (GameLevels[CurrentLevel].gameObject.transform.childCount > 1)
         {
@@ -31,8 +38,11 @@ public class LevelManager : MonoBehaviour
             if (playerShip != null)
             {
                 playerShip.gameObject.SetActive(true);
+                isFinalLevel = true;
             }
         }
+
+
 
     }   
 }
