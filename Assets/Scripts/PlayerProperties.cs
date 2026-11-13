@@ -26,6 +26,7 @@ public class PlayerProperties : MonoBehaviour
     public ElementState playerElement = ElementState.Base;
     public GameObject previousTile;
     public int RespawnCounter = 0;
+    public float MovingTime = 0.1f;
 
     // Cached reference for performance and safety
     private GameFunctions gameFunctions; 
@@ -88,7 +89,9 @@ public class PlayerProperties : MonoBehaviour
         // -------------------------------------------
 
         //Move the player smoothly to the new position
-        StartCoroutine(MoveTo(newPos, 0.3f));
+        float maxStep = FindAnyObjectByType<PlayerModelAnimator>().stopDelay;
+       
+        StartCoroutine(MoveTo(newPos, maxStep));
     }
 
     IEnumerator MoveTo(Vector3 target, float duration)

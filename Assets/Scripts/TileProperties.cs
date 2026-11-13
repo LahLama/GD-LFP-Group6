@@ -20,6 +20,7 @@ public class TileProperties : MonoBehaviour
     [SerializeField]
     private TileState preRespawnState = TileState.Tile;
 
+
     // ---------- Move costs ----------
     private int tileMoveCost = -1;
     private int obstacleMoveCost = -2;
@@ -133,14 +134,15 @@ public void InitAfterPlacement()
     public void SetTileRadius()
     {
         
-            if (tileElement == ElementState.Acid)
+            if (tileElement == ElementState.Acid && tileState == TileState.Obstacle)
             {
                 //Reverse the movement of the player
                 radius = Mathf.Abs(CustomMoveCost); //to accoutnt for obstacles having negative movement costs
-                FindAnyObjectByType<TileFunctions>().SetAOEsize(radius, this);
+                Transform AOE = transform.Find("AOE");
+                FindAnyObjectByType<TileFunctions>().SetAOEsize(radius, this, AOE.gameObject);
                 
             }
-            else if (tileElement == ElementState.Electro)
+            else if (tileElement == ElementState.Electro && tileState == TileState.Obstacle)
             {
                 //Send out a 1 block shockwave out that respawns player
                 radius = 1;

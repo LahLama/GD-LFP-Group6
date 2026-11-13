@@ -3404,6 +3404,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad417521cf1e44e4b852cd1a7bae5576, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameFunctions
+  hudContainer: {fileID: 0}
+  centerIcon: {fileID: 0}
+  beamGlow: {fileID: 0}
+  fireIcon: {fileID: 0}
+  iceIcon: {fileID: 0}
+  acidIcon: {fileID: 0}
+  electroIcon: {fileID: 0}
 --- !u!4 &720522506
 Transform:
   m_ObjectHideFlags: 0
@@ -3742,6 +3749,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PauseMenuController
   pauseMenuUI: {fileID: 0}
   settingsPanel: {fileID: 0}
+  pauseCanvas: {fileID: 0}
+  settingsCanvas: {fileID: 0}
 --- !u!114 &854121199
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4668,15 +4677,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MapCreator
   StartingMoves: 4
   level:
-  - '.,.,.,.,O,.,.,m6,B,B,B,B,B,m4 '
-  - '.,.,.,.,.,.,.,.,B,#,#,#,F1,. '
-  - 'm2,#,#,#,m6,.,.,.,B,#,#,#,B,. '
-  - '.,.,f,#,.,.,.,.,B,#,#,#,B,. '
+  - .,.,.,.,O,.,#,m6,B,B,B,B,B,m4
+  - .,.,.,.,.,.,#,.,B,#,#,#,F1,.
+  - m2,#,#,#,m6,.,#,.,B,#,#,#,B,.
+  - .,.,f,#,.,.,#,.,B,#,#,#,B,.
   - 'm4,#,#,#,.,.,.,m6,B,B,B,B,B,m6 '
-  - '.,.,.,.,m6,.,.,.,.,#,#,#,.,. '
-  - '.,.,.,.,.,.,.,.,.,#,#,#,.,e '
-  - '.,.,.,E1,.,.,.,.,.,#,#,#,.,. '
-  - '#,#,#,X,#,#,#,#,#,#,#,#,.,. '
+  - .,.,.,.,m6,.,#,.,.,#,#,#,.,.
+  - .,.,.,.,.,.,#,.,.,#,#,#,.,e
+  - .,.,.,E1,.,.,#,.,.,#,#,#,.,.
+  - '#,#,#,X,#,#,#,#,#,#,#,#,.,.'
   tilePrefabs:
   - type: 9
     prefab: {fileID: 8994451080318423122, guid: f582545e406b3b2468e54ec95ca7648a, type: 3}
@@ -8751,6 +8760,7 @@ MonoBehaviour:
   playerElement: 4
   previousTile: {fileID: 0}
   RespawnCounter: 0
+  MovingTime: 0.1
 --- !u!114 &2084505432
 MonoBehaviour:
   m_ObjectHideFlags: 0

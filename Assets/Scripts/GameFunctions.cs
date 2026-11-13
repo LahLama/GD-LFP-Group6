@@ -49,7 +49,7 @@ public class GameFunctions : MonoBehaviour
     // --- ELEMENT COLLECTION ---
     public void GotElement(ElementState TileElement)
     {
-        Debug.Log("the player got this element: " + TileElement);
+        // Debug.Log("the player got this element: " + TileElement);
 
         // If the player respawns to Base (no element), force the HUD to hide
         if (TileElement == ElementState.Base)

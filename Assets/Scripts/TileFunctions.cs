@@ -74,13 +74,22 @@ public class TileFunctions : MonoBehaviour
         }
     }
 
-    public void SetAOEsize(float radius, TileProperties tile)
+    public void SetAOEsize(float radius, TileProperties tile, GameObject areaEffectObject)
     {
-            AOE = tile.transform.Find("AOE").gameObject;
+          
+            Transform aoeTransform = tile.transform.Find("AOE");
+               
+            if (areaEffectObject == null)
+            {
+                // This tile type has no AOE visual, nothing to size
+                return;
+            }
+ 
             float cellSize = FindAnyObjectByType<MapCreator>().cellSize;
+         
 
             float radiusAccounted = 2*radius + 1; // Add 1 to the radius to account for the tile itself, 2*radius is for scaling diameter 
-            AOE.transform.localScale = new Vector3(radiusAccounted * cellSize, radiusAccounted * cellSize, 0.4f);
+            areaEffectObject.transform.localScale = new Vector3(radiusAccounted * cellSize, radiusAccounted * cellSize, 0.4f);
             
         }
     private bool IsReversingControls(TileProperties tile)

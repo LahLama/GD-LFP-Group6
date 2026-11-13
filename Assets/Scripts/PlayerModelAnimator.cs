@@ -11,7 +11,9 @@ public class PlayerModelAnimator : MonoBehaviour
     bool moving;
     float stillTimer;
 
-    void Start() { lastPos = player.position; }
+    void Start() { lastPos = player.position;
+        
+     }
 
     void Update()
     {

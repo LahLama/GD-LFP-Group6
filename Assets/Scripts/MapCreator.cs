@@ -150,6 +150,7 @@ public class MapCreator : MonoBehaviour
 
     List<RowData> CreateLevel(string[] rowStrings)
     {
+        customMovementNumbers.Clear();
         var result = new List<RowData>();
         foreach (var line in rowStrings)
         {

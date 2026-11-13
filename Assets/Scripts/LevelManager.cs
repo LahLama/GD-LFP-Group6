@@ -15,9 +15,9 @@ public class LevelManager : MonoBehaviour
         if ( GameLevels[CurrentLevel].gameObject.transform.childCount > 0)
         GameLevels[CurrentLevel].gameObject.transform.GetChild(0).gameObject.SetActive(false);
         CurrentLevel++;
-                FindAnyObjectByType<PlayerProperties>().RespawnCounter = 0;
-            FindAnyObjectByType<PlayerProperties>().currentMoves = GameLevels[CurrentLevel].StartingMoves;
-            GameLevels[CurrentLevel].enabled = true;
+        FindAnyObjectByType<PlayerProperties>().RespawnCounter = 0;
+        FindAnyObjectByType<PlayerProperties>().currentMoves = GameLevels[CurrentLevel].StartingMoves;
+        GameLevels[CurrentLevel].enabled = true;
         if ( GameLevels[CurrentLevel].gameObject.transform.childCount > 0)
         GameLevels[CurrentLevel].gameObject.transform.GetChild(0).gameObject.SetActive(true);
 
