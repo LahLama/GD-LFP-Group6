@@ -193,11 +193,11 @@ private void StartElectroPulse()
             //         default:                   return "obstacleBase";
             //     }
 
-            case TileState.OneWay:    return "NormalTile";
-            case TileState.MoveAdd:   return "Achetypes/moveAdd";
+            // case TileState.OneWay:    return "NormalTile";
+            // case TileState.MoveAdd:   return "Achetypes/moveAdd";
             case TileState.Wall:      return "WallTile";
-            case TileState.EndPoint:  return "Achetypes/endPoint";
-            case TileState.StartTile: return "Achetypes/startPoint";
+            // case TileState.EndPoint:  return "Achetypes/endPoint";
+            // case TileState.StartTile: return "Achetypes/startPoint";
             default:                  return "NormalTile";
         }
     }
